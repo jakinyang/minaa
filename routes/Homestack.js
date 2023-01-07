@@ -1,5 +1,3 @@
-// Imports
-
 import * as React from 'react';
 import { View, Button, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -7,83 +5,20 @@ import {
   createStackNavigator,
   TransitionPresets,
 } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import HomeScreen from '../screens/HomeScreen';
+import ResourceIndex from '../screens/ResourceIndexScreen';
 
+import ResourceOne from '../screens/resources/ResourceOne';
+import ResourceTwo from '../screens/resources/ResourceTwo';
+import ResourceThree from '../screens/resources/ResourceThree';
 
-function Home({ navigation }) {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home screen</Text>
-      <Button
-        title="Go to Resource Index"
-        onPress={() => navigation.navigate('ResourceIndex')}
-      />
-      <Button
-        title="Go to Profile Tab"
-        onPress={() => navigation.navigate('ProfileTab')}
-      />
-    </View>
-  );
-}
-
-function ResourceIndex({ navigation }) {
-  return (
-    <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: "lightcoral", height: "90%" }}>
-      <Text>Resouce Index screen</Text>
-      <Button
-        title="Go to Article 1"
-        onPress={() => navigation.navigate('ResourceOne')}
-      />
-      <Button
-        title="Go to Article 2"
-        onPress={() => navigation.navigate('ResourceTwo')}
-      />
-      <Button
-        title="Go to Article 3"
-        onPress={() => navigation.navigate('ResourceThree')}
-      />
-      <Button title="Go back" onPress={() => navigation.goBack()} />
-    </View>
-  );
-}
-
-function ResourceOne({ navigation }) {
-  return (
-    <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: "lightseagreen", height: "90%" }}>
-      <Text>Resource 1</Text>
-      <Button title="Go back" onPress={() => navigation.goBack()} />
-    </View>
-  );
-}
-
-function ResourceTwo({ navigation }) {
-  return (
-    <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: "lightblue", height: "90%" }}>
-      <Text>Resource 2</Text>
-      <Button title="Go back" onPress={() => navigation.goBack()} />
-    </View>
-  );
-}
-
-function ResourceThree({ navigation }) {
-  return (
-    <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: "lightgreen", height: "90%" }}>
-      <Text>Resource 3</Text>
-      <Button title="Go back" onPress={() => navigation.goBack()} />
-    </View>
-  );
-}
 
 function ProfileTab({ navigation }) {
   return (
     <View style={{ width: "70%", height: "100%", alignSelf: "flex-end", justifyContent: 'center', alignItems: 'center', backgroundColor: "lightpink" }}>
       <Text>Profile Tab</Text>
       <Button title="Go back" onPress={() => navigation.goBack()} />
-      <Button 
-        title="Go to resource Index" 
-        onPress={() => {
-          navigation.popToTop()
-          setTimeout(() => navigation.navigate('ResourceIndex'), 100) 
-        }} />
     </View>
   );
 }
@@ -91,11 +26,12 @@ function ProfileTab({ navigation }) {
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
-// Main HomeScreen Component
-function HomeScreen() {
+export default function HomeStack() {
   return (
+  
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} />
+    
+      <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen 
         name="ProfileTab" 
         component={ProfileTab}
@@ -108,7 +44,7 @@ function HomeScreen() {
          />
     
       <Stack.Screen
-        name="ResourceIndex"
+        name="ResourceIndexScreen"
         component={ResourceIndex}
         options={{
           title: 'Resources',
@@ -138,13 +74,8 @@ function HomeScreen() {
           }
         />
     </Stack.Navigator>
+   
   );
 }
 
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyStack style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}/>
-    </NavigationContainer>
-  );
-}
+
