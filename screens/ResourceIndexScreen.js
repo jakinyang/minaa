@@ -30,15 +30,18 @@ export default function ResourceIndex({ navigation }) {
             </Text>
           </Card.Content>
       </Card>
+      <Card style={styles.card}    onPress={() => navigation.navigate('ResourceThree')}>
+        <Card.Cover source={require("../assets/landmine1.jpg")}/>
+        <Card.Title title="Resource 3"/>
+        <Card.Content>
+            <Text variant="bodyMedium">
+            Lorem ipsum dolor sit amet, consectetur adipiscing eliurna.
+            </Text>
+          </Card.Content>
+      </Card>
     </ScrollView>
     
-  
-      <Button
-        title="Go to Article 3"
-        onPress={() => navigation.navigate('ResourceThree')}
-        buttonColor="lightseagreen"
-      />
-      <Button title="Go back" onPress={() => navigation.goBack()} />
+      <Button title="Go back" onPress={() => navigation.goBack()} buttonColor="lightseagreen"/>
     </ScrollView>
   );
 };
