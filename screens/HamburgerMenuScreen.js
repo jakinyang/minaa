@@ -12,9 +12,10 @@ export default function HamburgerMenuScreen({ navigation }) {
         Hamburger menu drawer section
           - five drawer items
             - icon for drawer items see reference (3)
-
+            - styleing
+            - change color to match minaa theme
             - Takes you to the given resouce associated with that drawer
-              - login.js // logout.js
+              - login.js // logout.js < -- Requires if else logic to display one or the other
               - reports.js
               - resources.js
               - settings.js
@@ -28,22 +29,27 @@ export default function HamburgerMenuScreen({ navigation }) {
       <Text>Hamburger Menu Screen</Text>
         <Drawer.Section title="Hamburger menu - DEV TITLE">
           <Drawer.Item
-            label="Login/Logout  - REQUIRES IF ELSE LOGIC TO DISPLAY ONE OR OTHER"
+            style={{ backgroundColor: '#64ffda' }}
+            label="Login/Logout"
             onPress={() => alert('clicked on login/logout')}
           />
           <Drawer.Item
+            style={{ backgroundColor: '#64ffda' }}
             label="Reports"
             onPress={() => alert('clicked on reports')}
           />
           <Drawer.Item
+            style={{ backgroundColor: '#64ffda' }}
             label="Resources"
             onPress={() => alert('clicked on resources')}
           />
           <Drawer.Item
+            style={{ backgroundColor: '#64ffda' }}
             label="Settings"
             onPress={() => alert('clicked on settings')}
           />
           <Drawer.Item
+            style={{ backgroundColor: '#64ffda' }}
             label="User Profile"
             onPress={() => alert('clicked on profile')}
           />
