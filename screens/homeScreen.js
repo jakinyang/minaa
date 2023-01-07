@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { View, Button, Text } from 'react-native';
 
+
 // Main Home Screen Component
 export default function HomeScreen({ navigation }) {
   return (
@@ -51,7 +52,7 @@ export default function HomeScreen({ navigation }) {
       <Text>Home Screen</Text>
       <Button
         title="Go to Resource Index"
-        onPress={() => navigation.navigate('ResourceIndex')}
+        onPress={() => navigation.navigate('ResourceIndexScreen')}
       />
       <Button
         title="Go to Profile Tab"
