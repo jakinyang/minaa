@@ -48,7 +48,7 @@ export default function HomeScreen({ navigation }) {
         Reference:
           - https://callstack.github.io/react-native-paper/bottom-navigation.html
       */}
-      <Text>Home screen</Text>
+      <Text>Home Screen</Text>
       <Button
         title="Go to Resource Index"
         onPress={() => navigation.navigate('ResourceIndex')}
