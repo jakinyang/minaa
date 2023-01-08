@@ -4,6 +4,7 @@ import { View, Button, Text, StyleSheet } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE, Callout, Geojson } from 'react-native-maps';
 import * as Location from 'expo-location';
 
+import MapMarkers from './MapMarkers';
 
 // Main Home Screen Component
 export default function HomeScreen({ navigation }) {
@@ -61,7 +62,8 @@ export default function HomeScreen({ navigation }) {
         latitude: 37.7130,
         longitude: -122.4102
       },
-      img: ""
+      img: "",
+      content: "report one content ",
     },
     {
       id: 1,
@@ -69,7 +71,8 @@ export default function HomeScreen({ navigation }) {
         latitude: 37.7684,
         longitude: -122.4102
       },
-      img:""
+      img:"",
+      content: "report two content ",
     },
     {
       id: 2,
@@ -77,31 +80,11 @@ export default function HomeScreen({ navigation }) {
         latitude: 37.7345,
         longitude: -122.5128
       },
-      img:""
+      img:"",
+      content: "report three content ",
     },
   ]
 
-  function MapMarkers() {
-    return (
-      mockReportData.map((item, i) => {
-        return (
-          <Marker
-          coordinate={item.coords}
-          key={item.id}
-          > 
-          </Marker>
-        )
-      })
-      // <Marker
-      // draggable
-      // coordinate={initialMarkerRegion}
-      // onDragEnd={
-      //   (e) => setMarkerRegion({...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude})}
-
-      // >
-      // </Marker>
-    )
-  }
 
 
   const [region, setRegion] = React.useState(initialRegion);
@@ -155,9 +138,8 @@ export default function HomeScreen({ navigation }) {
       >
       </Marker>
 
-      <MapMarkers />
+      <MapMarkers mockReportData={mockReportData} />
 
-  
     </MapView>
     </View>
 
