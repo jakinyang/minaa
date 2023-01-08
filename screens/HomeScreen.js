@@ -1,12 +1,47 @@
 // Imports
 import * as React from 'react';
-import { View, Button, Text, StyleSheet} from 'react-native';
-import MapView, { Marker, PROVIDER_GOOGLE, Callout } from 'react-native-maps';
+import { View, Button, Text, StyleSheet } from 'react-native';
+import MapView, { Marker, PROVIDER_GOOGLE, Callout, Geojson } from 'react-native-maps';
+import * as Location from 'expo-location';
 
 
 // Main Home Screen Component
 export default function HomeScreen({ navigation }) {
-  
+
+  //Test
+  const [location, setLocation] = React.useState(null);
+  const [errorMsg, setErrorMsg] = React.useState(null);
+
+  React.useEffect(() => {
+    (async () => {
+      
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  }, []);
+
+  let text = 'Waiting..';
+  if (errorMsg) {
+    text = errorMsg;
+  } else if (location) {
+    text = JSON.stringify(location);
+  }
+
+  // console.log(location);
+  // let currentLocation = {
+  //   latitude: location.coords.latitude,
+  //   longitude: location.coords.longitude,
+  //   latitudeDelta: 0.0922,
+  //   longitudeDelta: 0.0421,
+  // }
+  // console.log(currentLocation);
+  //---
   const initialRegion = {
     latitude: 37.78825,
     longitude: -122.4324,
@@ -76,12 +111,17 @@ export default function HomeScreen({ navigation }) {
   const resetRegionHandler = () => {
     mapRef.current.animateToRegion(initialRegion, 1 * 1000);
   };
-
-  
+  // const goToMyLocationHandeler = () => {
+  //   mapRef.current.animateToRegion(currentLocation, 1 * 1000);
+  // };
 
   return (
     <View style={styles.container}>
     <Text>Home Screen</Text>
+    <View >
+      <Text>My location: {text}</Text>
+    </View>
+    {/* <Button title='Got to my current location' onPress={goToMyLocationHandeler}/> */}
     <Button
   title="Go to Resource Index"
   onPress={() => navigation.navigate('ResourceIndexScreen')}
@@ -95,12 +135,16 @@ export default function HomeScreen({ navigation }) {
 
 <Text>Current lat and lon:</Text>
  <Text>{region.latitude}, {region.longitude}</Text>
+    <View >
     <MapView 
     style={styles.map}
-    initialRegion={initialRegion}
+    // initialRegion={initialRegion}
+    showsUserLocation={true}
+    showsMyLocationButton={true}
     provider={PROVIDER_GOOGLE}
     onRegionChangeComplete={(region) => setRegion(region)}
     ref={mapRef}
+  
     >
       <Marker
       draggable
@@ -113,8 +157,9 @@ export default function HomeScreen({ navigation }) {
 
       <MapMarkers />
 
+  
     </MapView>
-    
+    </View>
 
   </View>
     //   {/* 
