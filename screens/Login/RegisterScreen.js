@@ -1,6 +1,6 @@
 // RN imports
 import React, { useState } from 'react'
-import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import { Text } from 'react-native-paper'
 
 // component imports
@@ -18,16 +18,23 @@ import { passwordValidator } from './LoginHelpers/passwordValidator.js'
 import { nameValidator } from './LoginHelpers/nameValidator.js'
 
 export default function RegisterScreen({ navigation }) {
-  const [name, setName] = useState({ value: '', error: '' })
+  const [firstName, setFirstName] = useState({ value: '', error: '' })
+  const [lastName, setLastName] = useState({ value: '', error: '' })
+  const [phoneNumber, setPhoneNumber] = useState({ value: '', error: '' })
   const [email, setEmail] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
+  const [DOB, setDOB] = useState({ value: ''})
 
   const onSignUpPressed = () => {
-    const nameError = nameValidator(name.value)
+    const firstNameError = nameValidator(firstName.value)
+    const lastNameError = nameValidator(lastName.value)
     const emailError = emailValidator(email.value)
     const passwordError = passwordValidator(password.value)
-    if (emailError || passwordError || nameError) {
-      setName({ ...name, error: nameError })
+    setDOB({...DOB})
+
+    if (emailError || passwordError || firstNameError || lastNameError) {
+      setFirstName({ ...firstName, error: firstNameError })
+      setLastName({ ...lastName, error: lastNameError })
       setEmail({ ...email, error: emailError })
       setPassword({ ...password, error: passwordError })
       return
@@ -39,6 +46,7 @@ export default function RegisterScreen({ navigation }) {
   }
 
   return (
+  <ScrollView style={{ flex: 1, width: "100%", height: "100%" }}> 
     <Background>
       <BackButton goBack={navigation.goBack} />
       <Logo />
@@ -46,18 +54,18 @@ export default function RegisterScreen({ navigation }) {
       <TextInput
         label="First name"
         returnKeyType="next"
-        value={name.value}
-        onChangeText={(text) => setName({ value: text, error: '' })}
-        error={!!name.error}
-        errorText={name.error}
+        value={firstName.value}
+        onChangeText={(text) => setFirstName({ value: text, error: '' })}
+        error={!!firstName.error}
+        errorText={firstName.error}
       />
       <TextInput
         label="Last name"
         returnKeyType="next"
-        value={name.value}
-        onChangeText={(text) => setName({ value: text, error: '' })}
-        error={!!name.error}
-        errorText={name.error}
+        value={lastName.value}
+        onChangeText={(text) => setLastName({ value: text, error: '' })}
+        error={!!lastName.error}
+        errorText={lastName.error}
       />
       <TextInput
         label="Email"
@@ -80,6 +88,30 @@ export default function RegisterScreen({ navigation }) {
         errorText={password.error}
         secureTextEntry
       />
+      <TextInput
+        label="Phone number"
+        returnKeyType="next"
+        keyboardType = 'numeric'
+        value={phoneNumber.value}
+        onChangeText={(text) => setPhoneNumber({ value: text, error: '' })}
+        // error={!!phoneNumber.error}
+        // errorText={phoneNumber.error}
+      />
+      <TextInput
+      // currently no validation for DOB - needs implementation
+        label="Date of Birth YYYY-MM-DD"
+        returnKeyType="next"
+        keyboardType = 'numeric'
+        value={phoneNumber.value}
+        onChangeText={(text) => setPhoneNumber({ value: text, error: '' })}
+        // error={!!phoneNumber.error}
+        // errorText={phoneNumber.error}
+      />
+      <TextInput 
+        label="Qualification"
+        returnKeyType="next"
+        // possibly use this: https://www.npmjs.com/package/react-native-paper-dropdown
+      />
       <Button
         mode="contained"
         onPress={onSignUpPressed}
@@ -94,6 +126,7 @@ export default function RegisterScreen({ navigation }) {
         </TouchableOpacity>
       </View>
     </Background>
+  </ScrollView>  
   )
 }
 
