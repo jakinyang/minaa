@@ -2,6 +2,7 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
+import { View, Text } from 'react-native'
 
 // screens imports from Login folder
 import StartScreen from '../screens/Login/StartScreen'
@@ -19,7 +20,7 @@ export default function LoginStack() {
       screenOptions={{
         headerShown: false,
       }}
-    >
+    > 
       <Stack.Screen name="StartScreen" component={StartScreen} />
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
       <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
@@ -27,7 +28,7 @@ export default function LoginStack() {
       <Stack.Screen
         name="ResetPasswordScreen"
         component={ResetPasswordScreen}
-      />
+      />  
     </Stack.Navigator>
   )
 }
