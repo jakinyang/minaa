@@ -6,7 +6,7 @@ import * as Location from 'expo-location';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Chip, Card } from 'react-native-paper';
 
-export default function MapMarkers({mockReportData}) {
+export default function MapPins({mockReportData}) {
     return (
       mockReportData.map((item, i) => {
         return (
