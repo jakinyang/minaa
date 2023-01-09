@@ -69,6 +69,7 @@ export default function HomeScreen({ navigation }) {
   };
 
   return (
+    
     <View style={styles.container}>
        <DialoguePopup modalVisible={modalVisible} setModalVisible={setModalVisible} navigation={navigation}/>
       <Button

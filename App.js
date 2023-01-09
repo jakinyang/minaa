@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import HomeStack from './routes/Homestack';
 import { ApolloClient, InMemoryCache, ApolloProvider, gql, useQuery } from '@apollo/client';
 import Test from './screens/test';
+import { Provider } from 'react-native-paper';
 
 
 
@@ -21,11 +22,11 @@ export default function App() {
     // <ApolloProvider client={client}>
     //   <Test />
     // </ApolloProvider>
-
+  <Provider>
     <NavigationContainer>
       <HomeStack style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}/>
     </NavigationContainer>
-    
+    </Provider>
   );
 }
 
