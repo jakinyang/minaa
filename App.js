@@ -10,35 +10,36 @@ import Test from './screens/test';
 
 
 
-// const client = new ApolloClient({
-//   uri: 'http://localhost:4000/',
-//   cache: new InMemoryCache(),
-// });
+const client = new ApolloClient({
+  uri: 'http://localhost:4000/',
+  cache: new InMemoryCache(),
+});
 
 // client
 //   .query({
 //     query: gql`
-//       query Query {
-//         test
+//     query Query {
+//       users {
+//         id
+//         firstName
+//         lastName
 //       }
+      
+//     }
 //     `,
 //   })
-//   .then((result) => console.log(result));
+//   .then((result) => console.log(JSON.stringify(result)));
 
   
 
 export default function App() {
   return (
-    // <ApolloClient client={client}>
-    //   <View>
-    //     <Test />
-    //     <Text>hello test</Text>
-    //   </View>
-    // </ApolloClient>
-
-    <NavigationContainer>
-      <HomeStack style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}/>
-    </NavigationContainer>
+    <ApolloProvider client={client}>
+      <Test />
+    </ApolloProvider>
+    // <NavigationContainer>
+    //   <HomeStack style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}/>
+    // </NavigationContainer>
   );
 }
 
