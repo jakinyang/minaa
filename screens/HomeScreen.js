@@ -61,18 +61,13 @@ export default function HomeScreen({ navigation }) {
           </Marker>
         )
       })
-      // <Marker
-      // draggable
-      // coordinate={initialMarkerRegion}
-      // onDragEnd={
-      //   (e) => setMarkerRegion({...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude})}
-      // >
-      // </Marker>
     )
   }
 
   const [region, setRegion] = React.useState(initialRegion);
   const [markerRegion, setMarkerRegion] = React.useState(initialMarkerRegion);
+  // console.log(markerRegion);
+  
   const mapRef = React.useRef(null);
 
   const resetRegionHandler = () => {
@@ -104,9 +99,10 @@ export default function HomeScreen({ navigation }) {
           draggable
           coordinate={initialMarkerRegion}
           onDragEnd={
-            (e) => 
-            // setMarkerRegion({ ...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude })
+            (e) => {
+              setMarkerRegion({ ...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude });
             navigation.navigate("NewReportScreen")
+           }
           }
         >
         </Marker>
