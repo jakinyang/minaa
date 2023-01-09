@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
 
-export default function DialoguePopup({modalVisible, setModalVisible, navigation={navigation}}) {
- 
- 
+export default function DialoguePopup({ modalVisible, setModalVisible, navigation = { navigation } }) {
+
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -17,17 +16,17 @@ export default function DialoguePopup({modalVisible, setModalVisible, navigation
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-          <Pressable
+            <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => {
                 navigation.navigate("NewReportScreen");
                 setModalVisible(!modalVisible)
               }
-            }
-              >
-                <Text style={styles.textStyle}>Make a report </Text>
-              </Pressable>
-            
+              }
+            >
+              <Text style={styles.textStyle}>Make a report </Text>
+            </Pressable>
+
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}
@@ -37,8 +36,8 @@ export default function DialoguePopup({modalVisible, setModalVisible, navigation
           </View>
         </View>
       </Modal>
-    
-        <Text style={styles.textStyle}>Show Modal</Text>
+
+      <Text style={styles.textStyle}>Show Modal</Text>
 
     </View>
   );
