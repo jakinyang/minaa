@@ -24,14 +24,7 @@ function ProfileTab({ navigation }) {
   );
 }
 
-function NewReport({ navigation }) {
-  return (
-    <View style={{ width: "70%", height: "100%", alignSelf: "flex-end", justifyContent: 'center', alignItems: 'center', backgroundColor: "lightpink" }}>
-    <Text>Make a new report test</Text>
-    <Button title="Go back" onPress={() => navigation.goBack()} />
-  </View>
-  )
-}
+
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -41,7 +34,6 @@ export default function HomeStack() {
   
     <Stack.Navigator>
 
-<Stack.Screen name='NewReport' component={NewReport}/>
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen 
         name="ProfileTab" 

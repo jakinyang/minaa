@@ -34,12 +34,15 @@ const client = new ApolloClient({
 
 export default function App() {
   return (
+   
     <ApolloProvider client={client}>
       <Test />
     </ApolloProvider>
+    
     // <NavigationContainer>
     //   <HomeStack style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}/>
     // </NavigationContainer>
+    
   );
 }
 
