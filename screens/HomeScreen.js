@@ -103,7 +103,6 @@ export default function HomeScreen({ navigation }) {
           }
         }
         onMarkerPress={(e) => console.log("Marker is pressed")}
-        onMarkerDeselect={(e) => console.log("Marker is deselected")}
       >
         <Marker
           draggable
@@ -111,9 +110,9 @@ export default function HomeScreen({ navigation }) {
           onDragEnd={
             (e) => {
               setMarkerRegion({ ...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude });
-              setTimeout( () => {if(triggerReport) {
+              setInterval( () => {if(triggerReport) {
                 navigation.navigate("NewReportScreen")
-              }}, 2000)
+              }}, 1000)
             
            }
           }
