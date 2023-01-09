@@ -110,7 +110,7 @@ export default function HomeScreen({ navigation }) {
           onDragEnd={
             (e) => {
               setMarkerRegion({ ...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude });
-              setInterval( () => {if(triggerReport) {
+              setTimeout( () => {if(triggerReport) {
                 navigation.navigate("NewReportScreen")
               }}, 1000)
             
