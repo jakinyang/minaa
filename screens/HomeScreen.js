@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { View, Button, Text, StyleSheet } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE, Callout } from 'react-native-maps';
-import MapMarkers from './MapMarkers';
+import MapPins from './MapMarkers';
 
 // Main Home Screen Component
 export default function HomeScreen({ navigation }) {
@@ -22,7 +22,7 @@ export default function HomeScreen({ navigation }) {
   const mockReportData = [
     {
       id: 0,
-      coords: {
+      coords:{
         latitude: 37.7130,
         longitude: -122.4102
       },
@@ -35,7 +35,8 @@ export default function HomeScreen({ navigation }) {
         latitude: 37.7684,
         longitude: -122.4102
       },
-      img: ""
+      img:"",
+      content: "report two content ",
     },
     {
       id: 2,
@@ -43,7 +44,8 @@ export default function HomeScreen({ navigation }) {
         latitude: 37.7345,
         longitude: -122.5128
       },
-      img: ""
+      img:"",
+      content: "report three content ",
     },
   ]
 
@@ -104,9 +106,12 @@ export default function HomeScreen({ navigation }) {
             (e) => setMarkerRegion({ ...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude })}
 
         >
+          <Callout tooltip>
+            <Text>testtesttest</Text>
+          </Callout>
         </Marker>
 
-        <MapMarkers />
+        <MapPins mockReportData={mockReportData}/>
 
       </MapView>
 
