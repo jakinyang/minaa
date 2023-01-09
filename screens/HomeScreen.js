@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { View, Button, Text, StyleSheet } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE, Callout } from 'react-native-maps';
-
+import MapMarkers from './MapMarkers';
 
 // Main Home Screen Component
 export default function HomeScreen({ navigation }) {
@@ -26,7 +26,8 @@ export default function HomeScreen({ navigation }) {
         latitude: 37.7130,
         longitude: -122.4102
       },
-      img: ""
+      img: "",
+      content: "report one content ",
     },
     {
       id: 1,
@@ -62,12 +63,10 @@ export default function HomeScreen({ navigation }) {
       // coordinate={initialMarkerRegion}
       // onDragEnd={
       //   (e) => setMarkerRegion({...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude})}
-
       // >
       // </Marker>
     )
   }
-
 
   const [region, setRegion] = React.useState(initialRegion);
   const [markerRegion, setMarkerRegion] = React.useState(initialMarkerRegion);
@@ -76,8 +75,6 @@ export default function HomeScreen({ navigation }) {
   const resetRegionHandler = () => {
     mapRef.current.animateToRegion(initialRegion, 1 * 1000);
   };
-
-
 
   return (
     <View style={styles.container}>

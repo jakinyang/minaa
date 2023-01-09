@@ -15,12 +15,14 @@ export default function HomeStack() {
       <Drawer.Screen
         name="Home"
         component={MapStack} 
+
         options={{
           title: 'Home',
           cardStyle: {
             ...TransitionPresets.ModalSlideFromBottomIOS
           }
         }}
+
         />
       <Drawer.Screen
         name="Login"
