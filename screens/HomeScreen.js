@@ -1,12 +1,48 @@
 // Imports
 import * as React from 'react';
-import { View, Button, Text, StyleSheet} from 'react-native';
-import MapView, { Marker, PROVIDER_GOOGLE, Callout } from 'react-native-maps';
+import { View, Button, Text, StyleSheet } from 'react-native';
+import MapView, { Marker, PROVIDER_GOOGLE, Callout, Geojson } from 'react-native-maps';
+import * as Location from 'expo-location';
 
+import MapMarkers from './MapMarkers';
 
 // Main Home Screen Component
 export default function HomeScreen({ navigation }) {
-  
+
+  //Test
+  const [location, setLocation] = React.useState(null);
+  const [errorMsg, setErrorMsg] = React.useState(null);
+
+  React.useEffect(() => {
+    (async () => {
+      
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  }, []);
+
+  let text = 'Waiting..';
+  if (errorMsg) {
+    text = errorMsg;
+  } else if (location) {
+    text = JSON.stringify(location);
+  }
+
+  // console.log(location);
+  // let currentLocation = {
+  //   latitude: location.coords.latitude,
+  //   longitude: location.coords.longitude,
+  //   latitudeDelta: 0.0922,
+  //   longitudeDelta: 0.0421,
+  // }
+  // console.log(currentLocation);
+  //---
   const initialRegion = {
     latitude: 37.78825,
     longitude: -122.4324,
@@ -26,7 +62,8 @@ export default function HomeScreen({ navigation }) {
         latitude: 37.7130,
         longitude: -122.4102
       },
-      img: ""
+      img: "",
+      content: "report one content ",
     },
     {
       id: 1,
@@ -34,7 +71,8 @@ export default function HomeScreen({ navigation }) {
         latitude: 37.7684,
         longitude: -122.4102
       },
-      img:""
+      img:"",
+      content: "report two content ",
     },
     {
       id: 2,
@@ -42,31 +80,11 @@ export default function HomeScreen({ navigation }) {
         latitude: 37.7345,
         longitude: -122.5128
       },
-      img:""
+      img:"",
+      content: "report three content ",
     },
   ]
 
-  function MapMarkers() {
-    return (
-      mockReportData.map((item, i) => {
-        return (
-          <Marker
-          coordinate={item.coords}
-          key={item.id}
-          > 
-          </Marker>
-        )
-      })
-      // <Marker
-      // draggable
-      // coordinate={initialMarkerRegion}
-      // onDragEnd={
-      //   (e) => setMarkerRegion({...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude})}
-
-      // >
-      // </Marker>
-    )
-  }
 
 
   const [region, setRegion] = React.useState(initialRegion);
@@ -76,12 +94,17 @@ export default function HomeScreen({ navigation }) {
   const resetRegionHandler = () => {
     mapRef.current.animateToRegion(initialRegion, 1 * 1000);
   };
-
-  
+  // const goToMyLocationHandeler = () => {
+  //   mapRef.current.animateToRegion(currentLocation, 1 * 1000);
+  // };
 
   return (
     <View style={styles.container}>
     <Text>Home Screen</Text>
+    <View >
+      <Text>My location: {text}</Text>
+    </View>
+    {/* <Button title='Got to my current location' onPress={goToMyLocationHandeler}/> */}
     <Button
   title="Go to Resource Index"
   onPress={() => navigation.navigate('ResourceIndexScreen')}
@@ -95,26 +118,36 @@ export default function HomeScreen({ navigation }) {
 
 <Text>Current lat and lon:</Text>
  <Text>{region.latitude}, {region.longitude}</Text>
+    <View >
     <MapView 
     style={styles.map}
-    initialRegion={initialRegion}
+    // initialRegion={initialRegion}
+    showsUserLocation={true}
+    showsMyLocationButton={true}
     provider={PROVIDER_GOOGLE}
     onRegionChangeComplete={(region) => setRegion(region)}
     ref={mapRef}
+  
     >
       <Marker
       draggable
+      tappable
       coordinate={initialMarkerRegion}
       onDragEnd={
-        (e) => setMarkerRegion({...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude})}
+        (e) => 
+        // setMarkerRegion({...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude}
+        //   ) 
+        navigation.navigate("Home", {screen:'NewReport'})
+    
+      }
 
       >
       </Marker>
 
-      <MapMarkers />
+      <MapMarkers mockReportData={mockReportData} />
 
     </MapView>
-    
+    </View>
 
   </View>
     //   {/* 
