@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { View, Button, Text, StyleSheet } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE, Callout } from 'react-native-maps';
+
 import MapPins from './MapMarkers';
 
 // Main Home Screen Component
@@ -103,12 +104,11 @@ export default function HomeScreen({ navigation }) {
           draggable
           coordinate={initialMarkerRegion}
           onDragEnd={
-            (e) => setMarkerRegion({ ...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude })}
-
+            (e) => 
+            // setMarkerRegion({ ...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude })
+            navigation.navigate("NewReportScreen")
+          }
         >
-          <Callout tooltip>
-            <Text>testtesttest</Text>
-          </Callout>
         </Marker>
 
         <MapPins mockReportData={mockReportData}/>
