@@ -67,7 +67,8 @@ export default function HomeScreen({ navigation }) {
   const [region, setRegion] = React.useState(initialRegion);
   const [markerRegion, setMarkerRegion] = React.useState(initialMarkerRegion);
   // console.log(markerRegion);
-  
+  const [triggerReport, setTriggerReport] = React.useState(false);
+
   const mapRef = React.useRef(null);
 
   const resetRegionHandler = () => {
@@ -94,6 +95,13 @@ export default function HomeScreen({ navigation }) {
         provider={PROVIDER_GOOGLE}
         onRegionChangeComplete={(region) => setRegion(region)}
         ref={mapRef}
+        onLongPress={(e) => {
+          console.log(e.nativeEvent.coordinate); 
+          setTriggerReport(true)
+          }
+        }
+        onMarkerPress={(e) => console.log("Marker is pressed")}
+        onMarkerDeselect={(e) => console.log("Marker is deselected")}
       >
         <Marker
           draggable
@@ -101,7 +109,10 @@ export default function HomeScreen({ navigation }) {
           onDragEnd={
             (e) => {
               setMarkerRegion({ ...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude });
-            navigation.navigate("NewReportScreen")
+              setTimeout( () => {if(triggerReport) {
+                navigation.navigate("NewReportScreen")
+              }}, 2000)
+            
            }
           }
         >
