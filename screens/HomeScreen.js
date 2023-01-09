@@ -131,9 +131,15 @@ export default function HomeScreen({ navigation }) {
     >
       <Marker
       draggable
+      tappable
       coordinate={initialMarkerRegion}
       onDragEnd={
-        (e) => setMarkerRegion({...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude})}
+        (e) => 
+        // setMarkerRegion({...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude}
+        //   ) 
+        navigation.navigate("Home", {screen:'NewReport'})
+    
+      }
 
       >
       </Marker>
