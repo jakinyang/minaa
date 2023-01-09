@@ -4,9 +4,13 @@ import { View, Button, Text, StyleSheet } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE, Callout } from 'react-native-maps';
 
 import MapPins from './MapMarkers';
+import DialoguePopup from '../shared/DialoguePopup';
+
+
 
 // Main Home Screen Component
 export default function HomeScreen({ navigation }) {
+  
 
   const initialRegion = {
     latitude: 37.78825,
@@ -50,25 +54,13 @@ export default function HomeScreen({ navigation }) {
     },
   ]
 
-  function MapMarkers() {
-    return (
-      mockReportData.map((item, i) => {
-        return (
-          <Marker
-            coordinate={item.coords}
-            key={item.id}
-          >
-          </Marker>
-        )
-      })
-    )
-  }
-
   const [region, setRegion] = React.useState(initialRegion);
   const [markerRegion, setMarkerRegion] = React.useState(initialMarkerRegion);
   // console.log(markerRegion);
   const [triggerReport, setTriggerReport] = React.useState(false);
   const [tempMarker, setTempMarker] = React.useState(null);
+
+  const [modalVisible, setModalVisible] = React.useState(false);
 
   const mapRef = React.useRef(null);
 
@@ -77,7 +69,10 @@ export default function HomeScreen({ navigation }) {
   };
 
   return (
+    
+   
     <View style={styles.container}>
+       <DialoguePopup modalVisible={modalVisible} setModalVisible={setModalVisible} navigation={navigation}/>
       <Text>Home Screen</Text>
       <Button
         title="Go to Resource Index"
@@ -88,6 +83,7 @@ export default function HomeScreen({ navigation }) {
         onPress={() => navigation.navigate('ProfileTab')}
       />
       <Button title='reset location' onPress={resetRegionHandler} />
+      
       <Text>Current lat and lon:</Text>
       <Text>{region.latitude}, {region.longitude}</Text>
       <MapView
@@ -111,8 +107,9 @@ export default function HomeScreen({ navigation }) {
             (e) => {
               setMarkerRegion({ ...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude });
               setTimeout( () => {if(triggerReport) {
-                navigation.navigate("NewReportScreen")
-              }}, 1000)
+                // navigation.navigate("NewReportScreen")
+                setModalVisible(true)
+              }}, 500)
             
            }
           }
