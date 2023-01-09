@@ -1,12 +1,12 @@
 // Imports
 import * as React from 'react';
-import { View, Button, Text, StyleSheet} from 'react-native';
+import { View, Button, Text, StyleSheet } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE, Callout } from 'react-native-maps';
 
 
 // Main Home Screen Component
 export default function HomeScreen({ navigation }) {
-  
+
   const initialRegion = {
     latitude: 37.78825,
     longitude: -122.4324,
@@ -22,7 +22,7 @@ export default function HomeScreen({ navigation }) {
   const mockReportData = [
     {
       id: 0,
-      coords:{
+      coords: {
         latitude: 37.7130,
         longitude: -122.4102
       },
@@ -34,7 +34,7 @@ export default function HomeScreen({ navigation }) {
         latitude: 37.7684,
         longitude: -122.4102
       },
-      img:""
+      img: ""
     },
     {
       id: 2,
@@ -42,7 +42,7 @@ export default function HomeScreen({ navigation }) {
         latitude: 37.7345,
         longitude: -122.5128
       },
-      img:""
+      img: ""
     },
   ]
 
@@ -51,9 +51,9 @@ export default function HomeScreen({ navigation }) {
       mockReportData.map((item, i) => {
         return (
           <Marker
-          coordinate={item.coords}
-          key={item.id}
-          > 
+            coordinate={item.coords}
+            key={item.id}
+          >
           </Marker>
         )
       })
@@ -77,46 +77,44 @@ export default function HomeScreen({ navigation }) {
     mapRef.current.animateToRegion(initialRegion, 1 * 1000);
   };
 
-  
+
 
   return (
     <View style={styles.container}>
-    <Text>Home Screen</Text>
-    <Button
-  title="Go to Resource Index"
-  onPress={() => navigation.navigate('ResourceIndexScreen')}
-/>
-<Button
-  title="Go to Profile Tab"
-  onPress={() => navigation.navigate('ProfileTab')}
-/>
-
-<Button title='reset location' onPress={resetRegionHandler}/>
-
-<Text>Current lat and lon:</Text>
- <Text>{region.latitude}, {region.longitude}</Text>
-    <MapView 
-    style={styles.map}
-    initialRegion={initialRegion}
-    provider={PROVIDER_GOOGLE}
-    onRegionChangeComplete={(region) => setRegion(region)}
-    ref={mapRef}
-    >
-      <Marker
-      draggable
-      coordinate={initialMarkerRegion}
-      onDragEnd={
-        (e) => setMarkerRegion({...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude})}
-
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Resource Index"
+        onPress={() => navigation.navigate('ResourceIndexScreen')}
+      />
+      <Button
+        title="Go to Profile Tab"
+        onPress={() => navigation.navigate('ProfileTab')}
+      />
+      <Button title='reset location' onPress={resetRegionHandler} />
+      <Text>Current lat and lon:</Text>
+      <Text>{region.latitude}, {region.longitude}</Text>
+      <MapView
+        style={styles.map}
+        initialRegion={initialRegion}
+        provider={PROVIDER_GOOGLE}
+        onRegionChangeComplete={(region) => setRegion(region)}
+        ref={mapRef}
       >
-      </Marker>
+        <Marker
+          draggable
+          coordinate={initialMarkerRegion}
+          onDragEnd={
+            (e) => setMarkerRegion({ ...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude })}
 
-      <MapMarkers />
+        >
+        </Marker>
 
-    </MapView>
-    
+        <MapMarkers />
 
-  </View>
+      </MapView>
+
+
+    </View>
     //   {/* 
     //     Map Component 
     //       - Queries to the database to get back marker data
@@ -159,8 +157,8 @@ export default function HomeScreen({ navigation }) {
     //     Reference:
     //       - https://callstack.github.io/react-native-paper/bottom-navigation.html
     //   */}
-     
-   
+
+
   );
 }
 
@@ -169,7 +167,7 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  
+
   },
   map: {
     width: '100%',
