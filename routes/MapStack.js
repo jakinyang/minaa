@@ -47,6 +47,7 @@ export default function MapStack() {
             },
            }}
          />
+   
 
       <Stack.Screen
         name="ResourceIndexScreen"

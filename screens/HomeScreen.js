@@ -71,7 +71,11 @@ export default function HomeScreen({ navigation }) {
   return (
     
     <View style={styles.container}>
-       <DialoguePopup modalVisible={modalVisible} setModalVisible={setModalVisible} navigation={navigation}/>
+       <DialoguePopup 
+       modalVisible={modalVisible} 
+       setModalVisible={setModalVisible} 
+       navigation={navigation}
+       />
       <Button
         title="Go to Resource Index"
         onPress={() => navigation.navigate('ResourceIndexScreen')}
@@ -105,7 +109,7 @@ export default function HomeScreen({ navigation }) {
             (e) => {
               setMarkerRegion({ ...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude });
               setTimeout( () => {if(triggerReport) {
-                // navigation.navigate("NewReportScreen")
+                // navigation.navigate("ToReportScreen")
                 setModalVisible(true)
               }}, 500)
             
