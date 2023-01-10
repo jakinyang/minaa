@@ -3,11 +3,16 @@ import { useState } from 'react';
 import { View, Button,StyleSheet, ScrollView } from 'react-native';
 import { Dialog, Portal, Text, TextInput } from 'react-native-paper';
 import DropDownPicker from 'react-native-dropdown-picker';
+import * as ImagePicker from 'expo-image-picker';
 
 
 export default function NewReportScreen() {
+
+  //New report state
   const [open, setOpen] = useState(false);
+  const [reportOpen, setReportOpen] = useState(false);
   const [description, setDescription] = useState("")
+  const [image, setImage] = useState(null);
   const [reportSizeValue, setReportSizeValue] = useState(5)
   const [reportSizeItem, setReportSizeItem] = useState([
     { label: "5 Meters", value: 5 },
@@ -25,8 +30,11 @@ export default function NewReportScreen() {
     { label: "Small", value: "small"},
   ])
 
+  // New report image picker function
+  
+
   return (
-    <ScrollView style={{ flex: 1, width: "100%", height: "100%"}}>
+    <View style={{ flex: 1, width: "100%", height: "100%"}}>
       <View>
         <Text> New Report </Text>
         <TextInput 
@@ -51,16 +59,17 @@ export default function NewReportScreen() {
         />
         <Text> Area of concern in meters </Text>
         <DropDownPicker 
-          open={open}
+          open={reportOpen}
           value={reportSizeValue}
           items={reportSizeItem}
-          setOpen={setOpen}
+          setOpen={setReportOpen}
           setItems={setReportSizeItem}
           setValue={setReportSizeValue}
           zIndex={1000}
           zIndexInverse={3000}
         />
+
       </View>
-    </ScrollView>
+    </View>
   )
 }
