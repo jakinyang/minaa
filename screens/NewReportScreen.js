@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { View, Button,StyleSheet, ScrollView } from 'react-native';
+import { View, Button,StyleSheet, ScrollView, Image } from 'react-native';
 import { Dialog, Portal, Text, TextInput } from 'react-native-paper';
 import DropDownPicker from 'react-native-dropdown-picker';
 import * as ImagePicker from 'expo-image-picker';
@@ -30,8 +30,16 @@ export default function NewReportScreen() {
     { label: "Small", value: "small"},
   ])
 
-  // New report image picker function
-  
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+    setImage(result);
+  }
 
   return (
     <View style={{ flex: 1, width: "100%", height: "100%"}}>
@@ -68,8 +76,12 @@ export default function NewReportScreen() {
           zIndex={1000}
           zIndexInverse={3000}
         />
-
+        <Button title="Pick an image from camera roll" onPress={pickImage} />
+        {image && <Image source={{ uri: image }} />}
+      
       </View>
     </View>
   )
 }
+
+

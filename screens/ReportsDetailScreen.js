@@ -4,7 +4,7 @@ import {Avatar, Card, IconButton, Text, Chip } from 'react-native-paper';
 
 
 export default function ReportDetailScreen({navigation, route}) {
-  console.log(route.params);
+  // console.log(route.params);
   return (
     <View>
       <Card>
@@ -15,17 +15,17 @@ export default function ReportDetailScreen({navigation, route}) {
         />
       <Card.Content>
       <Chip icon="information">{route.params.status}</Chip>
-      <Text variant='bodyMedium'>Content: {route.params.content}</Text>
+      <Chip icon="information" style={styles.chipLocation}>lat: {route.params.coords.latitude} lon: {route.params.coords.longitude}</Chip>
+      <Text variant='bodyMedium'>Content: {route.params.content} </Text>
 
       </Card.Content>
-      <Text>lat: {route.params.coords.latitude}</Text>
-      <Text>lon: {route.params.coords.longitude}</Text>
-
       </Card>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
- 
+ chipLocation: {
+  marginTop: 4,
+ }
 })
