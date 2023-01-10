@@ -45,6 +45,9 @@ export default function NewReportScreen() {
           setOpen={setOpen}
           setItems={setReportItems}
           setValue={setReportValue}
+          zIndex={3000}
+          zIndexInverse={1000}
+
         />
         <Text> Area of concern in meters </Text>
         <DropDownPicker 
@@ -54,6 +57,8 @@ export default function NewReportScreen() {
           setOpen={setOpen}
           setItems={setReportSizeItem}
           setValue={setReportSizeValue}
+          zIndex={1000}
+          zIndexInverse={3000}
         />
       </View>
     </ScrollView>

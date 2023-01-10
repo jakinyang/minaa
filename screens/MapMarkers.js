@@ -26,7 +26,7 @@ export default function MapPins({mockReportData, navigation}) {
       <Card.Cover source={require("../assets/landmine1.jpg")}/>
       <Card.Title title="Report title"/>
       <Card.Content>
-       <Text variant="bodyMedium">{item.content} </Text>
+       <Chip icon="information">Reported</Chip>
       </Card.Content>
       </Card>
 
