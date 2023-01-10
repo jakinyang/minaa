@@ -14,7 +14,7 @@ export default function ResourceTwo({ navigation }) {
     </View>
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
       <Card style={styles.card}>
-        <Card.Cover source={require("../../assets/landmine1.jpg")}/>
+        <Card.Cover source={require("../../assets/landmine-warning.png")}/>
         <Card.Title title="Article 1"/>
         <Card.Content>
             <Text variant="bodyMedium">
