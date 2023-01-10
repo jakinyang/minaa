@@ -7,10 +7,13 @@ import ResourceIndex from './ResourceIndexScreen';
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import BottomSheet from 'reanimated-bottom-sheet';
 import { FAB, Portal } from 'react-native-paper';
-
+import CarouselCards from './TestCarousel';
+import mockReportData from './TestMarkerData';
+import TestMapMarkers from './TestMapMarkers';
 // Main Home Screen Component
 export default function HomeScreen({ navigation }) {
-
+  // Map Helpers
+  // Mock Data
   const initialRegion = {
     latitude: 37.78825,
     longitude: -122.4324,
@@ -23,55 +26,18 @@ export default function HomeScreen({ navigation }) {
     longitude: -122.4324,
   };
 
-  const mockReportData = [
-    {
-      id: 0,
-      coords: {
-        latitude: 37.7130,
-        longitude: -122.4102
-      },
-      img: "",
-      content: "report one content ",
-    },
-    {
-      id: 1,
-      coords: {
-        latitude: 37.7684,
-        longitude: -122.4102
-      },
-      img: ""
-    },
-    {
-      id: 2,
-      coords: {
-        latitude: 37.7345,
-        longitude: -122.5128
-      },
-      img: ""
-    },
-  ]
-
-  function MapMarkers() {
-    return (
-      mockReportData.map((item, i) => {
-        return (
-          <Marker
-            coordinate={item.coords}
-            key={item.id}
-          >
-          </Marker>
-        )
-      })
-    )
-  }
-
   const [region, setRegion] = useState(initialRegion);
+
   const [markerRegion, setMarkerRegion] = useState(initialMarkerRegion);
+
   const mapRef = useRef(null);
 
   const resetRegionHandler = () => {
     mapRef.current.animateToRegion(initialRegion, 1 * 1000);
   };
+
+  // Markers Array with mock data
+  const markers = TestMapMarkers(mockReportData);
 
   // Bottom Sheet Helpers
   const bottomSheetModalRef = useRef(null);
@@ -109,8 +75,9 @@ export default function HomeScreen({ navigation }) {
             })}
         >
         </Marker>
-        <MapMarkers />
+        {markers}
       </MapView>
+      <CarouselCards />
       <Text>Current lat and lon:</Text>
       <Text>{region.latitude}, {region.longitude}</Text>
       <Portal>
@@ -124,11 +91,6 @@ export default function HomeScreen({ navigation }) {
             { icon: 'crosshairs', label: 'Return', onPress: resetRegionHandler },
           ]}
           onStateChange={onStateChange}
-          onPress={() => {
-            if (open) {
-              // do something if the speed dial is open
-            }
-          }}
         />
       </Portal>
       <BottomSheetModal
@@ -150,6 +112,7 @@ const styles = StyleSheet.create({
   map: {
     width: '100%',
     height: '100%',
+    zIndex: -1,
   },
   fab: {
     position: 'absolute',
