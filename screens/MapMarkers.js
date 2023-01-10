@@ -1,26 +1,30 @@
 import * as React from 'react';
 import { View, Button, Text, StyleSheet } from 'react-native';
-import MapView, { Marker, PROVIDER_GOOGLE, Callout, Geojson } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE, Callout, Geojson, CalloutSubview } from 'react-native-maps';
 import * as Location from 'expo-location';
 
 import { ScrollView } from 'react-native-gesture-handler';
 import { Chip, Card } from 'react-native-paper';
 
-export default function MapPins({mockReportData}) {
+export default function MapPins({mockReportData, navigation}) {
     return (
       mockReportData.map((item, i) => {
         return (
           <Marker
           coordinate={item.coords}
           key={item.id}
+          
           > 
-          <Callout tooltip>
+          <Callout tooltip onPress={() => {console.log("Callout pressed"); navigation.navigate('ReportDetailScreen', item)}}>
             <View>
               {/* <Text>{item.content}</Text> */}
             
-      <Card style={styles.card}>
+      <Card 
+      style={styles.card}
+      
+      >
       <Card.Cover source={require("../assets/landmine1.jpg")}/>
-      <Card.Title title="Report n"/>
+      <Card.Title title="Report title"/>
       <Card.Content>
        <Text variant="bodyMedium">{item.content} </Text>
       </Card.Content>

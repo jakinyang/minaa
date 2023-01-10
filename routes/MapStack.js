@@ -10,6 +10,7 @@ import ResourceOne from '../screens/resources/ResourceOne';
 import ResourceTwo from '../screens/resources/ResourceTwo';
 import ResourceThree from '../screens/resources/ResourceThree';
 import NewReportScreen from '../screens/NewReportScreen';
+import ReportDetailScreen from '../screens/ReportsDetailScreen';
 
 function ProfileTab({ navigation }) {
   return (
@@ -42,6 +43,17 @@ export default function MapStack() {
            component={NewReportScreen}
            options={{
             title: "New Report",
+            cardStyle: {
+              ...TransitionPresets.ModalSlideFromBottomIOS
+            },
+           }}
+         />
+   
+         <Stack.Screen 
+           name='ReportDetailScreen'
+           component={ReportDetailScreen}
+           options={{
+            title: "ReportDetailScreen",
             cardStyle: {
               ...TransitionPresets.ModalSlideFromBottomIOS
             },

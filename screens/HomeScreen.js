@@ -9,7 +9,7 @@ import DialoguePopup from '../shared/DialoguePopup';
 
 
 // Main Home Screen Component
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen({ navigation, route }) {
   
 
   const initialRegion = {
@@ -118,7 +118,7 @@ export default function HomeScreen({ navigation }) {
         >
         </Marker>
 
-        <MapPins mockReportData={mockReportData}/>
+        <MapPins mockReportData={mockReportData} navigation={navigation} route={route}/>
 
       </MapView>
 
