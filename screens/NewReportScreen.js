@@ -38,8 +38,10 @@ export default function NewReportScreen() {
       aspect: [4, 3],
       quality: 1,
     });
-    setImage(result);
-  }
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
 
   return (
     <View style={{ flex: 1, width: "100%", height: "100%"}}>
@@ -77,8 +79,7 @@ export default function NewReportScreen() {
           zIndexInverse={3000}
         />
         <Button title="Pick an image from camera roll" onPress={pickImage} />
-        {image && <Image source={{ uri: image }} />}
-      
+        {image && <View><Image source={{ uri: image }} /></View>}
       </View>
     </View>
   )
