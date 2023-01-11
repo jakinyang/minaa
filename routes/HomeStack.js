@@ -16,8 +16,6 @@ export default function HomeStack() {
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      activeColor="#f0edf6"
-      inactiveColor="#3e2465"
       barStyle={styles.navigator}
       backBehavior="initialRoute"
       labeled={false}
@@ -25,6 +23,7 @@ export default function HomeStack() {
       <Tab.Screen
         name="Home"
         component={MapStack}
+        headerShown={false}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color }) => (
@@ -35,6 +34,7 @@ export default function HomeStack() {
       <Tab.Screen
         name="Login"
         component={LoginStack}
+        headerShown={false}
         options={{
           tabBarLabel: 'Updates',
           tabBarIcon: ({ color }) => (
@@ -45,6 +45,7 @@ export default function HomeStack() {
       <Tab.Screen
         name="Resources"
         component={ResourceStack}
+        headerShown={false}
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({ color }) => (
@@ -55,6 +56,7 @@ export default function HomeStack() {
       <Tab.Screen
         name="Profile"
         component={ProfileStack}
+        headerShown={false}
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({ color }) => (

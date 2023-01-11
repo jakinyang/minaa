@@ -13,6 +13,10 @@ const Stack = createStackNavigator();
 export default function MapStack() {
   return (
     <Stack.Navigator
+      initialRouteName="ProfileScreen"
+      screenOptions={{
+        headerShown: false,
+      }}
     >
       <Stack.Screen
         name="Map"
@@ -53,6 +57,5 @@ export default function MapStack() {
         }}
       />
     </Stack.Navigator>
-
   );
 }

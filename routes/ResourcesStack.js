@@ -16,7 +16,12 @@ const Stack = createStackNavigator();
 export default function ResourceStack() {
   const articles = mockArticleData;
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      initialRouteName="ProfileScreen"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <Stack.Screen
         name="ResourceIndex"
         component={ResourceIndex}
@@ -38,9 +43,9 @@ export default function ResourceStack() {
                 titleText,
                 bodyText,
               }}
-              options={{
-                headerShown: false,
-              }}
+            // options={{
+            //   headerShown: false,
+            // }}
             />
           )
         })
