@@ -1,10 +1,25 @@
 import React, { useState, useRef } from 'react';
+import { StyleSheet } from 'react-native';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 
-export default function Map({children}) {
+export default function Map({ children, setTempMarker, mapRef, setTriggerReport }) {
   const [region, setRegion] = useState(initialRegion);
   const [markerRegion, setMarkerRegion] = useState(initialMarkerRegion);
-  const [triggerReport, setTriggerReport] = useState(false);
-  const mapRef = useRef(null);
+  
+  
+
+  // Mock Data
+  const initialRegion = {
+    latitude: 37.78825,
+    longitude: -122.4324,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  }
+
+  const initialMarkerRegion = {
+    latitude: 37.78825,
+    longitude: -122.4324,
+  };
 
   return (
     <MapView
@@ -17,12 +32,7 @@ export default function Map({children}) {
         onLongPress={(e) => {
           console.log(e.nativeEvent.coordinate);
           setMarkerRegion({ ...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude });
-          setTimeout(() => {
-            if (triggerReport) {
-              // navigation.navigate("ToReportScreen")
-              setModalVisible(true)
-            }
-          }, 500)
+         setTriggerReport(true)
         }
         }
         onMarkerPress={(e) => console.log("Marker is pressed")}
@@ -31,3 +41,11 @@ export default function Map({children}) {
       </MapView>
   )
 }
+
+const styles = StyleSheet.create({
+  map: {
+    width: '100%',
+    height: '100%',
+    zIndex: -1,
+  },
+});

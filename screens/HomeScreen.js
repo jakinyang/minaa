@@ -1,8 +1,7 @@
 // Imports
 import React, { useState, useRef, useMemo } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import MapView, { Marker, PROVIDER_GOOGLE, Callout } from 'react-native-maps';
-import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { View, StyleSheet } from 'react-native';
+import { Marker } from 'react-native-maps';
 
 // Component Screens
 import Map from './MapViewScreen';
@@ -12,68 +11,52 @@ import CarouselCards from './Carousel';
 import mockReportData from './MockReportData.js';
 import FabGroup from './FabGroup';
 import BottomSheet from './BottomSheet';
+import DialoguePopup from './DialoguePopup';
 
 // Main Home Screen Component
 export default function HomeScreen({ navigation, route }) {
-  // Map Helpers
-  // Mock Data
-  const initialRegion = {
-    latitude: 37.78825,
-    longitude: -122.4324,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
-  }
-
+  // Map Data
   const initialMarkerRegion = {
     latitude: 37.78825,
     longitude: -122.4324,
   };
-
+  
+  // Map Helpers
+  const mapRef = useRef(null);
   const resetRegionHandler = () => {
     mapRef.current.animateToRegion(initialRegion, 1 * 1000);
   };
-
-  
+  const [triggerReport, setTriggerReport] = useState(false);
   const [tempMarker, setTempMarker] = useState(null);
-
+  const [markerRegion, setMarkerRegion] = useState(initialMarkerRegion);
   const [modalVisible, setModalVisible] = useState(false);
+
 
   // Bottom Sheet Helpers
   const bottomSheetModalRef = useRef(null);
-
   const snapPoints = useMemo(() => ["75%"], []);
-
   const openModal = () => {
     bottomSheetModalRef.current.present();
   }
 
   return (
     <View style={styles.container}>
-      <MapView
-        style={styles.map}
-        initialRegion={initialRegion}
-        provider={PROVIDER_GOOGLE}
-        onRegionChangeComplete={(region) => setRegion(region)}
-        ref={mapRef}
-        onPress={(e) => setTempMarker(e.nativeEvent.coordinate)}
-        onLongPress={(e) => {
-          console.log(e.nativeEvent.coordinate);
-          setMarkerRegion({ ...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude });
-          setTimeout(() => {
-            if (triggerReport) {
-              // navigation.navigate("ToReportScreen")
-              setModalVisible(true)
-            }
-          }, 500)
-        }
-        }
-        onMarkerPress={(e) => console.log("Marker is pressed")}
+      <Map
+        setTempMarker={setTempMarker}
+        mapRef={mapRef}
+        setTriggerReport={setTriggerReport}
+        markerRegion={markerRegion}
+        setMarkerRegion={setMarkerRegion}
       >
         <Marker
           draggable
           coordinate={tempMarker}
           onDragEnd={(e) => {
-            setTriggerReport(true)
+            setMarkerRegion({ ...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude });
+            setTimeout( () => {if(triggerReport) {
+              // navigation.navigate("ToReportScreen")
+              setModalVisible(true)
+            }}, 500)
           }}
         >
         </Marker>
@@ -82,7 +65,12 @@ export default function HomeScreen({ navigation, route }) {
           navigation={navigation}
           route={route}
         />
-      </MapView>
+      </Map>
+      <DialoguePopup 
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        navigation={navigation}
+      />
       <CarouselCards />
       <FabGroup
         navigation={navigation}
@@ -102,11 +90,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  map: {
-    width: '100%',
-    height: '100%',
-    zIndex: -1,
-  },
+ 
   fab: {
     position: 'absolute',
     margin: 16,

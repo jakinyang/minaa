@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useRef} from 'react'
 import { StyleSheet, View } from "react-native"
 import Carousel, { Pagination } from 'react-native-snap-carousel'
 import { CarouselCardItem, SLIDER_WIDTH, ITEM_WIDTH } from './CarouselCard'
 import data from './TestCardData'
 
-const CarouselCards = () => {
-  const isCarousel = React.useRef(null)
+export default function CarouselCards() {
+  const isCarousel = useRef(null)
   const [index, setIndex] = useState(0)
   return (
     <View style={styles.carouselContainer}>
@@ -47,5 +47,3 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
 });
-
-export default CarouselCards
