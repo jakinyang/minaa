@@ -53,19 +53,12 @@ export default function HomeScreen({ navigation, route }) {
     <View style={styles.container}>
       <ScreenHeader />
       <Map
-        tempMarker={tempMarker}
         setTempMarker={setTempMarker}
         mapRef={mapRef}
         setTriggerReport={setTriggerReport}
         markerRegion={markerRegion}
         setMarkerRegion={setMarkerRegion}
-        triggerReport={triggerReport}
-        setModalVisible={setModalVisible}
-        newReport={newReport}
-        newPin={newPin}
-        setNewPin={setNewPin}
       >
-  
         <Marker
           draggable
           coordinate={tempMarker}
@@ -90,7 +83,6 @@ export default function HomeScreen({ navigation, route }) {
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
         navigation={navigation}
-        setNewPin={setNewPin}
       />
       <CarouselCards />
       {/* <FabGroup
