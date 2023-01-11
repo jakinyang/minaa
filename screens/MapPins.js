@@ -13,7 +13,7 @@ export default function MapPins({ mockReportData, navigation }) {
         >
           <Callout
             tooltip
-            onPress={() => { console.log("Callout pressed"); navigation.navigate('ReportDetailScreen', item) }}
+            onPress={() => { navigation.navigate('ReportDetailScreen', item) }}
           >
             <View>
               <Card style={styles.card}>

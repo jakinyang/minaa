@@ -38,7 +38,7 @@ export default function NewReportScreen() {
       aspect: [4, 3],
       quality: 1,
     });
-    console.log('pickImage return value: ', result);
+    console.log('pickImage return val: ', result)
     if (!result.canceled) {
       setImage(result.assets[0].uri);
     }
@@ -66,7 +66,6 @@ export default function NewReportScreen() {
           setValue={setReportValue}
           zIndex={3000}
           zIndexInverse={1000}
-
         />
         <Text> Area of concern in meters </Text>
         <DropDownPicker 

@@ -55,6 +55,19 @@ export default function HomeScreen({ navigation, route }) {
         newPin={newPin}
         setNewPin={setNewPin}
       >
+  
+        <Marker
+          draggable
+          coordinate={tempMarker}
+          onDragEnd={(e) => {
+            setMarkerRegion({ ...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude });
+            setTimeout( () => {if(triggerReport) {
+              navigation.navigate("ToReportScreen")
+              setModalVisible(true)
+            }}, 500)
+          }}
+        >
+        </Marker>
         <MapPins
           mockReportData={mockReportData}
           navigation={navigation}
