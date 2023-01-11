@@ -36,7 +36,7 @@ export default function Map({ children, mapRef, setTriggerReport, tempPinData, s
         console.log(e.nativeEvent.coordinate);
 
         setTempPinData({...tempPinData, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude})
-        console.log("ssss: ",tempPinData);
+        console.log("on click temp pin data: ",tempPinData);
         const newReport = {
           id: 9999,
           coords:{
@@ -51,7 +51,7 @@ export default function Map({ children, mapRef, setTriggerReport, tempPinData, s
 
         pinData.push(newReport);
         setPinData(pinData)
-        console.log("2233 updated pin data: ", pinData);
+        console.log(" updated temp  pin data: ", pinData);
         // setNewPin(!newPin)
       }
     }

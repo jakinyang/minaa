@@ -21,24 +21,6 @@ export default function DialoguePopup({ modalVisible, setModalVisible, navigatio
             <Button
              mode="contained"
               onPress={() => {
-               
-
-                const newReport = {
-                  id: 9999,
-                  coords:{
-                    latitude: tempPinData.latitude,
-                    longitude: tempPinData.longitude
-                  },
-                  img: "",
-                  status: "Reviewed",
-                  title: "report n",
-                  content: "report n content  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veniam quo aperiam beatae culpa recusandae obcaecati eligendi sed ex corporis fugit similique perspiciatis, accusantium quia soluta rerum itaque, quaerat quibusdam nulla! " 
-                };
-      
-                pinData.push(newReport);
-                setPinData(pinData)
-                console.log("updated pin data: ", pinData);
-  
                 navigation.navigate( "NewReportScreen", {tempPinData: tempPinData, pinData: pinData});
 
                 setModalVisible(!modalVisible)
