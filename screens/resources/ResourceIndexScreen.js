@@ -1,7 +1,6 @@
 // Imports
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Button, Card, Text } from 'react-native-paper';
 
 // Mock Data
 import { mockArticleData } from '../mock_data/MockArticleData';
@@ -19,8 +18,7 @@ export default function ResourceIndex({ navigation }) {
         titleText={titleText}
         bodyText={bodyText}
         navigation={navigation}
-        onPress={() => {
-          navigation.navigate(`Article${id}`)}}
+        onPress={() => navigation.navigate(`Article${id}`)}
       />
     )
   })
