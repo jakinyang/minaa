@@ -1,84 +1,61 @@
-import * as React from 'react';
-import { View, Button, Text } from 'react-native';
+import React from 'react';
 import {
   createStackNavigator,
   TransitionPresets,
 } from '@react-navigation/stack';
 import HomeScreen from '../screens/HomeScreen';
-import ResourceIndex from '../screens/ResourceIndexScreen';
-import ResourceOne from '../screens/resources/ResourceOne';
-import ResourceTwo from '../screens/resources/ResourceTwo';
-import ResourceThree from '../screens/resources/ResourceThree';
-import NewReportScreen from '../screens/NewReportScreen';
-
-function ProfileTab({ navigation }) {
-  return (
-    <View style={{ width: "70%", height: "100%", alignSelf: "flex-end", justifyContent: 'center', alignItems: 'center', backgroundColor: "lightpink" }}>
-      <Text>Profile Tab</Text>
-      <Button title="Go back" onPress={() => navigation.goBack()} />
-    </View>
-  );
-}
+import ProfileTab from '../screens/Profile/ProfileScreen';
+import ReportDetailScreen from '../screens/Reports/ReportDetailScreen';
+import NewReportScreen from '../screens/Reports/NewReportScreen';
 
 const Stack = createStackNavigator();
 
 export default function MapStack() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Map" component={HomeScreen} />
-      <Stack.Screen 
-        name="ProfileTab" 
+    <Stack.Navigator
+      initialRouteName="ProfileScreen"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen
+        name="Map"
+        component={HomeScreen}
+        options={{
+          title: "",
+          headerTransparent: true,
+        }}
+      />
+      <Stack.Screen
+        name="ProfileTab"
         component={ProfileTab}
         options={{
-          title: 'Profile',
+          headerShown: false,
           cardStyle: {
             ...TransitionPresets.SlideFromRightIOS
           },
         }}
-         />
-
-         <Stack.Screen 
-           name='NewReportScreen'
-           component={NewReportScreen}
-           options={{
-            title: "New Report",
-            cardStyle: {
-              ...TransitionPresets.ModalSlideFromBottomIOS
-            },
-           }}
-         />
-
+      />
       <Stack.Screen
-        name="ResourceIndexScreen"
-        component={ResourceIndex}
+        name='NewReportScreen'
+        component={NewReportScreen}
         options={{
-          title: 'Resources',
-          cardStyle: {alignSelf: 'center', height: "90%", width: "90%", top: "10%", borderRadius: 20},
-          ...TransitionPresets.ModalSlideFromBottomIOS,
+          title: "New Report",
+          cardStyle: {
+            ...TransitionPresets.ModalSlideFromBottomIOS
+          },
         }}
       />
-      <Stack.Screen 
-        name="ResourceOne" 
-        component={ResourceOne} 
-        options={
-          { cardStyle: { alignSelf: 'center',height: "90%", width: "90%", top: "10%", borderRadius: 20}}
-          }
-        />
-      <Stack.Screen 
-        name="ResourceTwo" 
-        component={ResourceTwo} 
-        options={
-          { cardStyle: { alignSelf: 'center',height: "90%", width: "90%", top: "10%", borderRadius: 20}}
-          }
-        />
-      <Stack.Screen 
-        name="ResourceThree" 
-        component={ResourceThree} 
-        options={
-          { cardStyle: { alignSelf: 'center',height: "90%", width: "90%", top: "10%", borderRadius: 20}}
-          }
-        />
+      <Stack.Screen
+        name='ReportDetailScreen'
+        component={ReportDetailScreen}
+        options={{
+          title: "ReportDetailScreen",
+          cardStyle: {
+            ...TransitionPresets.ModalSlideFromBottomIOS
+          },
+        }}
+      />
     </Stack.Navigator>
-   
   );
 }
