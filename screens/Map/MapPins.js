@@ -8,7 +8,10 @@ export default function MapPins({ mockReportData, navigation }) {
     mockReportData.map((item, i) => {
       return (
         <Marker
-          coordinate={item.coords}
+          coordinate={{
+            longitude: item.coords.longitude ? item.coords.longitude : 0,
+            latitude: item.coords.latitude ? item.coords.latitude : 0
+          }}
           key={item.id}
         >
           <Callout
@@ -17,7 +20,7 @@ export default function MapPins({ mockReportData, navigation }) {
           >
             <View>
               <Card style={styles.card}>
-                <Card.Cover source={require("../assets/landmine1.jpg")} />
+                <Card.Cover source={{uri: item.img}} />
                 <Card.Title title={item.title} />
                 <Card.Content>
                   <Chip icon="information">{item.status}</Chip>

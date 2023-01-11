@@ -1,25 +1,21 @@
-// RN Imports
+//Imports
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { MD3Colors } from 'react-native-paper';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
-// Stack Imports: Map Stack for map "homescreen" & Login Stack for login screen
+// Stack Imports
 import MapStack from './MapStack';
 import LoginStack from './LoginStack';
-import ProfileTab from '../screens/ProfileScreen';
-import ResourceIndex from '../screens/ResourceIndexScreen';
+import ResourceStack from './ResourcesStack';
+import ProfileStack from './ProfileStack';
+
 const Tab = createMaterialBottomTabNavigator();
-const Drawer = createDrawerNavigator();
 
 export default function HomeStack() {
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      activeColor="#f0edf6"
-      inactiveColor="#3e2465"
       barStyle={styles.navigator}
       backBehavior="initialRoute"
       labeled={false}
@@ -27,6 +23,7 @@ export default function HomeStack() {
       <Tab.Screen
         name="Home"
         component={MapStack}
+        headerShown={false}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color }) => (
@@ -37,17 +34,19 @@ export default function HomeStack() {
       <Tab.Screen
         name="Login"
         component={LoginStack}
+        headerShown={false}
         options={{
           title: 'Login',
           tabBarLabel: 'Updates',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="bell" color={color} size={26} />
+            <MaterialCommunityIcons name="check" color={color} size={26} />
           ),
         }}
       />
       <Tab.Screen
-        name="ResourceIndex"
-        component={ResourceIndex}
+        name="Resources"
+        component={ResourceStack}
+        headerShown={false}
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({ color }) => (
@@ -57,7 +56,8 @@ export default function HomeStack() {
       />
       <Tab.Screen
         name="Profile"
-        component={ProfileTab}
+        component={ProfileStack}
+        headerShown={false}
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({ color }) => (
@@ -71,9 +71,11 @@ export default function HomeStack() {
 
 const styles = StyleSheet.create({
   navigator: {
-
+    backgroundColor: '#694fad',
   },
   screen: {
-
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 })

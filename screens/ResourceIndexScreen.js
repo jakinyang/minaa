@@ -47,25 +47,3 @@ export default function ResourceIndex({ navigation }) {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginVertical: 20,
-  },
-  content: {
-    padding: 4,
-  },
-  preference: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    paddingVertical: 12,
-    paddingHorizontal: 8,
-  },
-  chip: {
-    margin: 4,
-  },
-  card: {
-    margin: 4,
-  }
-})

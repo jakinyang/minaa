@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, StyleSheet, SafeAreaView } from 'react-native';
-import { Avatar, IconButton, MD3Colors } from 'react-native-paper';
+import { View, StyleSheet, SafeAreaView, Text } from 'react-native';
+import { IconButton, MD3Colors } from 'react-native-paper';
 
 
-export default function ProfileTab({ navigation }) {
+export default function SettingsScreen({ navigation }) {
   return (
     <>
       <SafeAreaView />
@@ -17,10 +17,7 @@ export default function ProfileTab({ navigation }) {
           size={30}
           onPress={() => navigation.goBack()}
         />
-        <Avatar.Text
-          size={50}
-          label="JS"
-        />
+        <Text>This is the Settings Page</Text>
       </View>
     </>
   );

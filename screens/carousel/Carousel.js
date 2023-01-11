@@ -1,8 +1,8 @@
 import React, { useState, useRef} from 'react'
 import { StyleSheet, View } from "react-native"
 import Carousel, { Pagination } from 'react-native-snap-carousel'
-import { CarouselCardItem, SLIDER_WIDTH, ITEM_WIDTH } from './CarouselCard'
-import data from './TestCardData'
+import { CarouselCardItem, SLIDER_WIDTH, ITEM_WIDTH } from './CarouselCard.js'
+import { mockCardData } from '../mock_data/MockCardData.js'
 
 export default function CarouselCards() {
   const isCarousel = useRef(null)
@@ -13,7 +13,7 @@ export default function CarouselCards() {
         layout="default"
         layoutCardOffset={9}
         ref={isCarousel}
-        data={data}
+        data={mockCardData}
         renderItem={CarouselCardItem}
         sliderWidth={SLIDER_WIDTH}
         itemWidth={ITEM_WIDTH}
@@ -22,7 +22,7 @@ export default function CarouselCards() {
         onSnapToItem={(index) => setIndex(index)}
       />
       <Pagination
-        dotsLength={data.length}
+        dotsLength={mockCardData.length}
         activeDotIndex={index}
         carouselRef={isCarousel}
         dotStyle={{

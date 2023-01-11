@@ -18,7 +18,7 @@
     "cross-fetch": "^3.1.5",
     "deprecated-react-native-prop-types": "^2.2.0",
     "expo": "~47.0.12",
-    "expo-image-picker": "^14.0.2",
+    "expo-image-picker": "~14.0.2",
     "expo-location": "~15.0.1",
     "expo-status-bar": "~1.4.2",
     "graphql": "^15.8.0",
@@ -35,7 +35,8 @@
     "react-native-vector-icons": "^9.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "@faker-js/faker": "^7.6.0"
   },
   "private": true
 }
