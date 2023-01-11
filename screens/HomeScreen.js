@@ -69,7 +69,6 @@ export default function HomeScreen({ navigation, route }) {
   const [tempMarker, setTempMarker] = React.useState(null);
 
   const [modalVisible, setModalVisible] = React.useState(false);
-
   const mapRef = React.useRef(null);
 
   const resetRegionHandler = () => {
