@@ -29,7 +29,7 @@ export default function HomeScreen({ navigation, route }) {
     const setPinData = (newState) => {
       pinData.current = newState;
     }
-    console.log("pin data:", pinData);
+    // console.log("pin data:", pinData);
     return [pinData, setPinData];
   }
 
@@ -46,6 +46,7 @@ export default function HomeScreen({ navigation, route }) {
   const [tempPinData, setTempPinData] = useState({latitude: 0, longitude: 0})
   const [newReport, setNewReport] = useState(mockReportData);
   const [newPin, setNewPin] = useState(false);
+  const [tempCoords, setTempCoords] = useFreshState()
   // Bottom Sheet Helpers
   const bottomSheetModalRef = useRef(null);
   const snapPoints = useMemo(() => ["75%"], []);
@@ -70,6 +71,8 @@ export default function HomeScreen({ navigation, route }) {
         setPinData={setPinData}
         newPin={newPin}
         setNewPin={setNewPin}
+        setModalVisible={setModalVisible}
+        setTempCoords={setTempCoords}
       >
         <MapPins
           navigation={navigation}
@@ -89,6 +92,7 @@ export default function HomeScreen({ navigation, route }) {
         tempPinData={tempPinData}
         pinData={pinData.current}
         setPinData={setPinData}
+        tempCoords={tempCoords.current}
       />
       {/* <CarouselCards /> */}
       <FabGroup

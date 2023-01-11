@@ -5,7 +5,7 @@ import { set } from 'react-native-reanimated';
 import mockReportData from './MockReportData.js';
 
 
-export default function Map({ children, mapRef, setTriggerReport, tempPinData, setTempPinData, pinData, setPinData, newPin, setNewPin }) {
+export default function Map({ children, mapRef, setTriggerReport, tempPinData, setTempPinData, pinData, setPinData, newPin, setNewPin, setModalVisible, setTempCoords }) {
   const [region, setRegion] = useState(initialRegion);
   const [markerRegion, setMarkerRegion] = useState(initialMarkerRegion);
   //Test
@@ -50,22 +50,24 @@ export default function Map({ children, mapRef, setTriggerReport, tempPinData, s
       ref={mapRef}
       onLongPress={(e) => {
         setTriggerReport(true)
-        setTempPinData({ latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude })
-        console.log(`latitude: ${e.nativeEvent.coordinate.latitude}, longitude: ${e.nativeEvent.coordinate.longitude}`) 
-        console.log("tem pin data: ", tempPinData);
-        const newReport = {
-          id: 9999,
+        setTempCoords({ latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude })
+        // console.log(`latitude: ${e.nativeEvent.coordinate.latitude}, longitude: ${e.nativeEvent.coordinate.longitude}`) 
+        // console.log("tem pin data: ", tempPinData);
+        const tempReport = {
+          id: null,
           coords:{
             latitude: e.nativeEvent.coordinate.latitude,
             longitude: e.nativeEvent.coordinate.longitude
           },
-          img: "",
-          status: "********",
-          title: "TEST PIN",
-          content: "THIS IS THE TEST PIN DATA" 
+          img: null,
+          status: null,
+          title:null,
+          content:null
         };  
-          setPinData([...pinData, newReport]);
+          setPinData([...pinData, tempReport]);
           console.log("long pressed, pin data:", pinData);
+          console.log(" temp data", tempPinData);
+          setModalVisible(true)
       }
       }
       

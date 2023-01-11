@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
 import { Button, Portal, Dialog, MD2Colors } from 'react-native-paper';
 
-export default function DialoguePopup({ modalVisible, setModalVisible, navigation, setNewPin, tempPinData, route, pinData, setPinData}) {
+export default function DialoguePopup({ modalVisible, setModalVisible, navigation, setNewPin, tempPinData, route, pinData, setPinData, tempCoords}) {
+  // console.log("popup tempCoords:", tempCoords);
 
   return (
     <View style={styles.bottomView}>
@@ -21,8 +22,10 @@ export default function DialoguePopup({ modalVisible, setModalVisible, navigatio
             <Button
              mode="contained"
               onPress={() => {
-                navigation.navigate( "NewReportScreen", {tempPinData: tempPinData, pinData: pinData});
-
+                
+                navigation.navigate( "NewReportScreen", {tempPinData: tempPinData, newPinData: pinData.at(-1), tempCoords: tempCoords});
+                // console.log("check last index", pinData.at(-1));
+                // console.log("check mutation", pinData);
                 setModalVisible(!modalVisible)
               }
               }

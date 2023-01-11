@@ -44,6 +44,9 @@ export default function NewReportScreen({navigation, route}) {
     }
   };
 
+  //Test
+  console.log("route.params.newPinData:",route.params.newPinData);
+
   return (
     <View style={{ flex: 1, width: "100%", height: "100%"}}>
       <View>
@@ -80,17 +83,25 @@ export default function NewReportScreen({navigation, route}) {
           zIndexInverse={3000}
         />
         <Button title='Submit' onPress={() =>{ 
-          // console.log("Submit report test", route.params);
-          
-          // console.log("check pin Data", route.params.pinData);
-         console.log("haha test 11",route.params);
-          // route.params.setPinData([...pinData, pinData])
-          // navigation.navigate("Map", returnPinData)
-          navigation.navigate({
-            name: "Map",
-            params: {updatedPinData: route.params.pinData},
-            merge: true
-          })
+       const newReport = {
+        id: 9999,
+        coords:{
+          latitude: route.params.tempCoords.latitude,
+          longitude: route.params.tempCoords.longitude
+        },
+        img: "",
+        status: "********",
+        title: "TEST PIN",
+        content: "THIS IS THE TEST PIN DATA" 
+      };  
+        // setPinData([...pinData, newReport]);
+        console.log("new report test:", pinData);
+          // navigation.navigate({
+          //   name: "Map",
+          //   params: {updatedPinData: route.params.pinData},
+          //   merge: true
+          // })
+
           }}/>
         <Button title="Pick an image from camera roll" onPress={pickImage} />
         {image && <View><Image source={{ uri: image }} /></View>}
