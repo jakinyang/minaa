@@ -7,7 +7,6 @@ export default function MapPins({ navigation, pinData, newPin, triggerReport, se
 
 return (pinData.map((item, i) => {
   return (
-
     <Marker
       coordinate={item.coords}
       key={i}

@@ -21,6 +21,18 @@ export default function HomeScreen({ navigation, route }) {
     longitude: -122.4324,
   };
 
+
+  //Helper functions
+  function useFreshState(value) {
+    console.log("function pindata result:",value);
+    const pinData = useRef(value);
+    const setPinData = (newState) => {
+      pinData.current = newState;
+    }
+    console.log("pin data:", pinData);
+    return [pinData, setPinData];
+  }
+
   // Map Helpers
   const mapRef = useRef(null);
   const resetRegionHandler = () => {
@@ -30,21 +42,20 @@ export default function HomeScreen({ navigation, route }) {
   const [tempMarker, setTempMarker] = useState({ longitude: 0, latitude: 0 });
   const [markerRegion, setMarkerRegion] = useState(initialMarkerRegion);
   const [modalVisible, setModalVisible] = useState(false);
-  const [pinData, setPinData] = useState(mockReportData);
+  const [pinData, setPinData] = useFreshState(mockReportData);
   const [tempPinData, setTempPinData] = useState({latitude: 0, longitude: 0})
   const [newReport, setNewReport] = useState(mockReportData);
   const [newPin, setNewPin] = useState(false);
-
   // Bottom Sheet Helpers
   const bottomSheetModalRef = useRef(null);
   const snapPoints = useMemo(() => ["75%"], []);
   const openModal = () => {
     bottomSheetModalRef.current.present();
   };
- 
-  // useEffect(() => {
-  //   setPinData(route.params?.updatedPinData)
-  // }, pinData)
+
+  useEffect(()=> {
+    console.log("test pin data",pinData);
+  }, [pinData])
 
   return (
     <View style={styles.container}>
@@ -55,13 +66,15 @@ export default function HomeScreen({ navigation, route }) {
         setTriggerReport={setTriggerReport}
         setTempPinData={setTempPinData}
         tempPinData={tempPinData}
-        pinData={pinData}
+        pinData={pinData.current}
         setPinData={setPinData}
+        newPin={newPin}
+        setNewPin={setNewPin}
       >
         <MapPins
           navigation={navigation}
           route={route}
-          pinData={pinData}
+          pinData={pinData.current}
           newPin={newPin}
           triggerReport={triggerReport}
           setModalVisible={setModalVisible}
@@ -74,7 +87,7 @@ export default function HomeScreen({ navigation, route }) {
         navigation={navigation}
         setNewPin={setNewPin}
         tempPinData={tempPinData}
-        pinData={pinData}
+        pinData={pinData.current}
         setPinData={setPinData}
       />
       {/* <CarouselCards /> */}

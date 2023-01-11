@@ -1,15 +1,32 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE, Callout, tooltip } from 'react-native-maps';
+import { set } from 'react-native-reanimated';
 import mockReportData from './MockReportData.js';
 
 
-export default function Map({ children, mapRef, setTriggerReport, tempPinData, setTempPinData, pinData, setPinData }) {
+export default function Map({ children, mapRef, setTriggerReport, tempPinData, setTempPinData, pinData, setPinData, newPin, setNewPin }) {
   const [region, setRegion] = useState(initialRegion);
   const [markerRegion, setMarkerRegion] = useState(initialMarkerRegion);
-
-
+  //Test
+  // const ref = useRef();
+  // useEffect(() => {
+  //   ref.current = pinData
+  // }, [ref])
+  
   //Helper Function
+//   function customSaveStateHook(value) 
+// {   const ref = useRef(value);    
+//     const updateState = (newState) => 
+//     {
+//      ref.current = newState;   
+//     }    
+//     return [ref, updateState]; 
+// }
+
+// ...
+
+// const [savedData, setSavedData] = customSaveStateHook(null)
 
   // Mock Data
   const initialRegion = {
@@ -31,39 +48,31 @@ export default function Map({ children, mapRef, setTriggerReport, tempPinData, s
       provider={PROVIDER_GOOGLE}
       onRegionChangeComplete={(region) => setRegion(region)}
       ref={mapRef}
-      onPress={(e) => {
-        // setTempMarker(e.nativeEvent.coordinate);
-        console.log(e.nativeEvent.coordinate);
-
-        setTempPinData({...tempPinData, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude})
-        console.log("on click temp pin data: ",tempPinData);
+      onLongPress={(e) => {
+        setTriggerReport(true)
+        setTempPinData({ latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude })
+        console.log(`latitude: ${e.nativeEvent.coordinate.latitude}, longitude: ${e.nativeEvent.coordinate.longitude}`) 
+        console.log("tem pin data: ", tempPinData);
         const newReport = {
           id: 9999,
           coords:{
-            latitude: tempPinData.latitude,
-            longitude: tempPinData.longitude
+            latitude: e.nativeEvent.coordinate.latitude,
+            longitude: e.nativeEvent.coordinate.longitude
           },
           img: "",
-          status: "Reviewed",
-          title: "report n",
-          content: "report n content  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veniam quo aperiam beatae culpa recusandae obcaecati eligendi sed ex corporis fugit similique perspiciatis, accusantium quia soluta rerum itaque, quaerat quibusdam nulla! " 
-        };
-
-        pinData.push(newReport);
-        setPinData(pinData)
-        console.log(" updated temp  pin data: ", pinData);
-        // setNewPin(!newPin)
-      }
-    }
-      onLongPress={(e) => {
-        console.log(e.nativeEvent.coordinate);
-        setMarkerRegion({ ...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude });
-        setTriggerReport(true)
+          status: "********",
+          title: "TEST PIN",
+          content: "THIS IS THE TEST PIN DATA" 
+        };  
+          setPinData([...pinData, newReport]);
+          console.log("long pressed, pin data:", pinData);
       }
       }
-      onMarkerPress={(e) => console.log("Marker is pressed")}
+      
     >
-      {children}
+      {
+       children
+       }
     </MapView>
   )
 }
