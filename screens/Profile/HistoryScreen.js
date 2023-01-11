@@ -1,37 +1,73 @@
-import React from 'react';
-import { View, StyleSheet, SafeAreaView, Text } from 'react-native';
+import React, { useState, useRef} from 'react'
+import { StyleSheet, View, Text, SafeAreaView } from "react-native"
+import Carousel, { Pagination } from 'react-native-snap-carousel'
+import { UserReportCardItem, SLIDER_WIDTH, ITEM_WIDTH } from './UserReports/UserReportCard.js'
+import { mockUserReportData } from './UserReports/dummyinfo.js'
 import { IconButton, MD3Colors } from 'react-native-paper';
 
-
 export default function HistoryScreen({ navigation }) {
+  const isCarousel = useRef(null)
+  const [index, setIndex] = useState(0)
   return (
-    <>
+    <View
+    style={styles.container}
+    >
       <SafeAreaView />
-      <View
-        style={styles.container}
-      >
-        <IconButton
-          icon="arrow-left"
-          iconColor={MD3Colors.primary0}
-          style={styles.goBack}
-          size={30}
-          onPress={() => navigation.goBack()}
+      <IconButton
+        icon="arrow-left"
+        iconColor={MD3Colors.primary0}
+        style={styles.goBack}
+        size={30}
+        onPress={() => navigation.goBack()}
+      />
+      <Text>This is the History Page</Text>
+      <View style={styles.carouselContainer}>
+        <Carousel
+          layout="default"
+          layoutCardOffset={9}
+          ref={isCarousel}
+          data={mockUserReportData}
+          renderItem={UserReportCardItem}
+          sliderWidth={SLIDER_WIDTH}
+          itemWidth={ITEM_WIDTH}
+          inactiveSlideShift={0}
+          useScrollView={true}
+          onSnapToItem={(index) => setIndex(index)}
         />
-        <Text>This is the History Page</Text>
+        <Pagination
+          dotsLength={mockUserReportData.length}
+          activeDotIndex={index}
+          carouselRef={isCarousel}
+          dotStyle={{
+            width: 10,
+            height: 10,
+            borderRadius: 5,
+            marginHorizontal: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.92)'
+          }}
+          inactiveDotOpacity={0.4}
+          inactiveDotScale={0.6}
+          tappableDots={true}
+        />
       </View>
-    </>
-  );
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+  carouselContainer: {
+    position: 'absolute',
+    top: 100,
+    alignSelf: 'center',
   },
   goBack: {
     position: 'absolute',
     top: 0,
     left: 15
-  }
+  },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
