@@ -2,16 +2,18 @@
 import React, { useState, useRef, useMemo } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE, Callout } from 'react-native-maps';
-import MapMarkers from './MapMarkers';
-import ResourceIndex from './ResourceIndexScreen';
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
-import BottomSheet from 'reanimated-bottom-sheet';
-import { FAB, Portal } from 'react-native-paper';
+
+// Component Screens
+import MapPins from './MapPins';
+import ResourceIndex from './ResourceIndexScreen';
 import CarouselCards from './TestCarousel';
-import mockReportData from './TestMarkerData';
-import TestMapMarkers from './TestMapMarkers';
+import mockReportData from './MockReportData.js';
+import FabGroup from './FabGroup';
+
+
 // Main Home Screen Component
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen({ navigation, route }) {
   // Map Helpers
   // Mock Data
   const initialRegion = {
@@ -36,8 +38,10 @@ export default function HomeScreen({ navigation }) {
     mapRef.current.animateToRegion(initialRegion, 1 * 1000);
   };
 
-  // Markers Array with mock data
-  const markers = TestMapMarkers(mockReportData);
+  const [triggerReport, setTriggerReport] = useState(false);
+  const [tempMarker, setTempMarker] = useState(null);
+
+  const [modalVisible, setModalVisible] = useState(false);
 
   // Bottom Sheet Helpers
   const bottomSheetModalRef = useRef(null);
@@ -63,36 +67,38 @@ export default function HomeScreen({ navigation }) {
         provider={PROVIDER_GOOGLE}
         onRegionChangeComplete={(region) => setRegion(region)}
         ref={mapRef}
+        onPress={(e) => setTempMarker(e.nativeEvent.coordinate)}
+        onLongPress={(e) => {
+          console.log(e.nativeEvent.coordinate);
+          setMarkerRegion({ ...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude });
+          setTimeout(() => {
+            if (triggerReport) {
+              // navigation.navigate("ToReportScreen")
+              setModalVisible(true)
+            }
+          }, 500)
+        }
+        }
+        onMarkerPress={(e) => console.log("Marker is pressed")}
       >
         <Marker
           draggable
-          coordinate={initialMarkerRegion}
-          onDragEnd={
-            (e) => setMarkerRegion({
-              ...markerRegion,
-              latitude: e.nativeEvent.coordinate.latitude,
-              longitude: e.nativeEvent.coordinate.longitude
-            })}
+          coordinate={tempMarker}
+          onDragEnd={(e) => {
+            setTriggerReport(true)
+          }}
         >
         </Marker>
-        {markers}
+        <MapPins
+          mockReportData={mockReportData}
+          navigation={navigation}
+          route={route}
+        />
       </MapView>
       <CarouselCards />
       <Text>Current lat and lon:</Text>
       <Text>{region.latitude}, {region.longitude}</Text>
-      <Portal>
-        <FAB.Group
-          open={open}
-          icon={open ? 'calendar-today' : 'plus'}
-          actions={[
-            // { icon: 'plus', onPress: openModal },
-            { icon: 'account-box-outline', label: 'Profile', onPress: () => navigation.navigate('ProfileTab') },
-            { icon: 'book', label: 'Resources', onPress: openModal },
-            { icon: 'crosshairs', label: 'Return', onPress: resetRegionHandler },
-          ]}
-          onStateChange={onStateChange}
-        />
-      </Portal>
+      <FabGroup navigation={navigation} openModal={openModal} resetRegionHandler={resetRegionHandler} />
       <BottomSheetModal
         ref={bottomSheetModalRef}
         index={0}

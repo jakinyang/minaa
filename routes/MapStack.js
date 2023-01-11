@@ -10,6 +10,8 @@ import ResourceIndex from '../screens/ResourceIndexScreen';
 import ResourceOne from '../screens/resources/ResourceOne';
 import ResourceTwo from '../screens/resources/ResourceTwo';
 import ResourceThree from '../screens/resources/ResourceThree';
+import ReportDetailScreen from '../screens/ReportDetailScreen';
+import NewReportScreen from '../screens/NewReportScreen';
 
 const Stack = createStackNavigator();
 
@@ -35,6 +37,27 @@ export default function MapStack() {
           },
         }}
       />
+      <Stack.Screen 
+           name='NewReportScreen'
+           component={NewReportScreen}
+           options={{
+            title: "New Report",
+            cardStyle: {
+              ...TransitionPresets.ModalSlideFromBottomIOS
+            },
+           }}
+         />
+   
+         <Stack.Screen 
+           name='ReportDetailScreen'
+           component={ReportDetailScreen}
+           options={{
+            title: "ReportDetailScreen",
+            cardStyle: {
+              ...TransitionPresets.ModalSlideFromBottomIOS
+            },
+           }}
+         />
       <Stack.Screen
         name="ResourceOne"
         component={ResourceOne}
