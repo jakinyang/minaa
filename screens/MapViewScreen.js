@@ -9,11 +9,6 @@ export default function Map({ children, setTempMarker, mapRef, setTriggerReport,
 
 
   //Helper Function
-  function PlaceNewPin(newPin) {
-    if(newPin) {
-
-    }
-  }
 
   // Mock Data
   const initialRegion = {
@@ -35,7 +30,11 @@ export default function Map({ children, setTempMarker, mapRef, setTriggerReport,
       provider={PROVIDER_GOOGLE}
       onRegionChangeComplete={(region) => setRegion(region)}
       ref={mapRef}
-      onPress={(e) => setTempMarker(e.nativeEvent.coordinate)}
+      onPress={(e) => {
+        setTempMarker(e.nativeEvent.coordinate);
+        // setNewPin(!newPin)
+      }
+    }
       onLongPress={(e) => {
         console.log(e.nativeEvent.coordinate);
         setMarkerRegion({ ...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude });
@@ -45,7 +44,7 @@ export default function Map({ children, setTempMarker, mapRef, setTriggerReport,
       onMarkerPress={(e) => console.log("Marker is pressed")}
     >
 
-     {!newPin ? (<Marker
+     {/* {!newPin ? (<Marker
         draggable
         coordinate={tempMarker}
         onDragEnd={
@@ -60,7 +59,7 @@ export default function Map({ children, setTempMarker, mapRef, setTriggerReport,
           }
         }
       >
-      </Marker>) : null}
+      </Marker>) : setNewPin(false)} */}
       {children}
     </MapView>
   )

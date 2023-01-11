@@ -33,7 +33,7 @@ export default function DialoguePopup({ modalVisible, setModalVisible, navigatio
              mode="outlined"
               // style={[styles.button, styles.buttonClose]}
               style={styles.closeButton}
-              onPress={() => {setModalVisible(!modalVisible); setNewPin(true)}}
+              onPress={() => {setModalVisible(!modalVisible); setNewPin(false)}}
             >
              Close
             </Button>
