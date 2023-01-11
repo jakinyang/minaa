@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { StyleSheet, View } from "react-native"
 import Carousel, { Pagination } from 'react-native-snap-carousel'
-import { CarouselCardItem, SLIDER_WIDTH, ITEM_WIDTH } from './TestCarouselItem'
-import data from './TestData'
+import { CarouselCardItem, SLIDER_WIDTH, ITEM_WIDTH } from './CarouselCard'
+import data from './TestCardData'
 
 const CarouselCards = () => {
   const isCarousel = React.useRef(null)

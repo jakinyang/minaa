@@ -1,17 +1,9 @@
 import React, {useRef, useMemo} from 'react';
 import { StyleSheet } from 'react-native';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
+import ResourceIndex from './ResourceIndexScreen';
 
-export default function BottomSheet({navigation}) {
-  // Bottom Sheet Helpers
-  const bottomSheetModalRef = useRef(null);
-
-  const snapPoints = useMemo(() => ["75%"], []);
-
-  const openModal = () => {
-    bottomSheetModalRef.current.present();
-  }
-  
+export default function BottomSheet({navigation, bottomSheetModalRef, snapPoints}) {
   return(
     <BottomSheetModal
         ref={bottomSheetModalRef}

@@ -5,12 +5,13 @@ import MapView, { Marker, PROVIDER_GOOGLE, Callout } from 'react-native-maps';
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 
 // Component Screens
+import Map from './MapViewScreen';
 import MapPins from './MapPins';
 import ResourceIndex from './ResourceIndexScreen';
-import CarouselCards from './TestCarousel';
+import CarouselCards from './Carousel';
 import mockReportData from './MockReportData.js';
 import FabGroup from './FabGroup';
-
+import BottomSheet from './BottomSheet';
 
 // Main Home Screen Component
 export default function HomeScreen({ navigation, route }) {
@@ -28,17 +29,11 @@ export default function HomeScreen({ navigation, route }) {
     longitude: -122.4324,
   };
 
-  const [region, setRegion] = useState(initialRegion);
-
-  const [markerRegion, setMarkerRegion] = useState(initialMarkerRegion);
-
-  const mapRef = useRef(null);
-
   const resetRegionHandler = () => {
     mapRef.current.animateToRegion(initialRegion, 1 * 1000);
   };
 
-  const [triggerReport, setTriggerReport] = useState(false);
+  
   const [tempMarker, setTempMarker] = useState(null);
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -51,13 +46,6 @@ export default function HomeScreen({ navigation, route }) {
   const openModal = () => {
     bottomSheetModalRef.current.present();
   }
-
-  // Fab Group Helpers
-  const [state, setState] = useState({ open: false });
-
-  const onStateChange = ({ open }) => setState({ open });
-
-  const { open } = state;
 
   return (
     <View style={styles.container}>
@@ -96,17 +84,16 @@ export default function HomeScreen({ navigation, route }) {
         />
       </MapView>
       <CarouselCards />
-      <Text>Current lat and lon:</Text>
-      <Text>{region.latitude}, {region.longitude}</Text>
-      <FabGroup navigation={navigation} openModal={openModal} resetRegionHandler={resetRegionHandler} />
-      <BottomSheetModal
-        ref={bottomSheetModalRef}
-        index={0}
+      <FabGroup
+        navigation={navigation}
+        openModal={openModal}
+        resetRegionHandler={resetRegionHandler}
+      />
+      <BottomSheet
+        navigation={navigation}
+        bottomSheetModalRef={bottomSheetModalRef}
         snapPoints={snapPoints}
-        style={styles.bottomSheet}
-      >
-        <ResourceIndex />
-      </BottomSheetModal>
+      />
     </View>
   );
 }
