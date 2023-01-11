@@ -4,7 +4,7 @@ import MapView, { Marker, PROVIDER_GOOGLE, Callout, tooltip } from 'react-native
 import mockReportData from './MockReportData.js';
 
 
-export default function Map({ children, mapRef, setTriggerReport, tempPinData, setTempPinData }) {
+export default function Map({ children, mapRef, setTriggerReport, tempPinData, setTempPinData, pinData, setPinData }) {
   const [region, setRegion] = useState(initialRegion);
   const [markerRegion, setMarkerRegion] = useState(initialMarkerRegion);
 
@@ -36,7 +36,22 @@ export default function Map({ children, mapRef, setTriggerReport, tempPinData, s
         console.log(e.nativeEvent.coordinate);
 
         setTempPinData({...tempPinData, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude})
-        console.log(tempPinData);
+        console.log("ssss: ",tempPinData);
+        const newReport = {
+          id: 9999,
+          coords:{
+            latitude: tempPinData.latitude,
+            longitude: tempPinData.longitude
+          },
+          img: "",
+          status: "Reviewed",
+          title: "report n",
+          content: "report n content  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veniam quo aperiam beatae culpa recusandae obcaecati eligendi sed ex corporis fugit similique perspiciatis, accusantium quia soluta rerum itaque, quaerat quibusdam nulla! " 
+        };
+
+        pinData.push(newReport);
+        setPinData(pinData)
+        console.log("2233 updated pin data: ", pinData);
         // setNewPin(!newPin)
       }
     }

@@ -55,6 +55,8 @@ export default function HomeScreen({ navigation, route }) {
         setTriggerReport={setTriggerReport}
         setTempPinData={setTempPinData}
         tempPinData={tempPinData}
+        pinData={pinData}
+        setPinData={setPinData}
       >
         <MapPins
           navigation={navigation}
