@@ -31,6 +31,7 @@ export default function HomeScreen({ navigation, route }) {
   const [markerRegion, setMarkerRegion] = useState(initialMarkerRegion);
   const [modalVisible, setModalVisible] = useState(false);
   const [newReport, setNewReport] = useState([]);
+  const [newPin, setNewPin] = useState(false);
 
 
   // Bottom Sheet Helpers
@@ -39,35 +40,21 @@ export default function HomeScreen({ navigation, route }) {
   const openModal = () => {
     bottomSheetModalRef.current.present();
   }
-
-  // const checkNewReport () {
-  //   if(modalVisible) {
-
-  //   }
-  // }
-
   return (
     <View style={styles.container}>
       <Map
+        tempMarker={tempMarker}
         setTempMarker={setTempMarker}
         mapRef={mapRef}
         setTriggerReport={setTriggerReport}
         markerRegion={markerRegion}
         setMarkerRegion={setMarkerRegion}
+        triggerReport={triggerReport}
+        setModalVisible={setModalVisible}
+        newReport={newReport}
+        newPin={newPin}
+        setNewPin={setNewPin}
       >
-  
-        <Marker
-          draggable
-          coordinate={tempMarker}
-          onDragEnd={(e) => {
-            setMarkerRegion({ ...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude });
-            setTimeout( () => {if(triggerReport) {
-              // navigation.navigate("ToReportScreen")
-              setModalVisible(true)
-            }}, 500)
-          }}
-        >
-        </Marker>
         <MapPins
           mockReportData={mockReportData}
           navigation={navigation}
@@ -78,6 +65,7 @@ export default function HomeScreen({ navigation, route }) {
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
         navigation={navigation}
+        setNewPin={setNewPin}
       />
       {/* <CarouselCards /> */}
       <FabGroup

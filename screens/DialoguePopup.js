@@ -2,7 +2,7 @@ import React from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
 import { Button, Portal, Dialog, MD2Colors } from 'react-native-paper';
 
-export default function DialoguePopup({ modalVisible, setModalVisible, navigation }) {
+export default function DialoguePopup({ modalVisible, setModalVisible, navigation, setNewPin }) {
 
   return (
     <View style={styles.bottomView}>
@@ -33,7 +33,7 @@ export default function DialoguePopup({ modalVisible, setModalVisible, navigatio
              mode="outlined"
               // style={[styles.button, styles.buttonClose]}
               style={styles.closeButton}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={() => {setModalVisible(!modalVisible); setNewPin(true)}}
             >
              Close
             </Button>
