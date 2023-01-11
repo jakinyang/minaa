@@ -38,6 +38,7 @@ export default function NewReportScreen() {
       aspect: [4, 3],
       quality: 1,
     });
+    console.log('pickImage return value: ', result);
     if (!result.canceled) {
       setImage(result.assets[0].uri);
     }

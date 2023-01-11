@@ -27,9 +27,10 @@ export default function HomeScreen({ navigation, route }) {
     mapRef.current.animateToRegion(initialRegion, 1 * 1000);
   };
   const [triggerReport, setTriggerReport] = useState(false);
-  const [tempMarker, setTempMarker] = useState(null);
+  const [tempMarker, setTempMarker] = useState({longitude: 0, latitude: 0});
   const [markerRegion, setMarkerRegion] = useState(initialMarkerRegion);
   const [modalVisible, setModalVisible] = useState(false);
+  const [newReport, setNewReport] = useState([]);
 
 
   // Bottom Sheet Helpers
@@ -38,6 +39,12 @@ export default function HomeScreen({ navigation, route }) {
   const openModal = () => {
     bottomSheetModalRef.current.present();
   }
+
+  // const checkNewReport () {
+  //   if(modalVisible) {
+
+  //   }
+  // }
 
   return (
     <View style={styles.container}>
@@ -48,6 +55,7 @@ export default function HomeScreen({ navigation, route }) {
         markerRegion={markerRegion}
         setMarkerRegion={setMarkerRegion}
       >
+  
         <Marker
           draggable
           coordinate={tempMarker}
@@ -71,7 +79,7 @@ export default function HomeScreen({ navigation, route }) {
         setModalVisible={setModalVisible}
         navigation={navigation}
       />
-      <CarouselCards />
+      {/* <CarouselCards /> */}
       <FabGroup
         navigation={navigation}
         openModal={openModal}
@@ -91,13 +99,4 @@ const styles = StyleSheet.create({
     flex: 1,
   },
  
-  fab: {
-    position: 'absolute',
-    margin: 16,
-    right: 10,
-    bottom: 10,
-  },
-  bottomSheet: {
-    paddingVertical: 10,
-  }
-});
+})
