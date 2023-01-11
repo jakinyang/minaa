@@ -5,14 +5,16 @@ export const SLIDER_WIDTH = Dimensions.get('window').width -50
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7)
 
 export const UserReportCardItem = ({ item, index }) => {
+  // returns a carousel card item in UserReportCards.js
+  console.log("user report card item: ", item);
   return (
     <View style={styles.container} key={index}>
       <Image
-        source={{ uri: item.imgUrl }}
+        source={{ uri: item.imageSource }}
         style={styles.image}
       />
-      <Text style={styles.header}>{item.title}</Text>
-      <Text style={styles.body}>{item.body}</Text>
+      <Text style={styles.header}>{item.titleText}</Text>
+      <Text style={styles.body}>{item.bodyText}</Text>
     </View>
   )
 }
