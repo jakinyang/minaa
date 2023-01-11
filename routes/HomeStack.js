@@ -1,7 +1,6 @@
 // RN Imports
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MD3Colors } from 'react-native-paper';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -11,8 +10,8 @@ import MapStack from './MapStack';
 import LoginStack from './LoginStack';
 import ProfileTab from '../screens/ProfileScreen';
 import ResourceIndex from '../screens/ResourceIndexScreen';
+import ResourceStack from './ResourcesStack';
 const Tab = createMaterialBottomTabNavigator();
-const Drawer = createDrawerNavigator();
 
 export default function HomeStack() {
   return (
@@ -40,13 +39,13 @@ export default function HomeStack() {
         options={{
           tabBarLabel: 'Updates',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="bell" color={color} size={26} />
+            <MaterialCommunityIcons name="check" color={color} size={26} />
           ),
         }}
       />
       <Tab.Screen
-        name="ResourceIndex"
-        component={ResourceIndex}
+        name="Resources"
+        component={ResourceStack}
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({ color }) => (
