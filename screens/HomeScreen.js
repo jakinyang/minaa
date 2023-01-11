@@ -12,6 +12,7 @@ import mockReportData from './MockReportData.js';
 import FabGroup from './FabGroup';
 import BottomSheet from './BottomSheet';
 import DialoguePopup from './DialoguePopup';
+import ScreenHeader from '../shared/ScreenHeader';
 
 // Main Home Screen Component
 export default function HomeScreen({ navigation, route }) {
@@ -20,7 +21,6 @@ export default function HomeScreen({ navigation, route }) {
     latitude: 37.78825,
     longitude: -122.4324,
   };
-  
   // Map Helpers
   const mapRef = useRef(null);
   const resetRegionHandler = () => {
@@ -42,6 +42,7 @@ export default function HomeScreen({ navigation, route }) {
   }
   return (
     <View style={styles.container}>
+      <ScreenHeader />
       <Map
         tempMarker={tempMarker}
         setTempMarker={setTempMarker}

@@ -10,6 +10,7 @@ import Header from './LoginComponents/Header.js'
 import Button from './LoginComponents/Button.js'
 import TextInput from './LoginComponents/TextInput.js'
 import BackButton from './LoginComponents/BackButton.js'
+import ScreenHeader from '../../shared/ScreenHeader.js'
 // import { theme } from '../core/theme'
 
 // helper function imports
@@ -49,6 +50,7 @@ export default function RegisterScreen({ navigation }) {
     <ScrollView style={{ flex: 1, width: "100%", height: "100%" }}>
       <SafeAreaView />
       <Background>
+        <ScreenHeader navigation={navigation} />
         <BackButton goBack={navigation.goBack} />
         <Logo />
         <Header>Create Account</Header>

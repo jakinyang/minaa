@@ -8,6 +8,7 @@ import LoginScreen from '../screens/Login/LoginScreen'
 import RegisterScreen from '../screens/Login/RegisterScreen'
 import Dashboard from '../screens/Login/Dashboard'
 import ResetPasswordScreen from '../screens/Login/ResetPasswordScreen'
+import ScreenHeader from '../shared/ScreenHeader'
 
 const Stack = createStackNavigator()
 

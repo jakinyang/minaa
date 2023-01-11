@@ -10,6 +10,7 @@ import Header from './LoginComponents/Header.js'
 import Button from './LoginComponents/Button.js'
 import TextInput from './LoginComponents/TextInput.js'
 import BackButton from './LoginComponents/BackButton.js'
+import ScreenHeader from '../../shared/ScreenHeader.js'
 // import { theme } from '../core/theme'
 
 // Helper function imports
@@ -38,6 +39,7 @@ export default function LoginScreen({ navigation }) {
     <>
       <SafeAreaView />
       <Background>
+        <ScreenHeader navigation={navigation} />
         <BackButton goBack={navigation.goBack} />
         <Logo />
         <Header>Welcome back.</Header>

@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Button, Card, Text } from 'react-native-paper';
+import ScreenHeader from '../shared/ScreenHeader';
 
 export default function ResourceIndex({ navigation }) {
 
@@ -9,6 +10,7 @@ export default function ResourceIndex({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <ScreenHeader navigation={navigation} />
       <ScrollView contentContainerStyle={{
         justifyContent: 'center',
         alignItems: 'center',

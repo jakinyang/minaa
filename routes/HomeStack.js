@@ -38,6 +38,7 @@ export default function HomeStack() {
         name="Login"
         component={LoginStack}
         options={{
+          title: 'Login',
           tabBarLabel: 'Updates',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="bell" color={color} size={26} />
