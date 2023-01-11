@@ -58,7 +58,7 @@ export default function HomeScreen({ navigation }) {
   const [markerRegion, setMarkerRegion] = React.useState(initialMarkerRegion);
   // console.log(markerRegion);
   const [triggerReport, setTriggerReport] = React.useState(false);
-  const [tempMarker, setTempMarker] = React.useState(null);
+  const [tempMarker, setTempMarker] = React.useState({longitude: 0, latitude: 0});
 
   const [modalVisible, setModalVisible] = React.useState(false);
 
@@ -79,6 +79,10 @@ export default function HomeScreen({ navigation }) {
       <Button
         title="Go to Profile Tab"
         onPress={() => navigation.navigate('ProfileTab')}
+      />
+      <Button
+        title="Go to user reports"
+        onPress={() => navigation.navigate('UserReportCards')}
       />
       <Button title='reset location' onPress={resetRegionHandler} />
       

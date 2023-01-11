@@ -10,6 +10,7 @@ import ResourceOne from '../screens/resources/ResourceOne';
 import ResourceTwo from '../screens/resources/ResourceTwo';
 import ResourceThree from '../screens/resources/ResourceThree';
 import NewReportScreen from '../screens/NewReportScreen';
+import UserReportCards from '../screens/userReports/UserReportCards';
 
 function ProfileTab({ navigation }) {
   return (
@@ -34,6 +35,16 @@ export default function MapStack() {
           cardStyle: {
             ...TransitionPresets.SlideFromRightIOS
           },
+        }}
+         />
+         <Stack.Screen 
+        name="UserReportCards" 
+        component={UserReportCards}
+        options={{
+          title: 'userReports',
+          // cardStyle: {
+          //   ...TransitionPresets.SlideFromRightIOS
+          // },
         }}
          />
 

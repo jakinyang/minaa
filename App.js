@@ -20,10 +20,10 @@ export default function App() {
     // <ApolloProvider client={client}>
     //   <Test />
     // </ApolloProvider>
-  <Provider>
-    <NavigationContainer>
-      <HomeStack style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}/>
-    </NavigationContainer>
+    <Provider>
+      <NavigationContainer>
+        <HomeStack style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}/>
+      </NavigationContainer>
     </Provider>
   );
 }

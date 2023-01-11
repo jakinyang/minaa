@@ -14,7 +14,8 @@
     "@react-navigation/native": "^6.1.1",
     "@react-navigation/stack": "^6.3.10",
     "cross-fetch": "^3.1.5",
-    "expo": "~47.0.12",
+    "deprecated-react-native-prop-types": "^2.2.0",
+    "expo": "^47.0.13",
     "expo-location": "~15.0.1",
     "expo-status-bar": "~1.4.2",
     "graphql": "^15.8.0",
@@ -25,10 +26,12 @@
     "react-native-paper": "^5.1.2",
     "react-native-reanimated": "^2.13.0",
     "react-native-safe-area-context": "^4.4.1",
+    "react-native-snap-carousel": "^3.9.1",
     "react-native-status-bar-height": "^2.6.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "@faker-js/faker": "^7.6.0"
   },
   "private": true
 }
