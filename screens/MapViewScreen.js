@@ -2,11 +2,8 @@ import React, { useState, useRef } from 'react';
 import { StyleSheet } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 
-export default function Map({ children, setTempMarker, mapRef, setTriggerReport }) {
+export default function Map({ children, setTempMarker, mapRef, setTriggerReport, markerRegion, setMarkerRegion }) {
   const [region, setRegion] = useState(initialRegion);
-  const [markerRegion, setMarkerRegion] = useState(initialMarkerRegion);
-  
-  
 
   // Mock Data
   const initialRegion = {
@@ -16,29 +13,24 @@ export default function Map({ children, setTempMarker, mapRef, setTriggerReport 
     longitudeDelta: 0.0421,
   }
 
-  const initialMarkerRegion = {
-    latitude: 37.78825,
-    longitude: -122.4324,
-  };
-
   return (
     <MapView
-        style={styles.map}
-        initialRegion={initialRegion}
-        provider={PROVIDER_GOOGLE}
-        onRegionChangeComplete={(region) => setRegion(region)}
-        ref={mapRef}
-        onPress={(e) => setTempMarker(e.nativeEvent.coordinate)}
-        onLongPress={(e) => {
-          console.log(e.nativeEvent.coordinate);
-          setMarkerRegion({ ...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude });
-         setTriggerReport(true)
-        }
-        }
-        onMarkerPress={(e) => console.log("Marker is pressed")}
-      >
-        {children}
-      </MapView>
+      style={styles.map}
+      initialRegion={initialRegion}
+      provider={PROVIDER_GOOGLE}
+      onRegionChangeComplete={(region) => setRegion(region)}
+      ref={mapRef}
+      onPress={(e) => setTempMarker(e.nativeEvent.coordinate)}
+      onLongPress={(e) => {
+        console.log(e.nativeEvent.coordinate);
+        setMarkerRegion({ ...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude });
+        setTriggerReport(true)
+      }
+      }
+      onMarkerPress={(e) => console.log("Marker is pressed")}
+    >
+      {children}
+    </MapView>
   )
 }
 

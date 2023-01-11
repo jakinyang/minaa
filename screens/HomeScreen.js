@@ -20,17 +20,16 @@ export default function HomeScreen({ navigation, route }) {
     latitude: 37.78825,
     longitude: -122.4324,
   };
-  
+
   // Map Helpers
   const mapRef = useRef(null);
   const resetRegionHandler = () => {
     mapRef.current.animateToRegion(initialRegion, 1 * 1000);
   };
   const [triggerReport, setTriggerReport] = useState(false);
-  const [tempMarker, setTempMarker] = useState(null);
+  const [tempMarker, setTempMarker] = useState({ longitude: 0, latitude: 0 });
   const [markerRegion, setMarkerRegion] = useState(initialMarkerRegion);
   const [modalVisible, setModalVisible] = useState(false);
-
 
   // Bottom Sheet Helpers
   const bottomSheetModalRef = useRef(null);
@@ -53,10 +52,12 @@ export default function HomeScreen({ navigation, route }) {
           coordinate={tempMarker}
           onDragEnd={(e) => {
             setMarkerRegion({ ...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude });
-            setTimeout( () => {if(triggerReport) {
-              // navigation.navigate("ToReportScreen")
-              setModalVisible(true)
-            }}, 500)
+            setTimeout(() => {
+              if (triggerReport) {
+                // navigation.navigate("ToReportScreen")
+                setModalVisible(true)
+              }
+            }, 500)
           }}
         >
         </Marker>
@@ -66,17 +67,17 @@ export default function HomeScreen({ navigation, route }) {
           route={route}
         />
       </Map>
-      <DialoguePopup 
+      <DialoguePopup
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
         navigation={navigation}
       />
       <CarouselCards />
-      <FabGroup
+      {/* <FabGroup
         navigation={navigation}
         openModal={openModal}
         resetRegionHandler={resetRegionHandler}
-      />
+      /> */}
       <BottomSheet
         navigation={navigation}
         bottomSheetModalRef={bottomSheetModalRef}
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
- 
+
   fab: {
     position: 'absolute',
     margin: 16,

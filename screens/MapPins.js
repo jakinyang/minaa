@@ -8,7 +8,10 @@ export default function MapPins({ mockReportData, navigation }) {
     mockReportData.map((item, i) => {
       return (
         <Marker
-          coordinate={item.coords}
+          coordinate={{
+            longitude: item.coords.longitude ? item.coords.longitude : 0,
+            latitude: item.coords.latitude ? item.coords.latitude : 0
+          }}
           key={item.id}
         >
           <Callout
