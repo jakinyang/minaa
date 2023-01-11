@@ -1,7 +1,7 @@
 import React, {useRef, useMemo} from 'react';
 import { StyleSheet } from 'react-native';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
-import ResourceIndex from './ResourceIndexScreen';
+import ResourceIndex from './Resources/ResourceIndexScreen';
 
 export default function BottomSheet({navigation, bottomSheetModalRef, snapPoints}) {
   return(

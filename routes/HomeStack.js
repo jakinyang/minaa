@@ -1,16 +1,15 @@
-// RN Imports
+//Imports
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { MD3Colors } from 'react-native-paper';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
-// Stack Imports: Map Stack for map "homescreen" & Login Stack for login screen
+// Stack Imports
 import MapStack from './MapStack';
 import LoginStack from './LoginStack';
-import ProfileTab from '../screens/ProfileScreen';
-import ResourceIndex from '../screens/ResourceIndexScreen';
 import ResourceStack from './ResourcesStack';
+import ProfileStack from './ProfileStack';
+
 const Tab = createMaterialBottomTabNavigator();
 
 export default function HomeStack() {
@@ -55,7 +54,7 @@ export default function HomeStack() {
       />
       <Tab.Screen
         name="Profile"
-        component={ProfileTab}
+        component={ProfileStack}
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({ color }) => (
@@ -69,9 +68,11 @@ export default function HomeStack() {
 
 const styles = StyleSheet.create({
   navigator: {
-
+    backgroundColor: '#694fad',
   },
   screen: {
-
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 })

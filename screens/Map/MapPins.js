@@ -20,7 +20,7 @@ export default function MapPins({ mockReportData, navigation }) {
           >
             <View>
               <Card style={styles.card}>
-                <Card.Cover source={require("../assets/landmine1.jpg")} />
+                <Card.Cover source={{uri: item.img}} />
                 <Card.Title title={item.title} />
                 <Card.Content>
                   <Chip icon="information">{item.status}</Chip>

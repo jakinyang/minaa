@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { View, Button,StyleSheet, ScrollView, Image } from 'react-native';
-import { Dialog, Portal, Text, TextInput } from 'react-native-paper';
+import { View, Button, Image } from 'react-native';
+import { Text, TextInput } from 'react-native-paper';
 import DropDownPicker from 'react-native-dropdown-picker';
-import * as ImagePicker from 'expo-image-picker';
-
+import * as ImagePicker from 'expo-image-picker'
 
 export default function NewReportScreen() {
 

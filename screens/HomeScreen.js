@@ -1,14 +1,17 @@
 // Imports
-import React, { useState, useRef, useMemo } from 'react';
+import React, { 
+  useState, 
+  useRef, 
+  useMemo, 
+} from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Marker } from 'react-native-maps';
 
 // Component Screens
-import Map from './MapViewScreen';
-import MapPins from './MapPins';
-import ResourceIndex from './ResourceIndexScreen';
-import CarouselCards from './Carousel';
-import mockReportData from './MockReportData.js';
+import Map from './Map/MapViewScreen';
+import MapPins from './Map/MapPins';
+import CarouselCards from './carousel/Carousel';
+import mockReportData from './mock_data/MockReportData.js';
 import FabGroup from './FabGroup';
 import BottomSheet from './BottomSheet';
 import DialoguePopup from './DialoguePopup';
@@ -20,6 +23,13 @@ export default function HomeScreen({ navigation, route }) {
     latitude: 37.78825,
     longitude: -122.4324,
   };
+
+  const initialRegion = {
+    latitude: 37.78825,
+    longitude: -122.4324,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  }
 
   // Map Helpers
   const mapRef = useRef(null);
