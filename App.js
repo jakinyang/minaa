@@ -3,7 +3,7 @@ import 'react-native-gesture-handler';
 // import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import HomeStack from './routes/Homestack';
+import HomeStack from './routes/HomeStack';
 import { ApolloClient, InMemoryCache, ApolloProvider, gql, useQuery } from '@apollo/client';
 import Test from './screens/test';
 import { Provider } from 'react-native-paper';
