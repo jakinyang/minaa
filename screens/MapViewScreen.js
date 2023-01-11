@@ -1,9 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE, Callout, tooltip } from 'react-native-maps';
+import mockReportData from './MockReportData.js';
 
 
-export default function Map({ children, setTempMarker, mapRef, setTriggerReport,tempMarker, triggerReport, setModalVisible, newReport, newPin, setNewPin }) {
+export default function Map({ children, mapRef, setTriggerReport, tempPinData, setTempPinData }) {
   const [region, setRegion] = useState(initialRegion);
   const [markerRegion, setMarkerRegion] = useState(initialMarkerRegion);
 
@@ -31,7 +32,11 @@ export default function Map({ children, setTempMarker, mapRef, setTriggerReport,
       onRegionChangeComplete={(region) => setRegion(region)}
       ref={mapRef}
       onPress={(e) => {
-        setTempMarker(e.nativeEvent.coordinate);
+        // setTempMarker(e.nativeEvent.coordinate);
+        console.log(e.nativeEvent.coordinate);
+
+        setTempPinData({...tempPinData, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude})
+        console.log(tempPinData);
         // setNewPin(!newPin)
       }
     }
@@ -43,23 +48,6 @@ export default function Map({ children, setTempMarker, mapRef, setTriggerReport,
       }
       onMarkerPress={(e) => console.log("Marker is pressed")}
     >
-
-     {/* {!newPin ? (<Marker
-        draggable
-        coordinate={tempMarker}
-        onDragEnd={
-          (e) => {
-            setMarkerRegion({ ...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude });
-            setTimeout(() => {
-              if (triggerReport) {
-                // navigation.navigate("ToReportScreen")
-                setModalVisible(true)
-              }
-            }, 500)
-          }
-        }
-      >
-      </Marker>) : setNewPin(false)} */}
       {children}
     </MapView>
   )

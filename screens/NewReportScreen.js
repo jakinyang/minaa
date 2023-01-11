@@ -6,7 +6,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import * as ImagePicker from 'expo-image-picker';
 
 
-export default function NewReportScreen({navigation}) {
+export default function NewReportScreen({navigation, route}) {
 
   //New report state
   const [open, setOpen] = useState(false);
@@ -79,7 +79,19 @@ export default function NewReportScreen({navigation}) {
           zIndex={1000}
           zIndexInverse={3000}
         />
-        <Button title='Submit' onPress={() => console.log("Submit report test")}/>
+        <Button title='Submit' onPress={() =>{ 
+          // console.log("Submit report test", route.params);
+          
+          // console.log("check pin Data", route.params.pinData);
+         console.log("haha test 11",route.params);
+          // route.params.setPinData([...pinData, pinData])
+          // navigation.navigate("Map", returnPinData)
+          navigation.navigate({
+            name: "Map",
+            params: {updatedPinData: route.params.pinData},
+            merge: true
+          })
+          }}/>
         <Button title="Pick an image from camera roll" onPress={pickImage} />
         {image && <View><Image source={{ uri: image }} /></View>}
       </View>

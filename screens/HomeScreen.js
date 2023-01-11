@@ -1,5 +1,5 @@
 // Imports
-import React, { useState, useRef, useMemo } from "react";
+import React, { useState, useRef, useMemo, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import { Marker } from "react-native-maps";
 
@@ -31,6 +31,7 @@ export default function HomeScreen({ navigation, route }) {
   const [markerRegion, setMarkerRegion] = useState(initialMarkerRegion);
   const [modalVisible, setModalVisible] = useState(false);
   const [pinData, setPinData] = useState(mockReportData);
+  const [tempPinData, setTempPinData] = useState({latitude: 0, longitude: 0})
   const [newReport, setNewReport] = useState(mockReportData);
   const [newPin, setNewPin] = useState(false);
 
@@ -40,6 +41,11 @@ export default function HomeScreen({ navigation, route }) {
   const openModal = () => {
     bottomSheetModalRef.current.present();
   };
+ 
+  // useEffect(() => {
+  //   setPinData(route.params?.updatedPinData)
+  // }, pinData)
+
   return (
     <View style={styles.container}>
       <Map
@@ -47,24 +53,17 @@ export default function HomeScreen({ navigation, route }) {
         setTempMarker={setTempMarker}
         mapRef={mapRef}
         setTriggerReport={setTriggerReport}
-        markerRegion={markerRegion}
-        setMarkerRegion={setMarkerRegion}
-        triggerReport={triggerReport}
-        setModalVisible={setModalVisible}
-        newReport={newReport}
-        newPin={newPin}
-        setNewPin={setNewPin}
+        setTempPinData={setTempPinData}
+        tempPinData={tempPinData}
       >
         <MapPins
           navigation={navigation}
           route={route}
           pinData={pinData}
           newPin={newPin}
-          setNewPin={setNewPin}
-          tempMarker={tempMarker}
-          markerRegion={markerRegion}
-          setMarkerRegion={setMarkerRegion}
-          initialMarkerRegion={initialMarkerRegion}
+          triggerReport={triggerReport}
+          setModalVisible={setModalVisible}
+          tempPinData={tempPinData}
         />
       </Map>
       <DialoguePopup
@@ -72,6 +71,9 @@ export default function HomeScreen({ navigation, route }) {
         setModalVisible={setModalVisible}
         navigation={navigation}
         setNewPin={setNewPin}
+        tempPinData={tempPinData}
+        pinData={pinData}
+        setPinData={setPinData}
       />
       {/* <CarouselCards /> */}
       <FabGroup

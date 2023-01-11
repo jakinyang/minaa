@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
 import { Button, Portal, Dialog, MD2Colors } from 'react-native-paper';
 
-export default function DialoguePopup({ modalVisible, setModalVisible, navigation, setNewPin }) {
+export default function DialoguePopup({ modalVisible, setModalVisible, navigation, setNewPin, tempPinData, route, pinData, setPinData}) {
 
   return (
     <View style={styles.bottomView}>
@@ -21,7 +21,26 @@ export default function DialoguePopup({ modalVisible, setModalVisible, navigatio
             <Button
              mode="contained"
               onPress={() => {
-                navigation.navigate("NewReportScreen");
+               
+
+                const newReport = {
+                  id: 9999,
+                  coords:{
+                    latitude: tempPinData.latitude,
+                    longitude: tempPinData.longitude
+                  },
+                  img: "",
+                  status: "Reviewed",
+                  title: "report n",
+                  content: "report n content  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veniam quo aperiam beatae culpa recusandae obcaecati eligendi sed ex corporis fugit similique perspiciatis, accusantium quia soluta rerum itaque, quaerat quibusdam nulla! " 
+                };
+      
+                pinData.push(newReport);
+                setPinData(pinData)
+                console.log("updated pin data: ", pinData);
+  
+                navigation.navigate( "NewReportScreen", {tempPinData: tempPinData, pinData: pinData});
+
                 setModalVisible(!modalVisible)
               }
               }
