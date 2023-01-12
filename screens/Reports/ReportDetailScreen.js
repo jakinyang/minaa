@@ -15,7 +15,7 @@ export default function ReportDetailScreen({ navigation, route }) {
         />
         <Card.Content>
           <Chip icon="information">{route.params.status}</Chip>
-          <Chip icon="information" style={styles.chipLocation}>lat: {route.params.coords.latitude} lon: {route.params.coords.longitude}</Chip>
+          <Chip icon="information" style={styles.chipLocation}>lat: {route.params.latitude} lon: {route.params.longitude}</Chip>
           <Text variant='bodyMedium'>Content: {route.params.content} </Text>
 
         </Card.Content>

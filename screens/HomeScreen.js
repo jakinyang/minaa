@@ -16,29 +16,21 @@ import mockReportData from './mock_data/MockReportData.js';
 import FabGroup from './FabGroup';
 import BottomSheet from './BottomSheet';
 import DialoguePopup from './DialoguePopup';
-
-//Test
-import FetchAllReports from '../src/Queries/FetchAllReports';
+// import FetchAllReports from '../src/Queries/FetchAllReports';
 
 
 // Main Home Screen Component
 export default function HomeScreen({ navigation, route }) {
-  const {loading, error, data} = FetchAllReports();
-  if(loading){
-    console.log("report data is loading");
-  }
-  if(error){
-    console.log("fetching data error", error.message);
-  }
-  // const allReportData = data.reports;
-
+ 
   console.log("returned new report: ", route.params?.newReport);
+  //Fetch all reports
+  // const {loading, error, data} = FetchAllReports();
+
   // Map Data
   const initialMarkerRegion = {
     latitude: 37.78825,
     longitude: -122.4324,
   };
-
 
   //Helper functions
   function useFreshState(value) {
@@ -75,6 +67,9 @@ export default function HomeScreen({ navigation, route }) {
 
   // State for managing new pin data
   const [tempCoords, setTempCoords] = useFreshState()
+
+  //Test: new
+  const [temporaryPinData, setTemporaryPinData] = useFreshState({longitude: 0, latitude: 0})
 
   // Use Effect for refreshing on new pin placed (i.e. MapViewScreen onLongPress())
   useEffect(()=> {
@@ -116,6 +111,7 @@ export default function HomeScreen({ navigation, route }) {
           pinData={pinData.current}
           setModalVisible={setModalVisible}
         />
+        {/*single pin .current */}
       </Map>
       <DialoguePopup
         navigation={navigation}

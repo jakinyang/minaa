@@ -99,15 +99,13 @@ export default function NewReportScreen({ navigation, route }) {
         />
         <Button title='Submit' onPress={() => {
           const newReport = {
-            coords: {
               longitude: tempCoords.longitude,
               latitude: tempCoords.latitude,
-            },
-            img: imageUrl,
-            radius: radius,
-            reportCategory: reportCategory,
-            reportStatus: reportStatus,
-            description: description,
+              description: description,
+              radius: radius,
+              statusCategory: reportStatus,
+              reportCategory: reportCategory,
+            imageUrl: imageUrl,
           };
           console.log("New Report Data - pre-submission: ", newReport);
           let tempData = pinData.slice(0, -1);

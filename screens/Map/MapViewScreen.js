@@ -40,17 +40,16 @@ export default function Map({
         console.log("Long press event transferred => tempCoords.current: ", tempCoords.current);
         const tempReport = {
           id: null,
-          coords: {
-            latitude: e.nativeEvent.coordinate.latitude,
-            longitude: e.nativeEvent.coordinate.longitude,
-          },
-          img: null,
-          reportStatus: null,
-          reportCategory: null,
+          latitude: e.nativeEvent.coordinate.latitude,
+          longitude: e.nativeEvent.coordinate.longitude,
           description: null,
+          radius: null,
+          statusCategory: null,
+          reportCategory: null,
+          imageUrl: null,
           userId: userInfo.id
         };
-        setPinData([...pinData, tempReport]);
+        setPinData([...pinData, tempReport]); //pinTempData
         console.log("New pinData status:", pinData);
         setModalVisible(true);
       }}
