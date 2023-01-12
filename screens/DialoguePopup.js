@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
 import { Button, Portal, Dialog, MD2Colors } from 'react-native-paper';
 
-export default function DialoguePopup({ modalVisible, setModalVisible, navigation }) {
+export default function DialoguePopup({ 
+  navigation, 
+  pinData,
+  setPinData,
+  tempCoords,
+  modalVisible, 
+  setModalVisible, 
+}) {
+  // console.log("popup tempCoords:", tempCoords);
 
   return (
     <View style={styles.bottomView}>
@@ -21,21 +29,28 @@ export default function DialoguePopup({ modalVisible, setModalVisible, navigatio
             <Button
              mode="contained"
               onPress={() => {
-                navigation.navigate("NewReportScreen");
+                navigation.navigate( "NewReportScreen", {pinData, tempCoords, setPinData});
+                console.log(`Data Passed to New Report Screen: ${pinData.at(-1)}`);
                 setModalVisible(!modalVisible)
               }
               }
             >
-              <Text style={styles.textStyle}>Make a report </Text>
+              <Text style={styles.textStyle}>Make a report</Text>
             </Button>
 
             <Button
              mode="outlined"
               // style={[styles.button, styles.buttonClose]}
               style={styles.closeButton}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={() => {
+                setModalVisible(!modalVisible)
+                let revertPinData = pinData.slice(0, -1)
+                console.log("Pin data after cancelling report: ", revertPinData);
+                setPinData(revertPinData);
+                console.log("Current Pin Data: ", pinData)
+              }}
             >
-             Close
+              Close
             </Button>
           </View>
         </View>
@@ -98,4 +113,3 @@ const styles = StyleSheet.create({
   }
 
 });
-

@@ -13,7 +13,7 @@ const Stack = createStackNavigator();
 export default function MapStack() {
   return (
     <Stack.Navigator
-      initialRouteName="ProfileScreen"
+      initialRouteName="HomeScreen"
       screenOptions={{
         headerShown: false,
       }}

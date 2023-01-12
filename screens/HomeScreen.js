@@ -2,7 +2,8 @@
 import React, { 
   useState, 
   useRef, 
-  useMemo, 
+  useMemo,
+  useEffect,
 } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Marker } from 'react-native-maps';
@@ -18,70 +19,100 @@ import DialoguePopup from './DialoguePopup';
 
 // Main Home Screen Component
 export default function HomeScreen({ navigation, route }) {
+
+  console.log("returned new report: ", route.params?.newReport);
   // Map Data
   const initialMarkerRegion = {
     latitude: 37.78825,
     longitude: -122.4324,
   };
 
-  const initialRegion = {
-    latitude: 37.78825,
-    longitude: -122.4324,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
+
+  //Helper functions
+  function useFreshState(value) {
+    console.log("function pindata result:",value);
+    const pinData = useRef(value);
+    const setPinData = (newState) => {
+      pinData.current = newState;
+    }
+    // console.log("pin data:", pinData);
+    return [pinData, setPinData];
   }
 
   // Map Helpers
   const mapRef = useRef(null);
+
+  // Reset Region for FabGroup button
   const resetRegionHandler = () => {
     mapRef.current.animateToRegion(initialRegion, 1 * 1000);
   };
-  const [triggerReport, setTriggerReport] = useState(false);
-  const [tempMarker, setTempMarker] = useState({ longitude: 0, latitude: 0 });
-  const [markerRegion, setMarkerRegion] = useState(initialMarkerRegion);
+
+  // States for Home Screen
+
+  // Mock User State
+  const [userInfo, setUserInfo] = useState({
+    id: 1,
+    token: "abc123",
+  });
+
+  // State for managing new report popup
   const [modalVisible, setModalVisible] = useState(false);
+
+  // State for managing global pin data
+  const [pinData, setPinData] = useFreshState(mockReportData);
+
+  // State for managing new pin data
+  const [tempCoords, setTempCoords] = useFreshState()
+
+  // Use Effect for refreshing on new pin placed (i.e. MapViewScreen onLongPress())
+  useEffect(()=> {
+    console.log("test pin data",pinData);
+  }, [pinData])
+
+  // State for managinng the map view region
+  const [region, setRegion] = useState({
+    latitude: 37.78825,
+    longitude: -122.4324,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  });
 
   // Bottom Sheet Helpers
   const bottomSheetModalRef = useRef(null);
   const snapPoints = useMemo(() => ["75%"], []);
   const openModal = () => {
     bottomSheetModalRef.current.present();
-  }
+  };
+
 
   return (
-    
     <View style={styles.container}>
       <Map
-        setTempMarker={setTempMarker}
         mapRef={mapRef}
-        setTriggerReport={setTriggerReport}
-        markerRegion={markerRegion}
-        setMarkerRegion={setMarkerRegion}
+        userInfo={userInfo}
+        pinData={pinData.current}
+        setPinData={setPinData}
+        tempCoords={tempCoords}
+        setTempCoords={setTempCoords}
+        region={region}
+        setRegion={setRegion}
+        setModalVisible={setModalVisible}
       >
-        <Marker
-          draggable
-          coordinate={tempMarker}
-          onDragEnd={(e) => {
-            setMarkerRegion({ ...markerRegion, latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude });
-            setTimeout(() => {
-              if (triggerReport) {
-                // navigation.navigate("ToReportScreen")
-                setModalVisible(true)
-              }
-            }, 500)
-          }}
-        >
-        </Marker>
         <MapPins
-          mockReportData={mockReportData}
           navigation={navigation}
           route={route}
+          pinData={pinData.current}
+          setModalVisible={setModalVisible}
         />
       </Map>
       <DialoguePopup
+        navigation={navigation}
+        userInfo={userInfo}
+        pinData={pinData.current}
+        setPinData={setPinData}
+        tempCoords={tempCoords.current}
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
-        navigation={navigation}
       />
       <CarouselCards />
       {/* <FabGroup
