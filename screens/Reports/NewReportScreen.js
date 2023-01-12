@@ -99,13 +99,17 @@ export default function NewReportScreen({ navigation, route }) {
         />
         <Button title='Submit' onPress={() => {
           const newReport = {
+              id:"1",
               longitude: tempCoords.longitude,
               latitude: tempCoords.latitude,
               description: description,
               radius: radius,
               statusCategory: reportStatus,
               reportCategory: reportCategory,
-            imageUrl: imageUrl,
+              imageUrl: imageUrl,
+              createdAt: "2023-01-09T21:44:08.923Z",
+              updatedAt: "2023-01-09T21:44:08.923Z",
+              userId: "1"
           };
           console.log("New Report Data - pre-submission: ", newReport);
           let tempData = pinData.slice(0, -1);
@@ -126,7 +130,7 @@ export default function NewReportScreen({ navigation, route }) {
 
           navigation.navigate({
             name: "Map",
-            params: {newReport: newReport},
+            // params: {newReport: newReport},
             merge: true
           })
         }} />

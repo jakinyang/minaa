@@ -9,14 +9,14 @@ export default function ReportDetailScreen({ navigation, route }) {
     <View>
       <Card>
         <Card.Title
-          title={route.params.title}
+          title={route.params.reportCategory}
           left={(props) => <Avatar.Icon {...props} icon="mail" />}
           right={(props) => <IconButton {...props} icon="heart" onPress={() => { console.log("use me for save button") }} />}
         />
         <Card.Content>
-          <Chip icon="information">{route.params.status}</Chip>
+          <Chip icon="information">{route.params.statusCategory}</Chip>
           <Chip icon="information" style={styles.chipLocation}>lat: {route.params.latitude} lon: {route.params.longitude}</Chip>
-          <Text variant='bodyMedium'>Content: {route.params.content} </Text>
+          <Text variant='bodyMedium'>Description: {route.params.description} </Text>
 
         </Card.Content>
       </Card>
