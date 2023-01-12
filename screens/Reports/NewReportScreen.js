@@ -4,6 +4,7 @@ import { View, Button, StyleSheet, ScrollView, Image, SafeAreaView } from 'react
 import { Dialog, Portal, Text, TextInput } from 'react-native-paper';
 import DropDownPicker from 'react-native-dropdown-picker';
 import * as ImagePicker from 'expo-image-picker';
+import CreateAReport from '../../src/Mutations/CreateAReport';
 
 
 export default function NewReportScreen({ navigation, route }) {
@@ -136,6 +137,7 @@ export default function NewReportScreen({ navigation, route }) {
           onPress={pickImage} 
         />
         {imageUrl && <View><Image source={{ uri: imageUrl }} /></View>}
+  
       </View>
     </View>
   )

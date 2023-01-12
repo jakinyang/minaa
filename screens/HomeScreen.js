@@ -17,8 +17,20 @@ import FabGroup from './FabGroup';
 import BottomSheet from './BottomSheet';
 import DialoguePopup from './DialoguePopup';
 
+//Test
+import FetchAllReports from '../src/Queries/FetchAllReports';
+
+
 // Main Home Screen Component
 export default function HomeScreen({ navigation, route }) {
+  const {loading, error, data} = FetchAllReports();
+  if(loading){
+    console.log("report data is loading");
+  }
+  if(error){
+    console.log("fetching data error", error.message);
+  }
+  // const allReportData = data.reports;
 
   console.log("returned new report: ", route.params?.newReport);
   // Map Data
