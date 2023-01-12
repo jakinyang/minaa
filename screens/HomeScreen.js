@@ -16,16 +16,14 @@ import mockReportData from './mock_data/MockReportData.js';
 import FabGroup from './FabGroup';
 import BottomSheet from './BottomSheet';
 import DialoguePopup from './DialoguePopup';
-// import FetchAllReports from '../src/Queries/FetchAllReports';
+import FetchAllReports from '../src/Queries/FetchAllReports';
 
 
 // Main Home Screen Component
 export default function HomeScreen({ navigation, route }) {
- 
-  console.log("returned new report: ", route.params?.newReport);
-  //Fetch all reports
-  // const {loading, error, data} = FetchAllReports();
 
+const reportsData = FetchAllReports();
+console.log("NEW ONE fetched data",reportsData);
   // Map Data
   const initialMarkerRegion = {
     latitude: 37.78825,
