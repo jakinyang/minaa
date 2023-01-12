@@ -45,7 +45,7 @@ export default function Test() {
     return <Text>Loading...</Text>;
   }
   if (error) {
-    console.log("Error from useQuery Test!");
+    console.log("Error from useQuery Test!", error);
   }
   // console.log(data.users);
   return (
@@ -65,3 +65,23 @@ export default function Test() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  item1: {
+    backgroundColor: "red",
+    padding: 20,
+  },
+  item2: {
+    backgroundColor: "blue",
+    padding: 20,
+  },
+  item3: {
+    backgroundColor: "green",
+    padding: 20,
+  },
+  item4: {
+    backgroundColor: "yellow",
+    padding: 20,
+  },
+});
+

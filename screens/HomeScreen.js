@@ -84,7 +84,6 @@ export default function HomeScreen({ navigation, route }) {
     bottomSheetModalRef.current.present();
   };
 
-
   return (
     <View style={styles.container}>
       <Map

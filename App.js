@@ -9,6 +9,7 @@ import {
   ApolloProvider 
 } from '@apollo/client';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import Test from './src/sample';
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/',
@@ -21,7 +22,8 @@ export default function App() {
       <ApolloProvider client={client}>
         <BottomSheetModalProvider>
           <NavigationContainer>
-            <HomeStack style={styles.container} />
+            {/* <HomeStack style={styles.container} /> */}
+            <Test />
           </NavigationContainer>
         </BottomSheetModalProvider>
       </ApolloProvider>
