@@ -1,12 +1,14 @@
 import React from 'react';
 import { View, StyleSheet, SafeAreaView, Text } from 'react-native';
 import { IconButton, MD3Colors } from 'react-native-paper';
+import ScreenHeader from '../../shared/ScreenHeader';
 
 
 export default function SettingsScreen({ navigation }) {
   return (
     <>
       <SafeAreaView />
+      <ScreenHeader/>
       <View
         style={styles.container}
       >
@@ -17,7 +19,7 @@ export default function SettingsScreen({ navigation }) {
           size={30}
           onPress={() => navigation.goBack()}
         />
-        <Text>This is the Settings Page</Text>
+        <Text style={styles.textBox}>This is the Settings Page</Text>
       </View>
     </>
   );
@@ -25,13 +27,16 @@ export default function SettingsScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
   goBack: {
     position: 'absolute',
-    top: 0,
-    left: 15
+    bottom: 30,
+    right: 15
+  },
+  textBox: {
+    bottom: 150,
   }
 });

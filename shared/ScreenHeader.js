@@ -38,6 +38,8 @@ const styles = StyleSheet.create({
   },
   screenHeaderDefault: {
     opacity: 0.8,
+    top: 0,
+    elevation: 0,
   },
 })
 

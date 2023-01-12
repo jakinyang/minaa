@@ -4,6 +4,7 @@ import Carousel, { Pagination } from 'react-native-snap-carousel'
 import { UserReportCardItem, SLIDER_WIDTH, ITEM_WIDTH } from './UserReports/UserReportCard.js'
 import { mockUserReportData } from './UserReports/dummyinfo.js'
 import { IconButton, MD3Colors } from 'react-native-paper';
+import ScreenHeader from '../../shared/ScreenHeader.js'
 
 export default function HistoryScreen({ navigation }) {
   const isCarousel = useRef(null)
@@ -12,7 +13,8 @@ export default function HistoryScreen({ navigation }) {
     <View
     style={styles.container}
     >
-      <SafeAreaView />
+      <SafeAreaView/>
+      <ScreenHeader navigation={ navigation }/>
       <IconButton
         icon="arrow-left"
         iconColor={MD3Colors.primary0}
@@ -62,11 +64,11 @@ const styles = StyleSheet.create({
   },
   goBack: {
     position: 'absolute',
-    top: 0,
-    left: 15
+    bottom: 30,
+    right: 15
   },
   container: {
-    flex: 1,
+    flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },

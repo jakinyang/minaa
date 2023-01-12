@@ -1,6 +1,7 @@
 import React, {useRef, useMemo} from 'react';
-import { View, StyleSheet, SafeAreaView, } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Avatar, IconButton, MD3Colors, Button } from 'react-native-paper';
+import ScreenHeader from '../../shared/ScreenHeader';
 import BottomSheet from '../BottomSheet';
 import MockTable from './MockTable';
 
@@ -14,10 +15,10 @@ export default function ProfileScreen({ navigation }) {
 
   return (
     <>
-      <SafeAreaView />
+      <ScreenHeader/>
       <View
         style={styles.container}
-      >
+        >
         <Avatar.Text
           style={styles.avatar}
           size={50}
@@ -64,7 +65,7 @@ export default function ProfileScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },

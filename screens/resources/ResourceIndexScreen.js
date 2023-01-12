@@ -1,6 +1,7 @@
 // Imports
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
+import ScreenHeader from '../../shared/ScreenHeader';
 
 // Mock Data
 import { mockArticleData } from '../mock_data/MockArticleData';
@@ -24,22 +25,26 @@ export default function ResourceIndex({ navigation }) {
   })
 
   return (
-    <View style={styles.container}>
-      <ScrollView contentContainerStyle={{
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-      >
-        {resourceArticles}
-      </ScrollView>
-    </View>
+    <>
+      <ScreenHeader/>
+      <View style={styles.container}>
+        <ScrollView contentContainerStyle={{
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+        >
+          {resourceArticles}
+        </ScrollView>
+      </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginVertical: 20,
+    flexGrow: 1,
+    marginTop: 80,
+    marginBottom: 2,
   },
   content: {
     padding: 4,
