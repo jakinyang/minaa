@@ -15,6 +15,8 @@ import DialoguePopup from "./DialoguePopup";
 
 // Main Home Screen Component
 export default function HomeScreen({ navigation, route }) {
+
+  console.log("returned new report: ", route.params?.newReport);
   // Map Data
   const initialMarkerRegion = {
     latitude: 37.78825,
@@ -35,18 +37,42 @@ export default function HomeScreen({ navigation, route }) {
 
   // Map Helpers
   const mapRef = useRef(null);
+
+  // Reset Region for FabGroup button
   const resetRegionHandler = () => {
     mapRef.current.animateToRegion(initialRegion, 1 * 1000);
   };
-  const [triggerReport, setTriggerReport] = useState(false);
-  const [tempMarker, setTempMarker] = useState({ longitude: 0, latitude: 0 });
-  const [markerRegion, setMarkerRegion] = useState(initialMarkerRegion);
+
+  // States for Home Screen
+
+  // Mock User State
+  const [userInfo, setUserInfo] = useState({
+    id: 1,
+    token: "abc123",
+  });
+
+  // State for managing new report popup
   const [modalVisible, setModalVisible] = useState(false);
+
+  // State for managing global pin data
   const [pinData, setPinData] = useFreshState(mockReportData);
-  const [tempPinData, setTempPinData] = useState({latitude: 0, longitude: 0})
-  const [newReport, setNewReport] = useState(mockReportData);
-  const [newPin, setNewPin] = useState(false);
+
+  // State for managing new pin data
   const [tempCoords, setTempCoords] = useFreshState()
+
+  // Use Effect for refreshing on new pin placed (i.e. MapViewScreen onLongPress())
+  useEffect(()=> {
+    console.log("test pin data",pinData);
+  }, [pinData])
+
+  // State for managinng the map view region
+  const [region, setRegion] = useState({
+    latitude: 37.78825,
+    longitude: -122.4324,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  });
+
   // Bottom Sheet Helpers
   const bottomSheetModalRef = useRef(null);
   const snapPoints = useMemo(() => ["75%"], []);
@@ -54,52 +80,41 @@ export default function HomeScreen({ navigation, route }) {
     bottomSheetModalRef.current.present();
   };
 
-  useEffect(()=> {
-    console.log("test pin data",pinData);
-  }, [pinData])
-
   return (
     <View style={styles.container}>
       <Map
-        tempMarker={tempMarker}
-        setTempMarker={setTempMarker}
         mapRef={mapRef}
-        setTriggerReport={setTriggerReport}
-        setTempPinData={setTempPinData}
-        tempPinData={tempPinData}
+        userInfo={userInfo}
         pinData={pinData.current}
         setPinData={setPinData}
-        newPin={newPin}
-        setNewPin={setNewPin}
-        setModalVisible={setModalVisible}
+        tempCoords={tempCoords}
         setTempCoords={setTempCoords}
+        region={region}
+        setRegion={setRegion}
+        setModalVisible={setModalVisible}
       >
         <MapPins
           navigation={navigation}
           route={route}
           pinData={pinData.current}
-          newPin={newPin}
-          triggerReport={triggerReport}
           setModalVisible={setModalVisible}
-          tempPinData={tempPinData}
         />
       </Map>
       <DialoguePopup
-        modalVisible={modalVisible}
-        setModalVisible={setModalVisible}
         navigation={navigation}
-        setNewPin={setNewPin}
-        tempPinData={tempPinData}
+        userInfo={userInfo}
         pinData={pinData.current}
         setPinData={setPinData}
         tempCoords={tempCoords.current}
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
       />
       {/* <CarouselCards /> */}
-      <FabGroup
+      {/* <FabGroup
         navigation={navigation}
         openModal={openModal}
         resetRegionHandler={resetRegionHandler}
-      />
+      /> */}
       <BottomSheet
         navigation={navigation}
         bottomSheetModalRef={bottomSheetModalRef}
@@ -114,48 +129,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-/* 
-// State to manage the new pins being made
-const [pinData, setPinData] = useState(mockReportData);
-const [newReport, setNewReport] = useState(false);
-const [newReportData, setNewReportData] = useState(null);
-
-// Map component registers a long press
-// Captures the event data and uses it to set the "newReport" to true
-// Captures the event data and stores it in the "newReportData" 
-<Map
-  setTempMarker={setTempMarker}
-  mapRef={mapRef}
-  setTriggerReport={setTriggerReport}
-  markerRegion={markerRegion}
-  setMarkerRegion={setMarkerRegion}
-  onLongPress={(e) => {
-    setNewReport(true)
-    setNewReportData({ latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude, title: "New Report", description: "This is a new report", isNewReport: true });
-  }}
->
-
-  {
-    if (newReport) {
-      // give temporary pin data with only coordinates
-      setPinData([...pinData, newReportData] )
-      // some logic to trigger the newReport Modal
-      // some logic to handle rendering the new report form
-      // some logic to update pinData after the new report is finalized
-      (pop the temporary data, replace with permanent data)
-      return (
-        <Marker />
-      )
-    }
-  }
-
-  // Map pins on the map are generated via the state (pinData)
-  // Whenever pin data is updated, the component (all the pins on the map) refresh and render the pins
-  <MapPins
-    mockReportData={pinData}
-    navigation={navigation}
-    route={route}
-  />
-</Map>
- */
