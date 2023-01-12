@@ -11,8 +11,8 @@ export default function ScreenHeader({ navigation }) {
     return (
       <SafeAreaProvider> 
        <Appbar.Header style={ styles.screenHeader } >
-         <Appbar.Content title="Minaa" />
-         <Appbar.Action icon="magnify" onPress={_handleSearch} />
+         <Appbar.Content style={ styles.title } title="Minaa" />
+         <Appbar.Action style={ styles.button } icon="magnify" onPress={_handleSearch} />
        </Appbar.Header>
       </SafeAreaProvider> 
      ); 
@@ -21,8 +21,8 @@ export default function ScreenHeader({ navigation }) {
   return (
     <SafeAreaProvider> 
      <Appbar.Header style={ styles.screenHeaderDefault }>
-       <Appbar.Content title="Minaa" />
-       <Appbar.Action icon="magnify" onPress={_handleSearch} />
+       <Appbar.Content style={ styles.title } title="Minaa" />
+       <Appbar.Action style={ styles.button } icon="magnify" onPress={_handleSearch} />
      </Appbar.Header>
     </SafeAreaProvider> 
    );
@@ -34,12 +34,21 @@ const styles = StyleSheet.create({
     top: 0,
     opacity: 0.8,
     elevation: 0,
+    display: 'flex',
     textAlign: 'center-align',
+    justifyContent: 'space-between',
   },
   screenHeaderDefault: {
     opacity: 0.8,
     top: 0,
     elevation: 0,
+  },
+  title: {
+    position: 'absolute',
+    textAlign: 'left',
+  },
+  button: {
+    position: 'absolute',
   },
 })
 
