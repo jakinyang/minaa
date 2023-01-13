@@ -1,13 +1,24 @@
+import { gql, useMutation } from '@apollo/client';
 import * as React from 'react';
 import { useState } from 'react';
 import { View, Button, StyleSheet, ScrollView, Image, SafeAreaView } from 'react-native';
 import { Dialog, Portal, Text, TextInput } from 'react-native-paper';
 import DropDownPicker from 'react-native-dropdown-picker';
 import * as ImagePicker from 'expo-image-picker';
-import CreateAReport from '../../src/Mutations/CreateAReport';
+import { CREATE_A_REPORT } from '../../src/Mutations/CreateAReport'
 
 
 export default function NewReportScreen({ navigation, route }) {
+            //Mutation
+            const [createReport, { data, loading, error }] = useMutation(CREATE_A_REPORT);
+            if(loading){
+              console.log("Submitting report data");
+            }
+            if(error){
+              console.log("Error when submitting: ", error.message);
+            }
+       
+
   //New report state
   const [radiusDropDown, setRadiusDropDown] = useState(false);
   const [reportDropDown, setReportDropDown] = useState(false);
@@ -58,7 +69,7 @@ export default function NewReportScreen({ navigation, route }) {
   console.log("route.params.tempCoords:", route.params.tempCoords);
 
   // Extract Route Params
-  const {pinData, tempCoords, setPinData} = route.params
+  const { pinData, tempCoords, setPinData } = route.params
   const { userId } = route.params.pinData;
 
   return (
@@ -99,19 +110,19 @@ export default function NewReportScreen({ navigation, route }) {
         />
         <Button title='Submit' onPress={() => {
           const newReport = {
-              id:"1",
-              longitude: tempCoords.longitude,
-              latitude: tempCoords.latitude,
-              description: description.value,
-              radius: radius,
-              statusCategory: reportStatus,
-              reportCategory: reportCategory,
-              imageUrl: imageUrl,
-              createdAt: "2023-01-09T21:44:08.923Z",
-              updatedAt: "2023-01-09T21:44:08.923Z",
-              userId: "1"
+            id: "1",
+            longitude: tempCoords.longitude,
+            latitude: tempCoords.latitude,
+            description: description.value,
+            radius: radius,
+            statusCategory: reportStatus,
+            reportCategory: reportCategory,
+            imageUrl: imageUrl,
+            createdAt: "2023-01-09T21:44:08.923Z",
+            updatedAt: "2023-01-09T21:44:08.923Z",
+            userId: 1
           };
-          console.log("New Report Data - pre-submission: ", newReport);
+          console.log("New Report Data - after-submission: ", newReport);
           let tempData = pinData.slice(0, -1);
           setPinData([...tempData, newReport]);
           // console.log("after submission tempData:", tempData);
@@ -129,6 +140,17 @@ export default function NewReportScreen({ navigation, route }) {
             }
           `) 
           */
+         createReport({
+          variables: {
+           data: { latitude: newReport.latitude,
+            longitude: newReport.latitude,
+            description: newReport.description,
+            radius: newReport.radius,
+            reportCategory: newReport.reportCategory,
+            statusCategory: newReport.statusCategory,
+            userId: newReport.userId}
+          }
+        })
 
           navigation.navigate({
             name: "Map",
@@ -136,12 +158,12 @@ export default function NewReportScreen({ navigation, route }) {
             merge: true
           })
         }} />
-        <Button 
-          title="Pick an image from camera roll" 
-          onPress={pickImage} 
+        <Button
+          title="Pick an image from camera roll"
+          onPress={pickImage}
         />
         {imageUrl && <View><Image source={{ uri: imageUrl }} /></View>}
-  
+
       </View>
     </View>
   )
