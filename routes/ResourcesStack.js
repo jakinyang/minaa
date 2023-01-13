@@ -7,17 +7,14 @@ import {
 // Components Screens
 import ResourceIndex from '../screens/Resources/ResourceIndexScreen';
 import ResourceCard from '../screens/Resources/ResourceCard';
-
-// Mock Data
-import { mockArticleData } from '../screens/mock_data/MockArticleData';
+import ResourceArticleOne from '../screens/Resources/ResourceArticleOne';
 
 const Stack = createStackNavigator();
 
 export default function ResourceStack() {
-  const articles = mockArticleData;
   return (
     <Stack.Navigator
-      initialRouteName="ProfileScreen"
+      initialRouteName="ResourceIndex"
       screenOptions={{
         headerShown: false,
       }}
@@ -31,7 +28,7 @@ export default function ResourceStack() {
         }}
       />
       <Stack.Screen
-        name={`ArticleOne`}
+        name={'ResourceArticleOne'}
         component={ResourceArticleOne}
         options={{
           headerTransparent: true,
