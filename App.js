@@ -14,7 +14,7 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 
 
 const link = new HttpLink({
-  uri: 'https://fast-shrimps-happen-64-201-201-32.loca.lt',
+  uri: 'http://localhost:4000/',
   credentials: 'omit'
 });
 
