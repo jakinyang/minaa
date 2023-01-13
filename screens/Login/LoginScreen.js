@@ -31,7 +31,7 @@ export default function LoginScreen({ navigation }) {
       "email": loginAttempt
     }}
   })
-  console.log('login user client data', data)
+  // console.log('login user client data', data)
 
   const onLoginPressed = async () => {
     const emailError = emailValidator(email.value)
@@ -50,10 +50,13 @@ export default function LoginScreen({ navigation }) {
       alert("Invalid email or password, please try again")
       return
     }
+
+    // never got to test (lines 57-60) this out working cause 502 error happened
+    // comment it out to seee the rest of it working
     alert("Login successful")
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'HomeStack' }],
+    navigation.navigate('HomeStack', {
+      screen: 'HomeScreen',
+      params: { user: data.usersSearch[0] }
     })
   }
 

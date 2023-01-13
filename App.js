@@ -14,10 +14,10 @@ import {
 } from '@apollo/client';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import React, { useEffect } from 'react';
-import { CURRENT_USER } from './src/Queries/GetCurrentUser';
 
 const link = new HttpLink({
-  uri: 'https://honest-ties-grin-64-201-201-32.loca.lt',
+  // http://localhost:4000/
+  uri: 'https://silent-friends-turn-64-201-201-32.loca.lt',
   credentials: 'omit'
 });
 
@@ -33,14 +33,13 @@ export default function App() {
 
   // useEffect(() => {
   //   const getUser = async () => {
-  //     const { data } = await client.query({
+  //     const { data } = await useQuery({
   //       query: CURRENT_USER,
   //       variables: { userId: "1" },
   //     });
   //     setUser(data.user);
   //     setUserSelected(true);
   //   };
-  //   getUser();
   // }, [user]);
 
 
