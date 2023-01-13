@@ -30,26 +30,13 @@ export default function ResourceStack() {
           headerTransparent: true,
         }}
       />
-      {
-        articles.map(({ id, imageSource, titleText, bodyText }, index) => {
-          return (
-            <Stack.Screen
-              key={index}
-              name={`Article${id}`}
-              component={ResourceCard}
-              initialParams={{
-                id,
-                imageSource,
-                titleText,
-                bodyText,
-              }}
-            // options={{
-            //   headerShown: false,
-            // }}
-            />
-          )
-        })
-      }
+      <Stack.Screen
+        name={`ArticleOne`}
+        component={ResourceArticleOne}
+        options={{
+          headerTransparent: true,
+        }}
+      />
     </Stack.Navigator>
 
   );
