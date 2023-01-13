@@ -9,31 +9,32 @@ export default function MapPins({
   navigation,
   pinData,
 }) {
-  console.log("all report data", pinData);
-
-  return (pinData.map((item, i) => {
-    return (
-      <Marker
-        coordinate={{latitude: item.latitude, longitude: item.longitude}}
-        key={i}
-      >
-        <Callout
-          tooltip
-          onPress={() => { console.log("Callout pressed"); navigation.navigate('ReportDetailScreen', item) }}
+  console.log("Pin Data Passed down to map pins \n", pinData);
+  if(pinData) {
+    return (pinData.map((item, i) => {
+      return (
+        <Marker
+          coordinate={{latitude: item.latitude, longitude: item.longitude}}
+          key={i}
         >
-          <View>
-            <Card style={styles.card}>
-              <Card.Cover source={{ uri: faker.image.nature() }} />
-              <Card.Title title={item.reportCategory} />
-              <Card.Content>
-                <Chip icon="information">{item.description}</Chip>
-              </Card.Content>
-            </Card>
-          </View>
-        </Callout>
-      </Marker>
-    )
-  }))
+          <Callout
+            tooltip
+            onPress={() => { console.log("Callout pressed"); navigation.navigate('ReportDetailScreen', item) }}
+          >
+            <View>
+              <Card style={styles.card}>
+                <Card.Cover source={{ uri: faker.image.nature() }} />
+                <Card.Title title={item.reportCategory} />
+                <Card.Content>
+                  <Chip icon="information">{item.description}</Chip>
+                </Card.Content>
+              </Card>
+            </View>
+          </Callout>
+        </Marker>
+      )
+    }))
+  }
 };
 
 const styles = StyleSheet.create({
