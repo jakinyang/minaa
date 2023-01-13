@@ -1,5 +1,5 @@
 // RN imports
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { TouchableOpacity, StyleSheet, View, SafeAreaView } from 'react-native'
 import { Text } from 'react-native-paper'
 
@@ -23,23 +23,34 @@ import { passwordValidator } from './LoginHelpers/passwordValidator.js'
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
+  const [loginAttempt, setLoginAttempt] = useState(null)
 
-  const onLoginPressed = () => {
+    // "Lura79@hotmail.com" "ZbDAic5PuBUQAgW"
+  const { data, refetch } = useQuery(CURRENT_USER, {
+    variables: {"search": {
+      "email": loginAttempt
+    }}
+  })
+  console.log('login user client data', data)
+
+  const onLoginPressed = async () => {
     const emailError = emailValidator(email.value)
     const passwordError = passwordValidator(password.value)
-
-    const { data } = useQuery(CURRENT_USER, {
-      variables: {"search": {
-        "email": "Lura79@hotmail.com"
-      }}
-    })
+    
+    setLoginAttempt(email.value);
+    await refetch();
     
     if (emailError || passwordError) {
       setEmail({ ...email, error: emailError })
       setPassword({ ...password, error: passwordError })
       return
     }
-    console.log('login user client data', data)
+
+    if (data.usersSearch[0].email !== email.value || data.usersSearch[0].password !== password.value) {
+      alert("Invalid email or password, please try again")
+      return
+    }
+    alert("Login successful")
     navigation.reset({
       index: 0,
       routes: [{ name: 'HomeStack' }],

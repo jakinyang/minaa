@@ -13,7 +13,7 @@ export default function HistoryScreen({ navigation }) {
   const { loading, error, data } = useQuery(GET_USER_REPORTS, {
     variables: { "userId": "3" }
   });
-  console.log('historyScreen data: ', data);
+  // console.log('historyScreen data: ', data);
   if (loading) return null;
   if (error) return `Error! ${error}`;
 
