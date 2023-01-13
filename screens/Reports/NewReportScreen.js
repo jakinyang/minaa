@@ -4,6 +4,7 @@ import { View, Button, StyleSheet, ScrollView, Image, SafeAreaView } from 'react
 import { Dialog, Portal, Text, TextInput } from 'react-native-paper';
 import DropDownPicker from 'react-native-dropdown-picker';
 import * as ImagePicker from 'expo-image-picker';
+import CreateAReport from '../../src/Mutations/CreateAReport';
 
 
 export default function NewReportScreen({ navigation, route }) {
@@ -98,15 +99,17 @@ export default function NewReportScreen({ navigation, route }) {
         />
         <Button title='Submit' onPress={() => {
           const newReport = {
-            coords: {
+              id:"1",
               longitude: tempCoords.longitude,
               latitude: tempCoords.latitude,
-            },
-            img: imageUrl,
-            radius: radius,
-            reportCategory: reportCategory,
-            reportStatus: reportStatus,
-            description: description,
+              description: description,
+              radius: radius,
+              statusCategory: reportStatus,
+              reportCategory: reportCategory,
+              imageUrl: imageUrl,
+              createdAt: "2023-01-09T21:44:08.923Z",
+              updatedAt: "2023-01-09T21:44:08.923Z",
+              userId: "1"
           };
           console.log("New Report Data - pre-submission: ", newReport);
           let tempData = pinData.slice(0, -1);
@@ -127,7 +130,7 @@ export default function NewReportScreen({ navigation, route }) {
 
           navigation.navigate({
             name: "Map",
-            params: {newReport: newReport},
+            // params: {newReport: newReport},
             merge: true
           })
         }} />
@@ -136,6 +139,7 @@ export default function NewReportScreen({ navigation, route }) {
           onPress={pickImage} 
         />
         {imageUrl && <View><Image source={{ uri: imageUrl }} /></View>}
+  
       </View>
     </View>
   )

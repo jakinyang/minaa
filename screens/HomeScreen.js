@@ -8,6 +8,12 @@ import React, {
 import { View, StyleSheet } from 'react-native';
 import { Marker } from 'react-native-maps';
 
+// Apollo Client
+import {
+  gql,
+  useQuery,
+} from "@apollo/client";
+
 // Component Screens
 import Map from './Map/MapViewScreen';
 import MapPins from './Map/MapPins';
@@ -17,20 +23,49 @@ import FabGroup from './FabGroup';
 import BottomSheet from './BottomSheet';
 import DialoguePopup from './DialoguePopup';
 
+import allReportsData from '../src/Queries/allReportsData';
+import TestMarkers from './Map/TestMarkers';
+
 // Main Home Screen Component
 export default function HomeScreen({ navigation, route }) {
 
-  console.log("returned new report: ", route.params?.newReport);
+  //Fetch reports data from database
+  const FETCH_ALL_REPORTS = gql `
+    query Query {
+      reports {
+        id
+        latitude
+        longitude
+        description
+        radius
+        statusCategory
+        reportCategory
+        imageUrl
+        createdAt
+        updatedAt
+      }
+    }
+  `;
+  const {loading, error, data} = useQuery(FETCH_ALL_REPORTS);
+
+  if(loading) {
+    console.log("report data lodaing from Apollo");
+  }
+  if(error) {
+   console.log("Apollo error:", error.message);
+  }
+  if (data) {
+    console.log("Initial data fetch result: \n");
+    console.table(data.reports.slice(1,5))
+  }
   // Map Data
   const initialMarkerRegion = {
     latitude: 37.78825,
     longitude: -122.4324,
   };
 
-
   //Helper functions
   function useFreshState(value) {
-    console.log("function pindata result:",value);
     const pinData = useRef(value);
     const setPinData = (newState) => {
       pinData.current = newState;
@@ -59,15 +94,28 @@ export default function HomeScreen({ navigation, route }) {
   const [modalVisible, setModalVisible] = useState(false);
 
   // State for managing global pin data
-  const [pinData, setPinData] = useFreshState(mockReportData);
+  const [pinData, setPinData] = useFreshState(null);
 
   // State for managing new pin data
   const [tempCoords, setTempCoords] = useFreshState()
 
+  //Test: new
+  const [temporaryPinData, setTemporaryPinData] = useFreshState(null)
+
   // Use Effect for refreshing on new pin placed (i.e. MapViewScreen onLongPress())
   useEffect(()=> {
-    console.log("test pin data",pinData);
+    console.log("Pin data on pinData update: \n", pinData[0]);
   }, [pinData])
+
+  useEffect(()=> {
+
+    if (data) {
+      console.log("Direct Fetch data: \n");
+      console.table(data.reports.slice(1, 5))};
+    // setPinData(data.reports);
+    // console.log("Pin data on fetchedData update: \n", pinData[0]);
+  }, [data])
+
 
   // State for managinng the map view region
   const [region, setRegion] = useState({
@@ -103,6 +151,10 @@ export default function HomeScreen({ navigation, route }) {
           pinData={pinData.current}
           setModalVisible={setModalVisible}
         />
+        {/* <TestMarkers 
+        reportsData={reportsData}
+        /> */}
+        {/*single pin .current */}
       </Map>
       <DialoguePopup
         navigation={navigation}
