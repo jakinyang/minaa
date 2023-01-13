@@ -13,11 +13,9 @@ import {
   HttpLink
 } from '@apollo/client';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import Test from './src/sample';
-
 
 const link = new HttpLink({
-  uri: 'http://localhost:4000/',
+  uri: 'https://honest-ties-grin-64-201-201-32.loca.lt',
   credentials: 'omit'
 });
 
