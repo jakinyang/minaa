@@ -146,6 +146,7 @@ if(error){
             radius: newReport.radius,
             reportCategory: newReport.reportCategory,
             statusCategory: newReport.statusCategory,
+            imageUrl: "dasdsadad",
             userId: newReport.userId}
           }
         })
