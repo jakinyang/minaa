@@ -102,7 +102,7 @@ export default function NewReportScreen({ navigation, route }) {
               id:"1",
               longitude: tempCoords.longitude,
               latitude: tempCoords.latitude,
-              description: description,
+              description: description.value,
               radius: radius,
               statusCategory: reportStatus,
               reportCategory: reportCategory,
@@ -114,6 +114,8 @@ export default function NewReportScreen({ navigation, route }) {
           console.log("New Report Data - pre-submission: ", newReport);
           let tempData = pinData.slice(0, -1);
           setPinData([...tempData, newReport]);
+          // console.log("after submission tempData:", tempData);
+          // console.log("after submission pinData:", pinData);
           /* 
           
           Apollo Client Query
