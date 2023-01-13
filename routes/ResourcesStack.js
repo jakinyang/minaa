@@ -5,8 +5,8 @@ import {
 } from '@react-navigation/stack';
 
 // Components Screens
-import ResourceIndex from '../screens/resources/ResourceIndexScreen';
-import ResourceCard from '../screens/resources/ResourceCard';
+import ResourceIndex from '../screens/Resources/ResourceIndexScreen';
+import ResourceCard from '../screens/Resources/ResourceCard';
 
 // Mock Data
 import { mockArticleData } from '../screens/mock_data/MockArticleData';
