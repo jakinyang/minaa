@@ -27,7 +27,14 @@ import TestMarkers from './Map/TestMarkers';
 
 // Main Home Screen Component
 export default function HomeScreen({ navigation, route }) {
-  console.log("HomeScreen route params: ", route.params);
+  
+  let userData = null;
+  useEffect(() => {
+    if (route.params) {
+      userData = route.params;
+    }
+  }, [route])
+  console.log("HomeScreen route params: ", userData);
   console.log("HomeScreen navigation: ", navigation);
   // Use Effect for refreshing on new pin placed (i.e. MapViewScreen onLongPress())
   useEffect(() => {

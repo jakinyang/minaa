@@ -29,7 +29,7 @@ export default function HistoryScreen({ navigation }) {
         size={30}
         onPress={() => navigation.goBack()}
       />
-      <Text>This is the History Page</Text>
+      <Text style={styles.pageTitle}>User Submitted Reports</Text>
       <View style={styles.carouselContainer}>
         <Carousel
           layout="default"
@@ -78,5 +78,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  pageTitle: {
+    top: 235,
   },
 });

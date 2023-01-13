@@ -24,15 +24,30 @@ import { passwordValidator } from './LoginHelpers/passwordValidator.js'
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
-
+  
     // "Lura79@hotmail.com" "ZbDAic5PuBUQAgW"
   const[getCurrentUser, { data, loading, error }] = useLazyQuery(CURRENT_USER, {
     variables: {"search": {
       "email": email.value
-    }}
+    }},
+    fetchPolicy: 'cache-and-network',
+    onCompleted: (data) => {
+      console.log('oncompleted triggered');
+      if (data.usersSearch[0].email !== email.value || data.usersSearch[0].password !== password.value) {
+        alert("Invalid email or password, please try again")
+        return
+      }
+  
+      alert("Login successful")
+      console.log(data);
+      navigation.navigate('Home', {
+        screen: 'HomeScreen',
+        params: { user: data.usersSearch[0] }
+      })
+    }
   })
   if (error) console.log(`Error ${error.message}`);
-  
+
   const onLoginPressed = () => {
     const emailError = emailValidator(email.value)
     const passwordError = passwordValidator(password.value)
@@ -42,19 +57,20 @@ export default function LoginScreen({ navigation }) {
       setPassword({ ...password, error: passwordError })
       return
     }
-
     getCurrentUser()
+    console.log('triggered');
     // console.log("data user obj", data.usersSearch[0])
-    if (data.usersSearch[0].email !== email.value || data.usersSearch[0].password !== password.value) {
-      alert("Invalid email or password, please try again")
-      return
-    }
+    // if (currentUserData.usersSearch[0].email !== email.value || currentUserData.usersSearch[0].password !== password.value) {
+    //   alert("Invalid email or password, please try again")
+    //   return
+    // }
 
-    alert("Login successful")
-    navigation.navigate('Home', {
-      screen: 'HomeScreen',
-      params: { user: data.usersSearch[0] }
-    })
+    // alert("Login successful")
+    // console.log(currentUserData);
+    // navigation.navigate('Home', {
+    //   screen: 'HomeScreen',
+    //   params: { user: currentUserData.usersSearch[0] }
+    // })
   }
 
   return (
