@@ -17,7 +17,7 @@ import React, { useEffect } from 'react';
 
 const link = new HttpLink({
   // http://localhost:4000/
-  uri: 'https://silent-friends-turn-64-201-201-32.loca.lt',
+  uri: 'https://solid-hands-drum-64-201-201-32.loca.lt',
   credentials: 'omit'
 });
 
