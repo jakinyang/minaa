@@ -6,17 +6,24 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persistCache, AsyncStorageWrapper } from 'apollo3-cache-persist';
 import HomeStack from './routes/HomeStack';
 import { 
+  createHttpLink,
   ApolloClient, 
   InMemoryCache, 
-  ApolloProvider 
+  ApolloProvider, 
+  HttpLink
 } from '@apollo/client';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import Test from './src/sample';
 
-const cache = new InMemoryCache();
+
+const link = new HttpLink({
+  uri: 'http://localhost:4000/',
+  credentials: 'omit'
+});
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/',
-  cache,
+  link,
+  cache: new InMemoryCache(),
 });
 
 export default function App() {
