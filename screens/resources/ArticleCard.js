@@ -3,7 +3,6 @@ import { StyleSheet, ScrollView } from 'react-native';
 import { Card, Text } from 'react-native-paper';
 
 export default function ArticleCard({
-  onPress,
   route
 }) {
   return (

@@ -10,8 +10,6 @@ export default function ResourceCard({
   bodyText2,
   bodyText3,
   onPress,
-  navigation,
-  route
 }) {
   return (
     <ScrollView
