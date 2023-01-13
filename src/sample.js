@@ -47,7 +47,7 @@ export default function Test() {
   if (error) {
     console.log("Error from useQuery Test!", error);
   }
-  // console.log(data.users);
+  console.log(data);
   return (
     <View>
       <FlatList
@@ -83,5 +83,9 @@ const styles = StyleSheet.create({
     backgroundColor: "yellow",
     padding: 20,
   },
+<<<<<<< HEAD
 });
 
+=======
+});
+>>>>>>> b697d7983c20fee423fec853e062949f22eadacf
