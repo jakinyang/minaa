@@ -47,7 +47,7 @@ export default function Test() {
   if (error) {
     console.log("Error from useQuery Test!", error);
   }
-  // console.log(data.users);
+  console.log(data);
   return (
     <View>
       <FlatList

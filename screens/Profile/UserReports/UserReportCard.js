@@ -10,11 +10,11 @@ export const UserReportCardItem = ({ item, index }) => {
   return (
     <View style={styles.container} key={index}>
       <Image
-        source={{ uri: item.imageSource }}
+        source={{ uri: item.imageUrl }}
         style={styles.image}
       />
-      <Text style={styles.header}>{item.titleText}</Text>
-      <Text style={styles.body}>{item.bodyText}</Text>
+      {/* <Text style={styles.header}>{item.titleText}</Text> */}
+      <Text style={styles.body}>{item.description}</Text>
     </View>
   )
 }
@@ -41,14 +41,14 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 15,
     borderTopStartRadius: 15,
   },
-  header: {
-    color: "#222",
-    fontSize: 28,
-    height: 50, 
-    fontWeight: "bold",
-    paddingLeft: 20,
-    paddingTop: 20
-  },
+  // header: {
+  //   color: "#222",
+  //   fontSize: 28,
+  //   height: 50, 
+  //   fontWeight: "bold",
+  //   paddingLeft: 20,
+  //   paddingTop: 20
+  // },
   body: {
     color: "#222",
     fontSize: 18,

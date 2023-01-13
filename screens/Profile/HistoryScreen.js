@@ -7,12 +7,12 @@ import { IconButton, MD3Colors } from 'react-native-paper';
 import { useQuery, gql } from '@apollo/client'
 import {GET_USER_REPORTS} from '../../src/Queries/UserReportsQueries.js'
 
-export default function HistoryScreen({ navigation, userId = "5" }) {
+export default function HistoryScreen({ navigation }) {
   const isCarousel = useRef(null)
   const [index, setIndex] = useState(0)
 
   const { loading, error, data } = useQuery(GET_USER_REPORTS, {
-    variables: { id: userId },
+    variables: { "userId": "3" }
   });
   console.log('historyScreen data: ', data);
   if (loading) return null;
@@ -42,10 +42,10 @@ export default function HistoryScreen({ navigation, userId = "5" }) {
           itemWidth={ITEM_WIDTH}
           inactiveSlideShift={0}
           useScrollView={true}
-          onSnapToItem={(index) => setIndex(index)}
+          // onSnapToItem={(index) => setIndex(index)}
         />
         <Pagination
-          dotsLength={mockUserReportData.length}
+          dotsLength={data.user.reports.length}
           activeDotIndex={index}
           carouselRef={isCarousel}
           dotStyle={{
