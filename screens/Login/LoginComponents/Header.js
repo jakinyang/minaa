@@ -7,7 +7,7 @@ import { Text } from 'react-native-paper'
 
 export default function Header(props) {
 
-  console.log("login componenets header props: ", props);
+  // console.log("login componenets header props: ", props);
 
   return <Text style={styles.header} {...props} />
 }

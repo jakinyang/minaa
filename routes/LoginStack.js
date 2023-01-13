@@ -26,6 +26,8 @@ export default function LoginStack() {
       <Stack.Screen
         name="LoginScreen"
         component={LoginScreen}
+        // setUser={setUser}
+        // setUserSelected={setUserSelected}
       />
       <Stack.Screen
         name="RegisterScreen"

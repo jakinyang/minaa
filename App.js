@@ -13,6 +13,8 @@ import {
   HttpLink
 } from '@apollo/client';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import React, { useEffect } from 'react';
+import { CURRENT_USER } from './src/Queries/GetCurrentUser';
 
 const link = new HttpLink({
   uri: 'https://honest-ties-grin-64-201-201-32.loca.lt',
@@ -25,6 +27,26 @@ const client = new ApolloClient({
 });
 
 export default function App() {
+
+  // const [user, setUser] = React.useState(null);
+  // const [userSelected, setUserSelected] = React.useState(false);
+
+  // useEffect(() => {
+  //   const getUser = async () => {
+  //     const { data } = await client.query({
+  //       query: CURRENT_USER,
+  //       variables: { userId: "1" },
+  //     });
+  //     setUser(data.user);
+  //     setUserSelected(true);
+  //   };
+  //   getUser();
+  // }, [user]);
+
+
+    // add these back into homestack props if thats a good idea...
+  // setUserSelected={setUserSelected} setUser={setUser}
+
   return (
     <PaperProvider>
       <ApolloProvider client={client}>

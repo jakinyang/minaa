@@ -3,6 +3,10 @@ import React, { useState } from 'react'
 import { TouchableOpacity, StyleSheet, View, SafeAreaView } from 'react-native'
 import { Text } from 'react-native-paper'
 
+//backend imports
+import { useQuery } from '@apollo/client'
+import { CURRENT_USER } from '../../src/Queries/GetCurrentUser.js'
+
 // Component and theme imports
 import Background from './LoginComponents/Background.js'
 import Logo from './LoginComponents/Logo.js'
@@ -23,11 +27,19 @@ export default function LoginScreen({ navigation }) {
   const onLoginPressed = () => {
     const emailError = emailValidator(email.value)
     const passwordError = passwordValidator(password.value)
+
+    const { data } = useQuery(CURRENT_USER, {
+      variables: {"search": {
+        "email": "Lura79@hotmail.com"
+      }}
+    })
+    
     if (emailError || passwordError) {
       setEmail({ ...email, error: emailError })
       setPassword({ ...password, error: passwordError })
       return
     }
+    console.log('login user client data', data)
     navigation.reset({
       index: 0,
       routes: [{ name: 'HomeStack' }],

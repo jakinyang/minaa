@@ -12,7 +12,7 @@ import ProfileStack from './ProfileStack';
 
 const Tab = createMaterialBottomTabNavigator();
 
-export default function HomeStack() {
+export default function HomeStack({ setUserSelected, setUser }) {
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -34,6 +34,8 @@ export default function HomeStack() {
       <Tab.Screen
         name="Login"
         component={LoginStack}
+        // setUserSelected={setUserSelected}
+        // setUser={setUser}
         headerShown={false}
         options={{
           tabBarLabel: 'Updates',

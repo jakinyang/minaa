@@ -8,9 +8,9 @@ import { Button as PaperButton } from 'react-native-paper'
 
 export default function Button({ mode, style, ...props }) {
 
-  console.log(" login component Button props", props);
-  console.log(" login component Button mode", mode);
-  console.log(" login component Button style", style);
+  // console.log(" login component Button props", props);
+  // console.log(" login component Button mode", mode);
+  // console.log(" login component Button style", style);
 
   return (
     <PaperButton
