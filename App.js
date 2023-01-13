@@ -4,14 +4,22 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import HomeStack from './routes/HomeStack';
 import { 
+  createHttpLink,
   ApolloClient, 
   InMemoryCache, 
-  ApolloProvider 
+  ApolloProvider, 
+  HttpLink
 } from '@apollo/client';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 
-const client = new ApolloClient({
+
+const link = new HttpLink({
   uri: 'http://localhost:4000/',
+  credentials: 'omit'
+});
+
+const client = new ApolloClient({
+  link,
   cache: new InMemoryCache(),
 });
 

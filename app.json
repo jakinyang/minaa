@@ -31,6 +31,7 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "bundleUrl": "http://localhost:19000/index.bundle?platform=android"
   }
 }
