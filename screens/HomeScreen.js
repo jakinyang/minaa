@@ -167,11 +167,6 @@ export default function HomeScreen({ navigation, route }) {
         openModal={openModal}
         resetRegionHandler={resetRegionHandler}
       /> */}
-      <BottomSheet
-        navigation={navigation}
-        bottomSheetModalRef={bottomSheetModalRef}
-        snapPoints={snapPoints}
-      />
     </View>
   );
 }

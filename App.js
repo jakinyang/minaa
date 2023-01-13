@@ -2,11 +2,8 @@ import 'react-native-gesture-handler';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider as PaperProvider } from 'react-native-paper';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { persistCache, AsyncStorageWrapper } from 'apollo3-cache-persist';
 import HomeStack from './routes/HomeStack';
 import { 
-  createHttpLink,
   ApolloClient, 
   InMemoryCache, 
   ApolloProvider, 
@@ -15,7 +12,7 @@ import {
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 
 const link = new HttpLink({
-  uri: 'https://honest-ties-grin-64-201-201-32.loca.lt',
+  uri: 'http://localhost:4000/',
   credentials: 'omit'
 });
 
