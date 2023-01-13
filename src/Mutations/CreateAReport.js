@@ -3,24 +3,16 @@ import {
   useMutation
 } from "@apollo/client";
 
-
-
-export default function CreateAReport() {
-  const GREATE_A_REPORT = gql`
+  export const CREATE_A_REPORT = gql`
   mutation CreateReport($data: ReportCreateInput!) {
     createReport(data: $data) {
       latitude
       longitude
+      description
       radius
       reportCategory
       statusCategory
-      user {
-        id
-      }
+      userId
     }
   }
-  `
-  let input;
-  const [createReport, { data, loading, error }] = useMutation(GREATE_A_REPORT);
-};
-
+  `;
