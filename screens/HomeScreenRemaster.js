@@ -15,18 +15,17 @@ import { FETCH_ALL_REPORTS } from '../src/Queries/FetchAllReports'
 
 export default function HomeScreenRemaster({ navigation, route }) {
   // Rerendering Helpers
-  useEffect(() => { }, [pinData])
+  useEffect(() => {}, [pinData])
   // Map Helpers
   const mapRef = useRef(null);
 
   //Helper functions
   function useFreshState(value) {
-    const pinData = useRef(value);
-    const setPinData = (newState) => {
-      pinData.current = newState;
+    const data = useRef(value);
+    const setData = (newState) => {
+      data.current = newState;
     }
-    // console.log("pin data:", pinData);
-    return [pinData, setPinData];
+    return [data, setData];
   }
 
   // State Helpers

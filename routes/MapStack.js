@@ -4,6 +4,7 @@ import {
   TransitionPresets,
 } from '@react-navigation/stack';
 import HomeScreenRemaster from '../screens/HomeScreenRemaster';
+import HomeScreen from '../screens/HomeScreen';
 import ProfileTab from '../screens/Profile/ProfileScreen';
 import ReportDetailScreen from '../screens/Reports/ReportDetailScreen';
 import NewReportScreen from '../screens/Reports/NewReportScreen';
@@ -13,14 +14,14 @@ const Stack = createStackNavigator();
 export default function MapStack() {
   return (
     <Stack.Navigator
-      initialRouteName="HomeScreenRemaster"
+      initialRouteName="HomeScreen"
       screenOptions={{
         headerShown: false,
       }}
     >
       <Stack.Screen
         name="Map"
-        component={HomeScreenRemaster}
+        component={HomeScreen}
         options={{
           title: "",
           headerTransparent: true,
