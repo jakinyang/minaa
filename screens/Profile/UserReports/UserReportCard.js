@@ -1,20 +1,57 @@
-import React from 'react'
-import { View, Text, StyleSheet, Dimensions, Image } from "react-native"
+import React, { useState } from 'react'
+import { View, StyleSheet, Dimensions } from "react-native"
+import { Avatar, Card, IconButton, Text, Chip } from 'react-native-paper';
+import { getTimeElapsed } from '../../../shared/helpers/timeCalculator';
 
-export const SLIDER_WIDTH = Dimensions.get('window').width -50
+export const SLIDER_WIDTH = Dimensions.get('window').width - 50
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7)
 
-export const UserReportCardItem = ({ item, index }) => {
-  // returns a carousel card item in UserReportCards.js
-  console.log("user report card item: ", item);
+export const UserReportCard = ({ item, index }) => {
+  let time = getTimeElapsed(item.createdAt)
+
   return (
-    <View style={styles.container} key={index}>
-      <Image
-        source={{ uri: item.imageUrl }}
-        style={styles.image}
+    <Card
+      style={styles.container}
+      key={index}
+    >
+      <Card.Title
+        title={item.reportCategory}
+        left={(props) => <Avatar.Icon {...props} icon="mine" />}
+      // right={(props) => <IconButton {...props} icon={saved ? "bookmark" : "bookmark-outline"} onPress={() => { setSaved(!saved) }} />}
       />
-      <Text style={styles.body}>{item.description}</Text>
-    </View>
+      <Card.Content>
+        <Chip
+          style={styles.chip} icon="alert-decagram"
+        >
+          Status: {item.statusCategory}
+        </Chip>
+        <Chip
+          icon="map-marker-alert-outline" style={styles.chip}
+        >
+          Latitude: {item.latitude}
+        </Chip>
+        <Chip
+          icon="map-marker-alert-outline" style={styles.chip}
+        >
+          Longitude: {item.longitude}
+        </Chip>
+        <Chip
+          style={styles.chip}
+          icon="information"
+        >
+          Report ID: {item.id}
+        </Chip>
+        <Chip
+          style={styles.chip}
+          icon="radar"
+        >
+          Reported Area: {item.radius}m
+        </Chip>
+        <Text style={styles.description}>
+          Reported: {time} ago
+        </Text>
+      </Card.Content>
+    </Card>
   )
 }
 
@@ -23,8 +60,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 15,
     width: ITEM_WIDTH,
-    height: 320,
-    paddingBottom: 10,
+    height: "100%",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -32,7 +68,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.29,
     shadowRadius: 4.65,
-    elevation: 7,
+    elevation: 9,
   },
   image: {
     width: ITEM_WIDTH,
@@ -47,5 +83,8 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingLeft: 20,
     paddingRight: 20
-  }
+  },
+  chip: {
+    marginBottom: 10,
+  },
 })
