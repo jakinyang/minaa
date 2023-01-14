@@ -5,11 +5,14 @@ import { Text } from 'react-native-paper'
 // Component and theme imports
 // import { theme } from '../core/theme'
 
-export default function Header(props) {
+export default function Header({ font, children }) {
 
-  console.log("login componenets header props: ", props);
-
-  return <Text style={styles.header} {...props} />
+  return (
+    <Text
+      style={{ ...styles.header, fontFamily: font }}
+    >
+      {children}
+    </Text>)
 }
 
 const styles = StyleSheet.create({

@@ -3,14 +3,7 @@ import React from 'react'
 import { StyleSheet } from 'react-native'
 import { Button as PaperButton } from 'react-native-paper'
 
-// Component and theme imports
-// import { theme } from '../core/theme'
-
 export default function Button({ mode, style, ...props }) {
-
-  console.log(" login component Button props", props);
-  console.log(" login component Button mode", mode);
-  console.log(" login component Button style", style);
 
   return (
     <PaperButton
