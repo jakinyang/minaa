@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 import MapView, {
   PROVIDER_GOOGLE,
 } from "react-native-maps";
+import { mapStyleDark, mapStyleLight } from "./mapStyle";
 
 export default function Map({
   children,
@@ -13,13 +14,14 @@ export default function Map({
   setRegion,
   setModalVisible,
 }) {
-
+ 
   return (
     <MapView
       style={styles.map}
       initialRegion={region}
       showsUserLocation={true}
       showsMyLocationButton={true}
+      customMapStyle={mapStyleDark}
       provider={PROVIDER_GOOGLE}
       onRegionChangeComplete={(region) => setRegion(region)}
       ref={mapRef}

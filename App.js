@@ -23,6 +23,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+
 export default function App() {
   return (
     <PaperProvider>
