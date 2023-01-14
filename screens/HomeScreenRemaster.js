@@ -10,12 +10,11 @@ import {
 // Components
 import Map from './Map/MapViewScreen'
 import MapPins from './Map/MapPins'
+import TempPins from './Map/TempPins';
 import DialoguePopup from './DialoguePopup'
 import { FETCH_ALL_REPORTS } from '../src/Queries/FetchAllReports'
 
 export default function HomeScreenRemaster({ navigation, route }) {
-  // Rerendering Helpers
-  useEffect(() => {}, [pinData])
   // Map Helpers
   const mapRef = useRef(null);
 
@@ -23,6 +22,7 @@ export default function HomeScreenRemaster({ navigation, route }) {
   function useFreshState(value) {
     const data = useRef(value);
     const setData = (newState) => {
+      console.log("Use Fresh State Setting the data value");
       data.current = newState;
     }
     return [data, setData];
@@ -30,7 +30,7 @@ export default function HomeScreenRemaster({ navigation, route }) {
 
   // State Helpers
   const [pinData, setPinData] = useFreshState([]);
-  const [tempCoords, setTempCoords] = useFreshState()
+  const [tempCoords, setTempCoords] = useFreshState({latitude: 0, longitude: 0})
   const [temporaryPinData, setTemporaryPinData] = useFreshState();
   const [userInfo, setUserInfo] = useState({ id: 1, token: 'abc123' });
   const [modalVisible, setModalVisible] = useState(false);
@@ -54,14 +54,20 @@ export default function HomeScreenRemaster({ navigation, route }) {
     mapRef.current.animateToRegion(initialRegion, 1 * 1000);
   };
 
-  const { loading, error, data } = useQuery(FETCH_ALL_REPORTS);
-
-  if (loading) return <Text style={{flex:1, marginTop: 400, alignSelf: 'center'}} >Loading...</Text>;
-  if (error) return <Text style={{flex:1, marginTop: 400, alignSelf: 'center'}} >{error.message}</Text>;
-
-  if (data) {
-    setPinData(data?.reports)
+  const { loading, error, data, refetch } = useQuery(FETCH_ALL_REPORTS,
+     {
+    fetchPolicy: "cache-and-network",
+    onCompleted: (data) => {
+      console.log("Datafetch from database completed");
+      setPinData(data.reports)
+      console.log("Pindata Second Time: \n")
+      console.log(pinData.current.slice(-1))
+    },
   }
+  );
+
+  if (loading) return <Text style={{flex: 1, alignItems: 'center', justifyContent: 'center', alignSelf:'center', marginTop:400}}>Loading...</Text>;
+  if (error) console.log("fetching error", error.message);
 
   return (
     <View style={styles.container}>
@@ -82,6 +88,11 @@ export default function HomeScreenRemaster({ navigation, route }) {
           pinData={pinData.current}
           setModalVisible={setModalVisible}
         />
+        <TempPins
+        navigation={navigation}
+        route={route}
+        tempCoords={tempCoords.current} 
+        />
       </Map>
       <DialoguePopup
         navigation={navigation}
@@ -89,8 +100,10 @@ export default function HomeScreenRemaster({ navigation, route }) {
         pinData={pinData.current}
         setPinData={setPinData}
         tempCoords={tempCoords.current}
+        setTempCoords={setTempCoords}
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
+        refetch={refetch}
       />
     </View>
   )

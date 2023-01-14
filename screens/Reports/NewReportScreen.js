@@ -1,13 +1,26 @@
 import * as React from 'react';
+import { useMutation } from '@apollo/client';
 import { useState } from 'react';
 import { View, Button, StyleSheet, ScrollView, Image, SafeAreaView } from 'react-native';
 import { Dialog, Portal, Text, TextInput } from 'react-native-paper';
 import DropDownPicker from 'react-native-dropdown-picker';
 import * as ImagePicker from 'expo-image-picker';
-import CreateAReport from '../../src/Mutations/CreateAReport';
+import { CREATE_A_REPORT } from "../../src/Mutations/CreateAReport"
+import { FETCH_ALL_REPORTS } from "../../src/Queries/FetchAllReports";
 
 
 export default function NewReportScreen({ navigation, route }) {
+  //Mutation
+  const [createReport, { data, loading, error }] = useMutation(CREATE_A_REPORT);
+  if (loading) {
+    console.log("Submitting report data");
+  }
+  if (error) {
+    console.log("Error when submitting: ", error.message);
+  }
+  if (data) {
+    console.log("Report submitted successfully");
+  }
   //New report state
   const [radiusDropDown, setRadiusDropDown] = useState(false);
   const [reportDropDown, setReportDropDown] = useState(false);
@@ -25,7 +38,7 @@ export default function NewReportScreen({ navigation, route }) {
   const [reportTypes, setReportTypes] = useState([
     { label: "Unclear", value: "UNCLEAR" },
     { label: "Obscured", value: "OBSCURED" },
-    { label: "Multiple", value: "MULTPLE" },
+    { label: "Multiple", value: "MULTIPLE" },
     { label: "Large", value: "LARGE" },
     { label: "Small", value: "SMALL" },
   ]);
@@ -53,13 +66,8 @@ export default function NewReportScreen({ navigation, route }) {
     }
   };
 
-  //Test
-  console.log("route.params.newPinData:", route.params.pinData);
-  console.log("route.params.tempCoords:", route.params.tempCoords);
-
   // Extract Route Params
-  const {pinData, tempCoords, setPinData} = route.params
-  const { userId } = route.params.pinData;
+  const { userInfo, pinData, tempCoords, setTempCoords,setPinData, refetch } = route.params
 
   return (
     <View style={{ flex: 1, width: "100%", height: "100%" }}>
@@ -70,6 +78,7 @@ export default function NewReportScreen({ navigation, route }) {
           mode='outlined'
           label="description"
           placeholder='what do you see?'
+          defaultValue=' '
           onChangeText={(text) => setDescription({ value: text })}
           multiline="true"
           returnKeyType='next'
@@ -98,35 +107,60 @@ export default function NewReportScreen({ navigation, route }) {
           zIndexInverse={3000}
         />
         <Button title='Submit' onPress={() => {
+          setTempCoords({latitude: 0, longitude: 0})
           const newReport = {
-              id:"1",
-              longitude: tempCoords.longitude,
-              latitude: tempCoords.latitude,
-              description: description,
-              radius: radius,
-              statusCategory: reportStatus,
-              reportCategory: reportCategory,
-              imageUrl: imageUrl,
-              createdAt: "2023-01-09T21:44:08.923Z",
-              updatedAt: "2023-01-09T21:44:08.923Z",
-              userId: "1"
+            longitude: tempCoords.longitude,
+            latitude: tempCoords.latitude,
+            description: description.value,
+            radius: radius,
+            statusCategory: reportStatus,
+            reportCategory: reportCategory,
+            imageUrl: imageUrl,
+            createdAt: "2023-01-09T21:44:08.923Z",
+            updatedAt: "2023-01-09T21:44:08.923Z",
+            userId: userInfo.id
           };
-          console.log("New Report Data - pre-submission: ", newReport);
-          let tempData = pinData.slice(0, -1);
-          setPinData([...tempData, newReport]);
-          /* 
-          
-          Apollo Client Query
-          mutation => create new report
-          useQuery(gql`
-            muation(foo) {
-              report(baz) {
-                id,
-                ...
+          console.log("New Report Data - after-submission: ", newReport);
+
+          createReport({
+            variables: {
+              data: {
+                latitude: newReport.latitude,
+                longitude: newReport.longitude,
+                description: newReport.description,
+                radius: newReport.radius,
+                reportCategory: newReport.reportCategory,
+                statusCategory: newReport.statusCategory,
+                imageUrl: "https://www.google.com",
+                userId: newReport.userId
               }
-            }
-          `) 
-          */
+            },
+            refetchQueries:
+              [
+                { query: FETCH_ALL_REPORTS },
+                'Query'
+              ],
+            fetchPolicy: "network-only",
+            onCompleted: (data) => {
+              let report = data.createReport;
+              const newReport = {
+                id: report.id,
+                latitude: report.latitude,
+                longitude: report.longitude,
+                description: report.description,
+                radius: report.radius,
+                statusCategory: report.statusCategory,
+                reportCategory: report.reportCategory,
+                imageUrl: report.imageUrl,
+                userId: report.userId
+              };
+              // setPinData([...pinData, newReport]);
+              refetch();
+              console.log("Refetch Data Completed: ")
+              console.log(data.createReport);
+              setPinData([...pinData, newReport]);
+            },
+          })
 
           navigation.navigate({
             name: "Map",
@@ -134,12 +168,10 @@ export default function NewReportScreen({ navigation, route }) {
             merge: true
           })
         }} />
-        <Button 
-          title="Pick an image from camera roll" 
-          onPress={pickImage} 
+        <Button
+          title="Pick an image from camera roll"
+          onPress={pickImage}
         />
-        {imageUrl && <View><Image source={{ uri: imageUrl }} /></View>}
-  
       </View>
     </View>
   )
