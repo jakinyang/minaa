@@ -18,6 +18,8 @@ export default function Map({
     <MapView
       style={styles.map}
       initialRegion={region}
+      showsUserLocation={true}
+      showsMyLocationButton={true}
       provider={PROVIDER_GOOGLE}
       onRegionChangeComplete={(region) => setRegion(region)}
       ref={mapRef}
