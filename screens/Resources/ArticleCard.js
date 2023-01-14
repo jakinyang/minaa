@@ -1,13 +1,16 @@
 import React from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import { Card, Text } from 'react-native-paper';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function ArticleCard({
   route
 }) {
+  const insets = useSafeAreaInsets();
+
   return (
     <ScrollView
-      style={styles.container}
+      style={{...styles.container, marginTop: insets.top }}
     >
       <Card
         style={styles.card}
@@ -29,7 +32,7 @@ export default function ArticleCard({
           </Text>
         </Card.Content>
       </Card>
-    </ScrollView>
+      </ScrollView>
   )
 }
 
@@ -38,6 +41,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   card: {
-    flex: 1
+    marginHorizontal: 10,
   }
 })

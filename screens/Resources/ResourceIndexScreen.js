@@ -1,13 +1,19 @@
 // Imports
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // Article Data
 import { articleData } from './ResourceArticlesData';
 
 // Components
 import ResourceCard from './ResourceCard';
+
+// Styling
+
 export default function ResourceIndex({ navigation }) {
+
+  const insets = useSafeAreaInsets();
 
   const resourceArticles = articleData.map(({ id, imageSource, titleText, subTitleText, bodyText1, bodyText2, bodyText3 }, index) => {
     return (
@@ -27,7 +33,11 @@ export default function ResourceIndex({ navigation }) {
   })
 
   return (
-    <View style={styles.container}>
+    <View
+      style={{
+        ...styles.container, paddingTop: insets.top
+      }}
+    >
       <ScrollView>
         {resourceArticles}
       </ScrollView>
@@ -38,7 +48,7 @@ export default function ResourceIndex({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginVertical: 20,
+    marginVertical: 5,
   },
   content: {
     padding: 4,
