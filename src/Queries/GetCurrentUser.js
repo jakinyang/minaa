@@ -1,15 +1,8 @@
-import * as React from "react";
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  gql,
-  useQuery,
-} from "@apollo/client";
+import { gql } from "@apollo/client";
 
 export const CURRENT_USER = gql`
-query User($userId: ID!) {
-  user(id: $userId) {
+query Query($search: UsersSearchInput) {
+  usersSearch(search: $search) {
     avatarUrl
     createdAt
     dateOfBirth
@@ -24,8 +17,8 @@ query User($userId: ID!) {
     reports {
       createdAt
       description
-      imageUrl
       id
+      imageUrl
       latitude
       longitude
       radius
