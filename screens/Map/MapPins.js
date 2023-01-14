@@ -1,15 +1,17 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Marker, Callout } from 'react-native-maps';
-import { Chip, Card } from 'react-native-paper';
-import { faker } from '@faker-js/faker';
-
+import { Chip, Card, Text } from 'react-native-paper';
+import { getTimeElapsed } from '../../shared/helpers/timeCalculator';
+import { formatDate } from '../../shared/helpers/dateFormatter';
 
 export default function MapPins({
   navigation,
   pinData,
 }) {
+
   return (pinData?.map((item, i) => {
+    const time = "Reported: " + formatDate(item.createdAt)
     return (
       <Marker
         coordinate={{ latitude: item.latitude, longitude: item.longitude }}
@@ -17,17 +19,19 @@ export default function MapPins({
       >
         <Callout
           tooltip
-          onPress={() => { console.log("Callout pressed"); navigation.navigate('ReportDetailScreen', item) }}
+          onPress={() => { navigation.navigate('ReportDetailScreen', item) }}
         >
-          <View>
-            <Card style={styles.card}>
-              <Card.Cover source={{ uri: faker.image.nature() }} />
-              <Card.Title title={item.reportCategory} />
-              <Card.Content>
-                <Chip icon="information">{item.description}</Chip>
-              </Card.Content>
-            </Card>
-          </View>
+          <Card style={styles.card}>
+            <Card.Content>
+              <Text variant="labelMedium" >
+                {time}
+              </Text>
+              <View style={styles.chipContainer}>
+              <Chip icon="information">{item.statusCategory}</Chip>
+              <Chip icon="information">{item.reportCategory}</Chip>
+              </View>
+            </Card.Content>
+          </Card>
         </Callout>
       </Marker>
     )
@@ -37,6 +41,14 @@ export default function MapPins({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  chipContainer: {
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   content: {
     padding: 4,
