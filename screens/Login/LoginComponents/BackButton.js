@@ -1,20 +1,23 @@
 import React from 'react'
-import { Text } from 'react-native-paper'
+import { IconButton, Text } from 'react-native-paper'
 import { TouchableOpacity, StyleSheet } from 'react-native'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 
 export default function BackButton({ goBack }) {
   return (
-    <TouchableOpacity onPress={goBack} style={styles.container}>
-      <Text>Back</Text>
-    </TouchableOpacity>
+    <IconButton
+      icon="arrow-left"
+      size={30}
+      style={styles.container}
+      onPress={goBack}
+    />
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: 10 + getStatusBarHeight(),
+    top: getStatusBarHeight(),
     left: 4,
   },
 })
