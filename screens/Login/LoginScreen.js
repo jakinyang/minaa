@@ -14,7 +14,6 @@ import Header from './LoginComponents/Header.js'
 import Button from './LoginComponents/Button.js'
 import TextInput from './LoginComponents/TextInput.js'
 import BackButton from './LoginComponents/BackButton.js'
-import HomeStack from '../../routes/HomeStack.js'
 
 // Helper function imports
 import { emailValidator } from './LoginHelpers/emailValidator.js'
