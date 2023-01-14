@@ -12,39 +12,36 @@ export default function ResourceCard({
   onPress,
 }) {
   return (
-    <ScrollView
-      style={styles.container}
+    <Card
+      style={styles.card}
+      mode="elevated"
+      elevation={1}
+      onPress={onPress}
     >
-      <Card
-        style={styles.card}
-        onPress={onPress}
-      >
-        <Card.Cover source={{ uri: imageSource }} />
-        <Card.Title title={titleText} />
-        <Card.Content>
-          <Text variant="labelSmall" >
-            {subTitleText}
-          </Text>
-          <Text variant="bodyMedium">
-            {bodyText1}
-          </Text>
-          <Text variant="bodyMedium">
-            {bodyText2}
-          </Text>
-          <Text variant="bodyMedium">
-            {bodyText3}
-          </Text>
-        </Card.Content>
-      </Card>
-    </ScrollView>
+      <Card.Cover source={{ uri: imageSource }} />
+      <Card.Title title={titleText} />
+      <Card.Content>
+        <Text variant="labelSmall" >
+          {subTitleText}
+        </Text>
+        <Text variant="bodyMedium">
+          {bodyText1}
+        </Text>
+        <Text variant="bodyMedium">
+          {bodyText2}
+        </Text>
+        <Text variant="bodyMedium">
+          {bodyText3}
+        </Text>
+      </Card.Content>
+    </Card>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   card: {
-    flex: 1
+    flex: 1,
+    marginVertical: 5,
+    marginHorizontal: 10,
   }
 })
