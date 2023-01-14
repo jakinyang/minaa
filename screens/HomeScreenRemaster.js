@@ -68,8 +68,6 @@ export default function HomeScreenRemaster({ navigation, route }) {
       <Map
         mapRef={mapRef}
         userInfo={userInfo}
-        pinData={pinData.current}
-        setPinData={setPinData}
         tempCoords={tempCoords}
         setTempCoords={setTempCoords}
         region={region}

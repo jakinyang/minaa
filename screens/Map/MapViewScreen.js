@@ -8,26 +8,16 @@ export default function Map({
   children,
   mapRef,
   userInfo,
-  pinData,
-  setPinData,
-  tempCoords,
   setTempCoords,
   region,
   setRegion,
   setModalVisible,
 }) {
 
-  const initialRegion = {
-    latitude: 37.78825,
-    longitude: -122.4324,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
-  };
-
   return (
     <MapView
       style={styles.map}
-      initialRegion={initialRegion}
+      initialRegion={region}
       provider={PROVIDER_GOOGLE}
       onRegionChangeComplete={(region) => setRegion(region)}
       ref={mapRef}
@@ -50,7 +40,6 @@ export default function Map({
           imageUrl: null,
           userId: userInfo.id
         };
-        // setPinData([...pinData, tempReport]);
         setModalVisible(true);
       }}
     >
