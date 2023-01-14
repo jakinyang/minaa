@@ -8,7 +8,6 @@ import {
 import { articleData } from '../screens/Resources/ResourceArticlesData';
 // Components Screens
 import ResourceIndex from '../screens/Resources/ResourceIndexScreen';
-import ResourceArticleOne from '../screens/Resources/ResourceArticleOne';
 import ArticleCard from '../screens/Resources/ArticleCard';
 
 const Stack = createStackNavigator();
