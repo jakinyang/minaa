@@ -1,7 +1,7 @@
 import React from 'react';
 import 'react-native-gesture-handler';
-import { StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { StyleSheet, useColorScheme } from 'react-native';
+import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import HomeStack from './routes/HomeStack';
 import {
@@ -25,10 +25,11 @@ const client = new ApolloClient({
 
 
 export default function App() {
+  const scheme = useColorScheme();
   return (
     <PaperProvider>
       <ApolloProvider client={client}>
-        <NavigationContainer>
+        <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
           <BottomSheetModalProvider>
             <UserProvider>
               <HomeStack style={styles.container} />

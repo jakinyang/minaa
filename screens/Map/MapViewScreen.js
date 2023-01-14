@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, useColorScheme } from "react-native";
 import MapView, {
   PROVIDER_GOOGLE,
 } from "react-native-maps";
@@ -14,14 +14,14 @@ export default function Map({
   setRegion,
   setModalVisible,
 }) {
- 
+ const scheme = useColorScheme();
   return (
     <MapView
       style={styles.map}
       initialRegion={region}
       showsUserLocation={true}
       showsMyLocationButton={true}
-      customMapStyle={mapStyleDark}
+      customMapStyle={scheme === 'dark' ? mapStyleDark : mapStyleLight}
       provider={PROVIDER_GOOGLE}
       onRegionChangeComplete={(region) => setRegion(region)}
       ref={mapRef}
