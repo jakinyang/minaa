@@ -29,7 +29,7 @@ export default function App() {
   return (
     <PaperProvider>
       <ApolloProvider client={client}>
-        <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <NavigationContainer >
           <BottomSheetModalProvider>
             <UserProvider>
               <HomeStack style={styles.container} />
