@@ -2,14 +2,8 @@ import React from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import { Card, Text } from 'react-native-paper';
 
-export default function ResourceCard({
-  imageSource,
-  titleText,
-  subTitleText,
-  bodyText1,
-  bodyText2,
-  bodyText3,
-  onPress,
+export default function ArticleCard({
+  route
 }) {
   return (
     <ScrollView
@@ -17,22 +11,21 @@ export default function ResourceCard({
     >
       <Card
         style={styles.card}
-        onPress={onPress}
       >
-        <Card.Cover source={{ uri: imageSource }} />
-        <Card.Title title={titleText} />
+        <Card.Cover source={{ uri: route.params.imageSource }} />
+        <Card.Title title={route.params.titleText} />
         <Card.Content>
           <Text variant="labelSmall" >
-            {subTitleText}
+            {route.params.subTitleText}
           </Text>
           <Text variant="bodyMedium">
-            {bodyText1}
+            {route.params.bodyText1}
           </Text>
           <Text variant="bodyMedium">
-            {bodyText2}
+            {route.params.bodyText2}
           </Text>
           <Text variant="bodyMedium">
-            {bodyText3}
+            {route.params.bodyText3}
           </Text>
         </Card.Content>
       </Card>

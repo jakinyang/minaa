@@ -56,8 +56,8 @@ export default function HomeScreenRemaster({ navigation, route }) {
 
   const { loading, error, data } = useQuery(FETCH_ALL_REPORTS);
 
-  if (loading) return <Text>Loading...</Text>;
-  if (error) return <Text>Error...</Text>;
+  if (loading) return <Text style={{flex:1, marginTop: 400, alignSelf: 'center'}} >Loading...</Text>;
+  if (error) return <Text style={{flex:1, marginTop: 400, alignSelf: 'center'}} >{error.message}</Text>;
 
   if (data) {
     setPinData(data?.reports)

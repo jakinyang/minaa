@@ -14,14 +14,14 @@ const Stack = createStackNavigator();
 export default function MapStack() {
   return (
     <Stack.Navigator
-      initialRouteName="HomeScreen"
+      initialRouteName="HomeScreenRemaster"
       screenOptions={{
         headerShown: false,
       }}
     >
       <Stack.Screen
         name="Map"
-        component={HomeScreen}
+        component={HomeScreenRemaster}
         options={{
           title: "",
           headerTransparent: true,

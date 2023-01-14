@@ -4,20 +4,19 @@ import {
   createStackNavigator,
 } from '@react-navigation/stack';
 
+// Data
+import { articleData } from '../screens/Resources/ResourceArticlesData';
 // Components Screens
 import ResourceIndex from '../screens/Resources/ResourceIndexScreen';
-import ResourceCard from '../screens/Resources/ResourceCard';
-
-// Mock Data
-import { mockArticleData } from '../screens/mock_data/MockArticleData';
+import ResourceArticleOne from '../screens/Resources/ResourceArticleOne';
+import ArticleCard from '../screens/Resources/ArticleCard';
 
 const Stack = createStackNavigator();
 
 export default function ResourceStack() {
-  const articles = mockArticleData;
   return (
     <Stack.Navigator
-      initialRouteName="ProfileScreen"
+      initialRouteName="ResourceIndex"
       screenOptions={{
         headerShown: false,
       }}
@@ -31,21 +30,20 @@ export default function ResourceStack() {
         }}
       />
       {
-        articles.map(({ id, imageSource, titleText, bodyText }, index) => {
+        articleData.map(({ id, imageSource, titleText, subTitleText, bodyText1, bodyText2, bodyText3 }, index) => {
           return (
             <Stack.Screen
               key={index}
               name={`Article${id}`}
-              component={ResourceCard}
+              component={ArticleCard}
               initialParams={{
-                id,
-                imageSource,
-                titleText,
-                bodyText,
+                titleText: titleText,
+                subTitleText: subTitleText,
+                bodyText1: bodyText1,
+                bodyText2: bodyText2,
+                bodyText3: bodyText3,
+                imageSource: imageSource,
               }}
-            // options={{
-            //   headerShown: false,
-            // }}
             />
           )
         })
