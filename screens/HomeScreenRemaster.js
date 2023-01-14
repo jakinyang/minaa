@@ -43,12 +43,6 @@ export default function HomeScreenRemaster({ navigation, route }) {
     longitudeDelta: 0.0421,
   });
 
-  // Map Data
-  const initialMarkerRegion = {
-    latitude: 37.78825,
-    longitude: -122.4324,
-  };
-
   // Reset Region for FabGroup button
   const resetRegionHandler = () => {
     mapRef.current.animateToRegion(initialRegion, 1 * 1000);
