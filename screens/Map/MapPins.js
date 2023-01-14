@@ -27,8 +27,8 @@ export default function MapPins({
                 {time}
               </Text>
               <View style={styles.chipContainer}>
-              <Chip icon="information">{item.statusCategory}</Chip>
-              <Chip icon="information">{item.reportCategory}</Chip>
+              <Chip icon="alert-decagram">{item.statusCategory}</Chip>
+              <Chip icon="smoke-detector-variant-alert">{item.reportCategory}</Chip>
               </View>
             </Card.Content>
           </Card>
@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap',
+    marginTop: 10,
   },
   content: {
     padding: 4,
