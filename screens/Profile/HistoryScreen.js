@@ -1,19 +1,26 @@
-import React, { useState, useRef} from 'react'
+import React, { useState, useRef, useContext} from 'react'
 import { StyleSheet, View, Text, SafeAreaView } from "react-native"
 import Carousel, { Pagination } from 'react-native-snap-carousel'
 import { UserReportCardItem, SLIDER_WIDTH, ITEM_WIDTH } from './UserReports/UserReportCard.js'
 import { IconButton, MD3Colors } from 'react-native-paper';
 import { useQuery } from '@apollo/client'
 import {GET_USER_REPORTS} from '../../src/Queries/UserReportsQueries.js'
+import { UserContext } from '../../shared/userContext.js';
 
 export default function HistoryScreen({ navigation }) {
   const isCarousel = useRef(null)
-  const [index, setIndex] = useState(0)
+  const [index, setIndex] = useState(0);
+  const { user, setUser } = useContext(UserContext);
+  let queryVar = user ? user : "3";
+
+  console.log('historyScreen userId: ', user);
+  console.log('historyScreen queryVar: ', queryVar);
+
 
   const { loading, error, data } = useQuery(GET_USER_REPORTS, {
-    variables: { "userId": "3" }
+    variables: { "userId": queryVar }
   });
-  console.log('historyScreen data: ', data);
+  // console.log('historyScreen data: ', data);
   if (loading) return null;
   if (error) return `Error! ${error}`;
 
@@ -29,7 +36,7 @@ export default function HistoryScreen({ navigation }) {
         size={30}
         onPress={() => navigation.goBack()}
       />
-      <Text>This is the History Page</Text>
+      <Text style={styles.pageTitle}>User Submitted Reports</Text>
       <View style={styles.carouselContainer}>
         <Carousel
           layout="default"
@@ -78,5 +85,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  pageTitle: {
+    top: 235,
   },
 });
