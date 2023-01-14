@@ -1,21 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, StyleSheet, SafeAreaView, Text, FlatList } from 'react-native';
-import { Button, IconButton, MD3Colors } from 'react-native-paper';
+import { Button, IconButton, MD3Colors, useTheme, Appbar, TouchableRipple, Switch } from 'react-native-paper';
 // import FetchAllReports from '../../src/Queries/FetchAllReports';
-
+import { PreferencesContext } from '../../shared/preferencesContext';
 
 export default function SettingsScreen({ navigation }) {
-  // const {loading, error, data} = FetchAllReports();
-  // if(loading) {
-  //   return <Text>Loading</Text>
-  // }
-  // if(error) {
-  //   <Text>Error</Text>
-  // }
-  // console.log("reports data: ", data.reports);
-  /*data.reports
-  {"__typename": "Report", "createdAt": "2023-01-09T21:44:09.306Z", "description": "Enim dolore modi laudantium officiis animi nulla eligendi labore possimus.", "id": "200", "imageUrl": "https://loremflickr.com/640/480", "latitude": 89.210466, "longitude": -61.886658, "radius": 5, "reportCategory": "UNCLEAR", "statusCategory": "REPORTED", "updatedAt": "2023-01-09T21:44:09.306Z"},
-   */
+  const theme = useTheme();
+  const { toggleTheme, isThemeDark } = useContext(PreferencesContext);
   return (
     <>
       <SafeAreaView />
@@ -30,25 +21,20 @@ export default function SettingsScreen({ navigation }) {
           onPress={() => navigation.goBack()}
         />
         <Text>This is the Settings Page</Text>
-        {/* <FlatList 
-        data={data.reports}
-        renderItem={({item}) => (
-          <View>
-            <Text style={styles.item1}>
-              id: {item.id}
-            </Text>
-            <Text style={styles.item2}>
-              description: {item.description}
-            </Text>
-            <Text style={styles.item1}>
-              createdAt: {item.createdAt}
-            </Text>
-            <Text style={styles.item2}>
-              radius: {item.radius}
-            </Text>
-          </View>
-        )}
-        /> */}
+        <Appbar.Header
+          theme={{
+            colors: {
+              primary: theme?.colors.surface,
+            },
+          }}
+        >
+          <Appbar.Content />
+          <Switch
+            color={'lightseagreen'}
+            value={isThemeDark}
+            onValueChange={toggleTheme}
+          />
+        </Appbar.Header>
       </View>
     </>
   );
