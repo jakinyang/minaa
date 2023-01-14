@@ -8,7 +8,8 @@ export default function DialoguePopup({
   setPinData,
   tempCoords,
   modalVisible, 
-  setModalVisible, 
+  setModalVisible,
+  refetch 
 }) {
   // console.log("popup tempCoords:", tempCoords);
 
@@ -29,7 +30,7 @@ export default function DialoguePopup({
             <Button
              mode="contained"
               onPress={() => {
-                navigation.navigate( "NewReportScreen", {pinData, tempCoords, setPinData});
+                navigation.navigate( "NewReportScreen", {pinData, tempCoords, setPinData, refetch});
                 console.log(`Data Passed to New Report Screen: ${pinData.at(-1)}`);
                 setModalVisible(!modalVisible)
               }

@@ -6,17 +6,24 @@ import { Dialog, Portal, Text, TextInput } from 'react-native-paper';
 import DropDownPicker from 'react-native-dropdown-picker';
 import * as ImagePicker from 'expo-image-picker';
 import { CREATE_A_REPORT } from "../../src/Mutations/CreateAReport"
+import { FETCH_ALL_REPORTS } from "../../src/Queries/FetchAllReports";
 
 
 export default function NewReportScreen({ navigation, route }) {
   //Mutation
-const [createReport, { data, loading, error }] = useMutation(CREATE_A_REPORT);
-if(loading){
-  console.log("Submitting report data");
-}
-if(error){
-  console.log("Error when submitting: ", error.message);
-}
+  const [createReport, { data, loading, error }] = useMutation(CREATE_A_REPORT,
+  
+    // [
+    //   { query: FETCH_ALL_REPORTS },
+    //   'Query'
+    // ]
+  );
+  if (loading) {
+    console.log("Submitting report data");
+  }
+  if (error) {
+    console.log("Error when submitting: ", error.message);
+  }
   //New report state
   const [radiusDropDown, setRadiusDropDown] = useState(false);
   const [reportDropDown, setReportDropDown] = useState(false);
@@ -67,7 +74,7 @@ if(error){
   console.log("route.params.tempCoords:", route.params.tempCoords);
 
   // Extract Route Params
-  const {pinData, tempCoords, setPinData} = route.params
+  const { pinData, tempCoords, setPinData, refetch } = route.params
   const { userId } = route.params.pinData;
 
   return (
@@ -138,20 +145,31 @@ if(error){
             }
           `) 
           */
-         createReport({
-          variables: {
-           data: { latitude: newReport.latitude,
-            longitude: newReport.latitude,
-            description: newReport.description,
-            radius: newReport.radius,
-            reportCategory: newReport.reportCategory,
-            statusCategory: newReport.statusCategory,
-            imageUrl: "dasdsadad",
-            userId: newReport.userId}
-          }
-        })
-        //update the pinData again
-
+          createReport({
+            variables: {
+              data: {
+                latitude: newReport.latitude,
+                longitude: newReport.latitude,
+                description: newReport.description,
+                radius: newReport.radius,
+                reportCategory: newReport.reportCategory,
+                statusCategory: newReport.statusCategory,
+                imageUrl: "dasdsadad",
+                userId: newReport.userId
+              }
+            },
+            refetchQueries:
+              [
+                { query: FETCH_ALL_REPORTS },
+                'Query'
+              ],
+              fetchPolicy: "no-cache",
+    onCompleted: (data) => {
+      setPinData(data?.reports)
+    },
+          })
+          //update the pinData again
+        // refetch();
 
           navigation.navigate({
             name: "Map",
@@ -159,12 +177,12 @@ if(error){
             merge: true
           })
         }} />
-        <Button 
-          title="Pick an image from camera roll" 
-          onPress={pickImage} 
+        <Button
+          title="Pick an image from camera roll"
+          onPress={pickImage}
         />
         {imageUrl && <View><Image source={{ uri: imageUrl }} /></View>}
-  
+
       </View>
     </View>
   )

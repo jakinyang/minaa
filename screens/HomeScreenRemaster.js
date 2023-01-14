@@ -54,12 +54,20 @@ export default function HomeScreenRemaster({ navigation, route }) {
     mapRef.current.animateToRegion(initialRegion, 1 * 1000);
   };
 
-  const { loading, error, data } = useQuery(FETCH_ALL_REPORTS);
+  const { loading, error, data, refetch } = useQuery(FETCH_ALL_REPORTS,
+     {
+    fetchPolicy: "cache-and-network",
+    onCompleted: (data) => {
+      setPinData(data?.reports)
+    },
+  }
+  );
 
   if (loading) return <Text style={{flex: 1, alignItems: 'center', justifyContent: 'center', alignSelf:'center', marginTop:400}}>Loading...</Text>;
   if (error) console.log("fetching error", error.message);
   if (data) {
     setPinData(data?.reports)
+    // refetch()
   }
 
   return (
@@ -90,6 +98,7 @@ export default function HomeScreenRemaster({ navigation, route }) {
         tempCoords={tempCoords.current}
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
+        refetch={refetch}
       />
     </View>
   )
