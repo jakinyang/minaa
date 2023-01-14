@@ -4,6 +4,7 @@ import { Button, Portal, Dialog, MD2Colors } from 'react-native-paper';
 
 export default function DialoguePopup({ 
   navigation, 
+  userInfo,
   pinData,
   setPinData,
   tempCoords,
@@ -11,8 +12,6 @@ export default function DialoguePopup({
   setModalVisible,
   refetch 
 }) {
-  // console.log("popup tempCoords:", tempCoords);
-
   return (
     <View style={styles.bottomView}>
       <Modal
@@ -30,8 +29,7 @@ export default function DialoguePopup({
             <Button
              mode="contained"
               onPress={() => {
-                navigation.navigate( "NewReportScreen", {pinData, tempCoords, setPinData, refetch});
-                console.log(`Data Passed to New Report Screen: ${pinData.at(-1)}`);
+                navigation.navigate( "NewReportScreen", { userInfo, pinData, tempCoords, setPinData, refetch });
                 setModalVisible(!modalVisible)
               }
               }
@@ -45,10 +43,8 @@ export default function DialoguePopup({
               style={styles.closeButton}
               onPress={() => {
                 setModalVisible(!modalVisible)
-                let revertPinData = pinData.slice(0, -1)
-                console.log("Pin data after cancelling report: ", revertPinData);
-                setPinData(revertPinData);
-                console.log("Current Pin Data: ", pinData)
+                // let revertPinData = pinData.slice(0, -1)
+                // setPinData(revertPinData);
               }}
             >
               Close

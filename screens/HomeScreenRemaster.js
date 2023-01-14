@@ -14,8 +14,6 @@ import DialoguePopup from './DialoguePopup'
 import { FETCH_ALL_REPORTS } from '../src/Queries/FetchAllReports'
 
 export default function HomeScreenRemaster({ navigation, route }) {
-  // Rerendering Helpers
-  useEffect(() => {}, [pinData])
   // Map Helpers
   const mapRef = useRef(null);
 
@@ -23,6 +21,7 @@ export default function HomeScreenRemaster({ navigation, route }) {
   function useFreshState(value) {
     const data = useRef(value);
     const setData = (newState) => {
+      console.log("Use Fresh State Setting the data value");
       data.current = newState;
     }
     return [data, setData];
@@ -58,17 +57,16 @@ export default function HomeScreenRemaster({ navigation, route }) {
      {
     fetchPolicy: "cache-and-network",
     onCompleted: (data) => {
-      setPinData(data?.reports)
+      console.log("Datafetch from database completed");
+      setPinData(data.reports)
+      console.log("Pindata Second Time: \n")
+      console.log(pinData.current.slice(-1))
     },
   }
   );
 
   if (loading) return <Text style={{flex: 1, alignItems: 'center', justifyContent: 'center', alignSelf:'center', marginTop:400}}>Loading...</Text>;
   if (error) console.log("fetching error", error.message);
-  if (data) {
-    setPinData(data?.reports)
-    // refetch()
-  }
 
   return (
     <View style={styles.container}>

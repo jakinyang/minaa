@@ -11,18 +11,15 @@ import { FETCH_ALL_REPORTS } from "../../src/Queries/FetchAllReports";
 
 export default function NewReportScreen({ navigation, route }) {
   //Mutation
-  const [createReport, { data, loading, error }] = useMutation(CREATE_A_REPORT,
-  
-    // [
-    //   { query: FETCH_ALL_REPORTS },
-    //   'Query'
-    // ]
-  );
+  const [createReport, { data, loading, error }] = useMutation(CREATE_A_REPORT);
   if (loading) {
     console.log("Submitting report data");
   }
   if (error) {
     console.log("Error when submitting: ", error.message);
+  }
+  if (data) {
+    console.log("Report submitted successfully");
   }
   //New report state
   const [radiusDropDown, setRadiusDropDown] = useState(false);
@@ -69,13 +66,8 @@ export default function NewReportScreen({ navigation, route }) {
     }
   };
 
-  //Test
-  console.log("route.params.newPinData:", route.params.pinData);
-  console.log("route.params.tempCoords:", route.params.tempCoords);
-
   // Extract Route Params
-  const { pinData, tempCoords, setPinData, refetch } = route.params
-  const { userId } = route.params.pinData;
+  const { userInfo, pinData, tempCoords, setPinData, refetch } = route.params
 
   return (
     <View style={{ flex: 1, width: "100%", height: "100%" }}>
@@ -86,6 +78,7 @@ export default function NewReportScreen({ navigation, route }) {
           mode='outlined'
           label="description"
           placeholder='what do you see?'
+          defaultValue=' '
           onChangeText={(text) => setDescription({ value: text })}
           multiline="true"
           returnKeyType='next'
@@ -115,7 +108,6 @@ export default function NewReportScreen({ navigation, route }) {
         />
         <Button title='Submit' onPress={() => {
           const newReport = {
-            id: "1",
             longitude: tempCoords.longitude,
             latitude: tempCoords.latitude,
             description: description.value,
@@ -125,51 +117,49 @@ export default function NewReportScreen({ navigation, route }) {
             imageUrl: imageUrl,
             createdAt: "2023-01-09T21:44:08.923Z",
             updatedAt: "2023-01-09T21:44:08.923Z",
-            userId: 1
+            userId: userInfo.id
           };
           console.log("New Report Data - after-submission: ", newReport);
-          let tempData = pinData.slice(0, -1);
-          setPinData([...tempData, newReport]);
-          // console.log("after submission tempData:", tempData);
-          // console.log("after submission pinData:", pinData);
-          /* 
-          
-          Apollo Client Query
-          mutation => create new report
-          useQuery(gql`
-            muation(foo) {
-              report(baz) {
-                id,
-                ...
-              }
-            }
-          `) 
-          */
+
           createReport({
             variables: {
               data: {
                 latitude: newReport.latitude,
-                longitude: newReport.latitude,
+                longitude: newReport.longitude,
                 description: newReport.description,
                 radius: newReport.radius,
                 reportCategory: newReport.reportCategory,
                 statusCategory: newReport.statusCategory,
-                imageUrl: "dasdsadad",
+                imageUrl: "https://www.google.com",
                 userId: newReport.userId
               }
             },
-    //         refetchQueries:
-    //           [
-    //             { query: FETCH_ALL_REPORTS },
-    //             'Query'
-    //           ],
-    //           fetchPolicy: "no-cache",
-    // onCompleted: (data) => {
-    //   setPinData(data?.reports)
-    // },
+            refetchQueries:
+              [
+                { query: FETCH_ALL_REPORTS },
+                'Query'
+              ],
+            fetchPolicy: "network-only",
+            onCompleted: (data) => {
+              let report = data.createReport;
+              const newReport = {
+                id: report.id,
+                latitude: report.latitude,
+                longitude: report.longitude,
+                description: report.description,
+                radius: report.radius,
+                statusCategory: report.statusCategory,
+                reportCategory: report.reportCategory,
+                imageUrl: report.imageUrl,
+                userId: report.userId
+              };
+              // setPinData([...pinData, newReport]);
+              refetch();
+              console.log("Refetch Data Completed: ")
+              console.log(data.createReport);
+              setPinData([...pinData, newReport]);
+            },
           })
-          //update the pinData again
-        // refetch();
 
           navigation.navigate({
             name: "Map",
@@ -181,8 +171,6 @@ export default function NewReportScreen({ navigation, route }) {
           title="Pick an image from camera roll"
           onPress={pickImage}
         />
-        {imageUrl && <View><Image source={{ uri: imageUrl }} /></View>}
-
       </View>
     </View>
   )
