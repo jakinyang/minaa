@@ -4,6 +4,7 @@ export const GET_USER_REPORTS = gql`
 query Query($userId: ID!) {
   user(id: $userId) {
     reports {
+      id
       description
       imageUrl
       latitude
@@ -11,7 +12,7 @@ query Query($userId: ID!) {
       radius
       reportCategory
       statusCategory
-      updatedAt
+      createdAt
     }
   }
 }`
