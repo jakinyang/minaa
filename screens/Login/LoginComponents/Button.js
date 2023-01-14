@@ -2,21 +2,30 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
 import { Button as PaperButton } from 'react-native-paper'
+import {
+  useFonts,
+  Raleway_600SemiBold,
+  Raleway_700Bold,
+  Raleway_800ExtraBold,
+  Raleway_900Black,
+} from '@expo-google-fonts/raleway';
 
-// Component and theme imports
-// import { theme } from '../core/theme'
 
 export default function Button({ mode, style, ...props }) {
-
-  console.log(" login component Button props", props);
-  console.log(" login component Button mode", mode);
-  console.log(" login component Button style", style);
-
+const [fontsLoaded] = useFonts({
+    Raleway_600SemiBold,
+    Raleway_700Bold,
+    Raleway_800ExtraBold,
+    Raleway_900Black,
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
     <PaperButton
       style={[
         styles.button,
-        mode === 'outlined' && { backgroundColor: '#b8c3bd' },
+        mode === 'outlined' && { backgroundColor: 'rgb(242, 242, 242)' },
         style,
       ]}
       labelStyle={styles.text}
@@ -33,8 +42,8 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
   },
   text: {
-    fontWeight: 'bold',
-    fontSize: 15,
-    lineHeight: 26,
+    fontSize: 18,
+    lineHeight: 30,
+    fontFamily: 'Raleway_600SemiBold',
   },
 })

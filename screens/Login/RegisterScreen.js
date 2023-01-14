@@ -132,6 +132,11 @@ export default function RegisterScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    height: "100%",
+    width: "100%",
+  },
   row: {
     flexDirection: 'row',
     marginTop: 4,
