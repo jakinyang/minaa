@@ -16,6 +16,7 @@ export default function MapPins({
       <Marker
         coordinate={{ latitude: item.latitude, longitude: item.longitude }}
         key={i}
+        image={require("../../assets/land-mine-on-solid_80_80.png")}
       >
         <Callout
           tooltip
