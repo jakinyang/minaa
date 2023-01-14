@@ -158,15 +158,15 @@ export default function NewReportScreen({ navigation, route }) {
                 userId: newReport.userId
               }
             },
-            refetchQueries:
-              [
-                { query: FETCH_ALL_REPORTS },
-                'Query'
-              ],
-              fetchPolicy: "no-cache",
-    onCompleted: (data) => {
-      setPinData(data?.reports)
-    },
+    //         refetchQueries:
+    //           [
+    //             { query: FETCH_ALL_REPORTS },
+    //             'Query'
+    //           ],
+    //           fetchPolicy: "no-cache",
+    // onCompleted: (data) => {
+    //   setPinData(data?.reports)
+    // },
           })
           //update the pinData again
         // refetch();
