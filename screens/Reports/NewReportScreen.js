@@ -67,7 +67,7 @@ export default function NewReportScreen({ navigation, route }) {
   };
 
   // Extract Route Params
-  const { userInfo, pinData, tempCoords, setPinData, refetch } = route.params
+  const { userInfo, pinData, tempCoords, setTempCoords,setPinData, refetch } = route.params
 
   return (
     <View style={{ flex: 1, width: "100%", height: "100%" }}>
@@ -107,6 +107,7 @@ export default function NewReportScreen({ navigation, route }) {
           zIndexInverse={3000}
         />
         <Button title='Submit' onPress={() => {
+          setTempCoords({latitude: 0, longitude: 0})
           const newReport = {
             longitude: tempCoords.longitude,
             latitude: tempCoords.latitude,

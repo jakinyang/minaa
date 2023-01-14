@@ -8,6 +8,7 @@ export default function DialoguePopup({
   pinData,
   setPinData,
   tempCoords,
+  setTempCoords,
   modalVisible, 
   setModalVisible,
   refetch 
@@ -29,7 +30,7 @@ export default function DialoguePopup({
             <Button
              mode="contained"
               onPress={() => {
-                navigation.navigate( "NewReportScreen", { userInfo, pinData, tempCoords, setPinData, refetch });
+                navigation.navigate( "NewReportScreen", { userInfo, pinData, tempCoords, setTempCoords, setPinData, refetch });
                 setModalVisible(!modalVisible)
               }
               }
@@ -42,6 +43,7 @@ export default function DialoguePopup({
               // style={[styles.button, styles.buttonClose]}
               style={styles.closeButton}
               onPress={() => {
+                setTempCoords({latitude: 0, longitude: 0})
                 setModalVisible(!modalVisible)
                 // let revertPinData = pinData.slice(0, -1)
                 // setPinData(revertPinData);

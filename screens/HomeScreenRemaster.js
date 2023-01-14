@@ -10,6 +10,7 @@ import {
 // Components
 import Map from './Map/MapViewScreen'
 import MapPins from './Map/MapPins'
+import TempPins from './Map/TempPins';
 import DialoguePopup from './DialoguePopup'
 import { FETCH_ALL_REPORTS } from '../src/Queries/FetchAllReports'
 
@@ -29,7 +30,7 @@ export default function HomeScreenRemaster({ navigation, route }) {
 
   // State Helpers
   const [pinData, setPinData] = useFreshState([]);
-  const [tempCoords, setTempCoords] = useFreshState()
+  const [tempCoords, setTempCoords] = useFreshState({latitude: 0, longitude: 0})
   const [temporaryPinData, setTemporaryPinData] = useFreshState();
   const [userInfo, setUserInfo] = useState({ id: 1, token: 'abc123' });
   const [modalVisible, setModalVisible] = useState(false);
@@ -87,6 +88,11 @@ export default function HomeScreenRemaster({ navigation, route }) {
           pinData={pinData.current}
           setModalVisible={setModalVisible}
         />
+        <TempPins
+        navigation={navigation}
+        route={route}
+        tempCoords={tempCoords.current} 
+        />
       </Map>
       <DialoguePopup
         navigation={navigation}
@@ -94,6 +100,7 @@ export default function HomeScreenRemaster({ navigation, route }) {
         pinData={pinData.current}
         setPinData={setPinData}
         tempCoords={tempCoords.current}
+        setTempCoords={setTempCoords}
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
         refetch={refetch}
