@@ -13,15 +13,14 @@ export const articleData = [
     imageSource: `https://www.unmas.org/sites/default/files/promobox/ied_lexicon3.jpg`,
     titleText: `United Nations Mine Action Service`,
     subTitleText: `Improvised Explosive Devices Lexicon`,
-    bodyText1: `As seen in United Nations peace operations, and according to data from Action on Armed Violence, the rise in conflicts typified by asymmetric warfare and the increased use of IEDs is widespread. Explosive ordnance and IEDs affected at least 50 different countries and territories and all continents except Antarctica, resulting in over 170,000 casualties over the last decade. IEDs are predominantly used by non-state actors and usually disproportionately affect civilian populations, who account for 80% of IED-related
-    casualties`,
+    bodyText1: `As seen in United Nations peace operations, and according to data from Action on Armed Violence, the rise in conflicts typified by asymmetric warfare and the increased use of IEDs is widespread. Explosive ordnance and IEDs affected at least 50 different countries and territories and all continents except Antarctica, resulting in over 170,000 casualties over the last decade. IEDs are predominantly used by non-state actors and usually disproportionately affect civilian populations, who account for 80% of IED-related casualties`,
     bodyText2: `Through its IED Threat Mitigation Advisory Team (TMAT), UNMAS provides IED threat mitigation expertise to inform strategic plans and policies, advise on the development of doctrine and training materials, and monitor and track emerging trends and mitigation technologies, in close collaboration with colleagues in the Department of Peace Operations, the Department of Operational Support and other United Nations entities, Member States, including troop contributing countries (TCCs), bilateral partners, and NGOs.`,
     bodyText3: `IEDs are designed to create maximum casualties and to impede political or social processes. The design, size and methods of emplacement are varied and continue to evolve to circumvent the countermeasures adopted to locate and mitigate these insidious devices. Access to the technology and components for their construction is easily shared across borders at the speed of the internet. They are inexpensive to fabricate and simple to produce using unsecured military munitions or easily available precursors that have legitimate dual uses, such as chemicals used for agricultural purposes. `,
   },
   {
     id: 3,
     imageSource: `https://www.issee.co.uk/sites/default/files/2018-03/unmas.jpg`,
-    titleText: `UN Landmine and UXO Safety Awareness`,
+    titleText: `UN Landmine & UXO Safety`,
     subTitleText: `Landmines`,
     bodyText1: `A mine is an explosive or other material, normally encased, designed to destroy or damage vehicles, boats, or aircraft, or designed to wound, kill, or otherwise incapacitate personnel. It may be detonated by the action of its target, the passage of time, or by controlled means. The term mine is also used to refer to the area in which a mine is placed, as in 'minefield'. The term mine is also used to refer to the explosive device itself, as in landmine, depth charge, or torpedo mine.`,
     bodyText2: `Mines are used to cause casualties to the enemy, to hinder movement, and to provide protection for important positions. They are also used in civil conflicts to disrupt infrastructures by denying the civilian population access to agricultural land, water, roads, schools, health care facilities and other socio-economic targets. Mines are also used to prevent the return of refugees and internally displaced persons to their homes.`,
@@ -30,7 +29,7 @@ export const articleData = [
   {
     id: 4,
     imageSource: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ65OPlbUABY4GxTKGd9KWnfS9WnM__t6V3wupAMe6c2Sc6PCbxUbOpHIEmPnBIt8WcDVI&usqp=CAU`,
-    titleText: `UN Landmine and UXO Safety Awareness`,
+    titleText: `Mine Action Canada`,
     subTitleText: `Anti-Personnel Landmines`,
     bodyText1: `An anti-personnel landmine is a mine designed to injure or kill one or more persons. Anti-personnel mines are usually detonated when they are stepped on or when a tripwire is
     disturbed, but they can also be set off by the passage of time or by controlled means. AP mines can be located under ground, on the ground surface, or fixed above ground level.`,
@@ -42,7 +41,7 @@ export const articleData = [
   {
     id: 5,
     imageSource: `https://www.mineaction.org/sites/default/files/promobox/screen_shot_2018-07-16_at_4.51.27_pm_0.png`,
-    titleText: `UN Landmine and UXO Safety Awareness`,
+    titleText: `Mine Action Support Group`,
     subTitleText: `Bounding AP Mines`,
     bodyText1: `Most bounding fragmentation AP mines are cylindrical in shape, with a single tubular fuse or a number of prongs sticking out from the top. They are typically around 15 cm in diameter and 28 cm in height.When these mines are laid it is common to see only the prongs sticking out above the soil. These
     mines are usually tan, olive, black, brown, and green, or are left unpainted. It is not uncommon for the spikes to be left as unpainted natural metal.`,
