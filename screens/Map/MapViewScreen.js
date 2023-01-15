@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet } from "react-native";
 import MapView, {
   PROVIDER_GOOGLE,
 } from "react-native-maps";
 import { mapStyleDark, mapStyleLight } from "./mapStyle";
+import { PreferencesContext } from "../../shared/preferencesContext";
+
 
 export default function Map({
   children,
@@ -14,14 +16,16 @@ export default function Map({
   setRegion,
   setModalVisible,
 }) {
- 
+  const { isThemeDark } = useContext(PreferencesContext);
+  let mapTheme = isThemeDark ? mapStyleDark : mapStyleLight;
+
   return (
     <MapView
       style={styles.map}
       initialRegion={region}
       showsUserLocation={true}
       showsMyLocationButton={true}
-      customMapStyle={mapStyleDark}
+      customMapStyle={mapTheme}
       provider={PROVIDER_GOOGLE}
       onRegionChangeComplete={(region) => setRegion(region)}
       ref={mapRef}

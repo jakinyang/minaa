@@ -1,14 +1,24 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Marker, Callout } from 'react-native-maps';
 import { Chip, Card, Text } from 'react-native-paper';
 import { getTimeElapsed } from '../../shared/helpers/timeCalculator';
 import { formatDate } from '../../shared/helpers/dateFormatter';
-
+import { DefaultTheme } from 'react-native-paper';
+import { lightColor, PaperThemeColorsLight } from '../../assets/ColorPalette';
 export default function MapPins({
   navigation,
   pinData,
 }) {
+  const [selected, setSelected] = useState(false);
+
+  const ChipTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...PaperThemeColorsLight,
+      primary: lightColor.otherGold[400]
+    }
+  }
 
   return (pinData?.map((item, i) => {
     const time = "Reported: " + formatDate(item.createdAt)
@@ -16,7 +26,7 @@ export default function MapPins({
       <Marker
         coordinate={{ latitude: item.latitude, longitude: item.longitude }}
         key={i}
-        image={require("../../assets/land-mine-on-solid_80_80.png")}
+        pinColor={lightColor.redAccent[400]}
       >
         <Callout
           tooltip
@@ -28,8 +38,11 @@ export default function MapPins({
                 {time}
               </Text>
               <View style={styles.chipContainer}>
-              <Chip icon="alert-decagram">{item.statusCategory}</Chip>
-              <Chip icon="smoke-detector-variant-alert">{item.reportCategory}</Chip>
+              <Chip icon="alert-decagram"
+              theme={ChipTheme}
+              >{item.statusCategory}</Chip>
+              <Chip icon="smoke-detector-variant-alert"
+              theme={ChipTheme}>{item.reportCategory}</Chip>
               </View>
             </Card.Content>
           </Card>

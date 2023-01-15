@@ -10,33 +10,37 @@ import LoginStack from './LoginStack';
 import ResourceStack from './ResourcesStack';
 import ProfileStack from './ProfileStack';
 
+import { lightColor, darkColor } from '../assets/ColorPalette';
+
 const Tab = createMaterialBottomTabNavigator();
 
 export default function HomeStack() {
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      barStyle={styles.navigator}
+      barStyle={{backgroundColor: lightColor.lapizLazuli[400]}}
       backBehavior="initialRoute"
       labeled={false}
+      activeColor={lightColor.otherGold[400]}
+      inactiveColor={lightColor.blackOff[900]}
     >
       <Tab.Screen
         name="Home"
         component={MapStack}
-        headerShown={false}
         options={{
-          tabBarLabel: 'Home',
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="map" color={color} size={26} />
+          tabBarIconStyle: {
+            backgroundColor: lightColor.bluePrimary[900]
+          },
+          tabBarIcon: ({ focused, color }) => (
+            <MaterialCommunityIcons name="map" color={color} backgroundColor={lightColor.bluePrimary[900]} size={26} />
           ),
         }}
-        />
+      />
       <Tab.Screen
         name="Login"
         component={LoginStack}
         headerShown={false}
         options={{
-          tabBarLabel: 'Updates',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="check" color={color} size={26} />
           ),
@@ -69,9 +73,6 @@ export default function HomeStack() {
 }
 
 const styles = StyleSheet.create({
-  navigator: {
-    backgroundColor: '#694fad',
-  },
   screen: {
     flex: 1,
     justifyContent: 'center',

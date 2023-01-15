@@ -35,7 +35,7 @@ export default function DialoguePopup({
               }
               }
             >
-              <Text style={styles.textStyle}>Make a report</Text>
+              <Text style={styles.textStyle}>MAKE A REPORT</Text>
             </Button>
 
             <Button
@@ -49,7 +49,7 @@ export default function DialoguePopup({
                 // setPinData(revertPinData);
               }}
             >
-              Close
+              CLOSE
             </Button>
           </View>
         </View>
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     
   },
   modalView: {
-    margin: 20,
+    marginBottom: 150,
     backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
@@ -108,7 +108,8 @@ const styles = StyleSheet.create({
     textAlign: "center"
   },
   closeButton: {
-    margin: 4
+    margin: 4,
+    paddingHorizontal: 32
   }
 
 });
