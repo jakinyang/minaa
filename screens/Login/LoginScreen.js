@@ -19,6 +19,7 @@ import BackButton from './LoginComponents/BackButton.js'
 import { emailValidator } from './LoginHelpers/emailValidator.js'
 import { passwordValidator } from './LoginHelpers/passwordValidator.js'
 import { UserContext } from '../../shared/userContext.js';
+import { OpenSans_400Regular, OpenSans_700Bold } from '@expo-google-fonts/open-sans';
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
@@ -99,7 +100,7 @@ export default function LoginScreen({ navigation }) {
           Login
         </Button>
         <View style={styles.row}>
-          <Text>Don’t have an account? </Text>
+          <Text style={styles.text}>Don't have an account? </Text>
           <TouchableOpacity onPress={() => navigation.replace('RegisterScreen')}>
             <Text style={styles.link}>Register</Text>
           </TouchableOpacity>
@@ -121,10 +122,12 @@ const styles = StyleSheet.create({
   },
   forgot: {
     fontSize: 13,
-    // color: theme.colors.secondary,
+    fontFamily: 'OpenSans_400Regular'
   },
   link: {
-    fontWeight: 'bold',
-    // color: theme.colors.primary,
+    fontFamily: 'OpenSans_700Bold'
   },
+  text: {
+    fontFamily: 'OpenSans_400Regular'
+  }
 })

@@ -4,6 +4,7 @@ import { Avatar, Card, IconButton, Text, Chip, DefaultTheme } from 'react-native
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { getTimeElapsed } from '../../shared/helpers/timeCalculator';
 import { lightColor, PaperThemeColorsLight } from '../../assets/ColorPalette'
+import { style } from 'deprecated-react-native-prop-types/DeprecatedViewPropTypes';
 
 export default function ReportDetailScreen({ navigation, route }) {
   const insets = useSafeAreaInsets();
@@ -22,7 +23,7 @@ export default function ReportDetailScreen({ navigation, route }) {
     ...DefaultTheme,
     colors: {
       ...PaperThemeColorsLight,
-      primary: lightColor.lapizLazuli[300]
+      primary: lightColor.redAccent[500]
     }
   }
 
@@ -36,60 +37,69 @@ export default function ReportDetailScreen({ navigation, route }) {
 
   return (
     <View style={{ ...styles.container, paddingTop: insets.top }}>
-      <Card>
-        <Card.Title
-          title={route.params.reportCategory}
-          left={(props) => <Avatar.Icon {...props} icon="mine" theme={IconTheme}/>}
-          right={(props) => <IconButton {...props} icon={saved ? "bookmark" : "bookmark-outline"} theme={ContrastTheme}
-          onPress={() => { setSaved(!saved) }}/>}
-        />
-        <Card.Content>
-          <Chip
-            style={styles.chip} icon="alert-decagram"
-            theme={ChipTheme}
-          >
-            Report Status: {route.params.statusCategory}
-          </Chip>
-          <Chip
-            icon="map-marker-alert-outline"
-            style={styles.chip}
-            theme={ChipTheme}
-          >
-          Latitude: {route.params.latitude}   Longitude: {route.params.longitude}
-        </Chip>
-        <View style={styles.chipContainer}>
-          <Chip
-            style={styles.chip}
-            icon="information"
-            theme={ChipTheme}
-          >
-            Report ID: {route.params.id}
-          </Chip>
-          <Chip
-            style={styles.chip}
-            icon="radar"
-            theme={ChipTheme}
-          >
-            Reported Area: {route.params.radius}m
-          </Chip>
-        </View>
-        <Text style={styles.description}>
-          Reported: {time} ago
-        </Text>
-        <Text
-          style={styles.description}
-          variant='bodyLarge'>Notes:</Text>
-        <ScrollView>
-          <Text
-            style={styles.description}
-            variant='bodyLarge'
-          >
-            {route.params.description}
-          </Text>
-        </ScrollView>
+      <ScrollView>
+        <Card>
+          <Card.Title
+            title={route.params.reportCategory}
+            left={(props) => <Avatar.Icon {...props} icon="map-marker-alert-outline" theme={IconTheme} />}
+            right={(props) => <IconButton {...props} icon={saved ? "bookmark" : "bookmark-outline"} theme={ContrastTheme}
+              onPress={() => { setSaved(!saved) }} />}
+            titleStyle={styles.title}
+          />
+          <Card.Content>
+            <Chip
+              style={styles.chip} icon="alert-decagram"
+              theme={ChipTheme}
+            >
+              REPORT STATUS: {route.params.statusCategory}
+            </Chip>
+            <Chip
+              icon="map-marker-alert"
+              style={styles.chip}
+              theme={ChipTheme}
+            >
+              LATITUDE: {route.params.latitude}
+            </Chip>
+            <Chip
+              icon="map-marker-alert"
+              style={styles.chip}
+              theme={ChipTheme}
+            >
+              LONGITUDE: {route.params.longitude}
+            </Chip>
+            <View style={styles.chipContainer}>
+              <Chip
+                style={styles.chip}
+                icon="information"
+                theme={ChipTheme}
+              >
+                REPORT ID: {route.params.id}
+              </Chip>
+              <Chip
+                style={styles.chip}
+                icon="radar"
+                theme={ChipTheme}
+              >
+                REPORTED AREA: {route.params.radius}m
+              </Chip>
+            </View>
+            <Text style={styles.description}>
+              Reported: {time} ago
+            </Text>
+            <Text
+              style={styles.text}
+              variant='bodyLarge'>Notes:</Text>
 
-      </Card.Content>
-    </Card>
+            <Text
+              style={styles.text}
+              variant='bodyLarge'
+            >
+              {route.params.description}
+            </Text>
+
+          </Card.Content>
+        </Card>
+      </ScrollView>
     </View >
   )
 }
@@ -108,7 +118,20 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   description: {
-    marginTop: 10,
+    marginTop: 5,
     marginHorizontal: 5,
+    marginBottom: 10
+  },
+  text: {
+    fontFamily: 'Montserrat_400Regular',
+    fontSize: 16,
+    marginVertical: 10,
+    marginHorizontal: 5,
+    lineHeight: 24,
+  },
+  title: {
+    fontFamily: 'Montserrat_600SemiBold',
+    fontSize: 20,
+    lineHeight: 30
   }
 })

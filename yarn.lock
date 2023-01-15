@@ -3334,7 +3334,7 @@
     "compare-versions" "^3.4.0"
     "invariant" "^2.2.4"
 
-"expo-splash-screen@~0.17.0":
+"expo-splash-screen@~0.17.0", "expo-splash-screen@~0.17.5":
   "integrity" "sha512-ejSO78hwHXz8T9u8kh8t4r6CR4h70iBvA65gX8GK+dYxZl6/IANPbIb2VnUpND9vqfW+JnkDw+ZFst+gDnkpcQ=="
   "resolved" "https://registry.npmjs.org/expo-splash-screen/-/expo-splash-screen-0.17.5.tgz"
   "version" "0.17.5"

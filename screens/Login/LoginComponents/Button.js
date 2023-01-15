@@ -2,25 +2,8 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
 import { Button as PaperButton } from 'react-native-paper'
-import {
-  useFonts,
-  Raleway_600SemiBold,
-  Raleway_700Bold,
-  Raleway_800ExtraBold,
-  Raleway_900Black,
-} from '@expo-google-fonts/raleway';
-
 
 export default function Button({ mode, style, ...props }) {
-const [fontsLoaded] = useFonts({
-    Raleway_600SemiBold,
-    Raleway_700Bold,
-    Raleway_800ExtraBold,
-    Raleway_900Black,
-  });
-  if (!fontsLoaded) {
-    return null;
-  }
   return (
     <PaperButton
       style={[

@@ -1,4 +1,5 @@
 // RN imports
+import { OpenSans_400Regular } from '@expo-google-fonts/open-sans';
 import React from 'react'
 import { StyleSheet } from 'react-native'
 import { Text } from 'react-native-paper'
@@ -16,5 +17,6 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     textAlign: 'center',
     marginBottom: 12,
+    fontFamily: 'OpenSans_400Regular',
   },
 })
