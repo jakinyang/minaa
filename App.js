@@ -121,7 +121,7 @@ export default function App() {
     ...DefaultTheme,
     colors: {
       // primary: lightColor.lapizLazuli[800],
-      background: darkColor.grayAccent[500],
+      background: lightColor.grayAccent[100],
       // card: 'rgb(255, 255, 255)',
       // text: 'rgb(28, 28, 30)',
       // border: 'rgb(199, 199, 204)',

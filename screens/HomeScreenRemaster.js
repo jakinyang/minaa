@@ -65,7 +65,7 @@ export default function HomeScreenRemaster({ navigation, route }) {
         setPinData(data.reports)
         console.log("Pindata Second Time: \n")
         console.log(pinData.current.slice(-1))
-        setLocation(region);
+        setLocation({ latitude: region.latitude, longitude: region.longitude });
       },
     }
   );

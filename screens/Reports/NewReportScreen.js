@@ -11,7 +11,6 @@ import TextInput from '../Login/LoginComponents/TextInput';
 import * as ImagePicker from 'expo-image-picker';
 import * as MediaLibrary from 'expo-media-library';
 
-// import { captureRef } from 'react-native-view-shot';
 import ImageViewer from '../../shared/ImageViewer';
 const PlaceholderImage = require("../../assets/landmine-warning.png");
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -24,6 +23,8 @@ export default function NewReportScreen({ navigation, route }) {
   const [selectedImage, setSelectedImage] = useState(null);
   const [showAppOptions, setShowAppOptions] = useState(false);
   const [status, requestPermission] = MediaLibrary.usePermissions();
+
+  const{ userInfo, pinData, tempCoords, setTempCoords, setPinData, refetch } = route.params;
 
   //Mutation
   const [createReport, { data, loading, error }] = useMutation(CREATE_A_REPORT);
