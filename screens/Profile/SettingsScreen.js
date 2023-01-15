@@ -1,18 +1,24 @@
-import React, { useContext } from 'react';
-import { View, StyleSheet, SafeAreaView, Text, FlatList } from 'react-native';
-import { Button, IconButton, MD3Colors, useTheme, Appbar, TouchableRipple, Switch } from 'react-native-paper';
-// import FetchAllReports from '../../src/Queries/FetchAllReports';
+import React, { useContext, useState } from 'react';
+import { View, StyleSheet, SafeAreaView, Text, FlatList, ScrollView } from 'react-native';
+import { Button, IconButton, MD3Colors, useTheme, Appbar, TouchableRipple, Switch, Card,  } from 'react-native-paper';
 import { PreferencesContext } from '../../shared/preferencesContext';
-
+import UserInfo
+  from './UserInfo';
 export default function SettingsScreen({ navigation }) {
   const theme = useTheme();
   const { toggleTheme, isThemeDark } = useContext(PreferencesContext);
+  const [emailNotification, setEmailNotification] = useState(false)
+  const [defaultLocation, setDefaultLocation] = useState(false)
+
   return (
     <>
-      <SafeAreaView />
+      <SafeAreaView  />
+   
+      <ScrollView>
       <View
         style={styles.container}
       >
+        
         <IconButton
           icon="arrow-left"
           iconColor={MD3Colors.primary0}
@@ -20,29 +26,62 @@ export default function SettingsScreen({ navigation }) {
           size={30}
           onPress={() => navigation.goBack()}
         />
-        <Text>This is the Settings Page</Text>
-        <Appbar.Header
-          theme={{
-            colors: {
-              primary: theme?.colors.surface,
-            },
-          }}
+        <Card
+          style={styles.card}
         >
-          <Appbar.Content />
-          <Switch
-            color={'lightseagreen'}
-            value={isThemeDark}
-            onValueChange={toggleTheme}
-          />
-        </Appbar.Header>
+          <Card.Content>
+            <View style={styles.row}>
+              <Text style={styles.rowText}>Dark Theme</Text>
+              <Switch
+                color={'lightseagreen'}
+                value={isThemeDark}
+                onValueChange={toggleTheme}
+              />
+            </View>
+
+            <View style={styles.row}>
+              <Text style={styles.rowText2}>Email Notification</Text>
+              <Switch
+                style={{ marginLeft: 8 }}
+                color={'lightseagreen'}
+                value={emailNotification}
+                onValueChange={() => setEmailNotification(!emailNotification)}
+              />
+            </View>
+
+            <View style={styles.row}>
+              <Text style={styles.rowText2}>Default Location</Text>
+              <Switch
+                style={{ marginLeft: 15 }}
+                color={'lightseagreen'}
+                value={defaultLocation}
+                onValueChange={() => setDefaultLocation(!defaultLocation)}
+              />
+            </View>
+          </Card.Content>
+        </Card>
+
+        <Card
+          style={styles.card}
+        >
+          <Card.Content>
+
+            <UserInfo />
+          </Card.Content>
+        </Card>
       </View>
+      </ScrollView>
     </>
   );
 }
 
 const styles = StyleSheet.create({
+  scrollViewContainer: {
+    alignItems: 'center',
+    marginTop: 100,
+  },
   container: {
-    flex: 1,
+    // flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -51,24 +90,27 @@ const styles = StyleSheet.create({
     top: 0,
     left: 15
   },
-  item1: {
-    margin: 5,
-    padding: 2,
-    backgroundColor: 'lightseagreen'
+  card: {
+    // flex: 1,
+    marginTop: 50,
+    marginVertical: 5,
+    marginHorizontal: 10,
   },
-  item2: {
-    margin: 5,
-    padding: 2,
-    backgroundColor: 'red'
+  appBarStyle: {
+    margin: 10,
+    padding: 5
   },
-  item3: {
-    margin: 5,
-    padding: 2,
-    backgroundColor: 'lightslategray'
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 8,
+    paddingHorizontal: 16,
   },
-  item4: {
-    margin: 5,
-    padding: 2,
-    backgroundColor: 'lightblue'
-  }
+  rowText: {
+    marginRight: 100
+  },
+  rowText2: {
+    marginRight: 60
+  },
 });
