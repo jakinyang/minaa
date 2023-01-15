@@ -1,5 +1,5 @@
 // RN imports
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native'
 import { Text } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -10,9 +10,15 @@ import Logo from './LoginComponents/Logo.js';
 import Header from './LoginComponents/Header.js';
 import Button from './LoginComponents/Button.js';
 import Paragraph from './LoginComponents/Paragraph.js';
+import { PreferencesContext } from '../../shared/preferencesContext.js';
+import { lightColor } from '../../assets/ColorPalette.js';
 
 export default function StartScreen({ navigation }) {
   const inset = useSafeAreaInsets();
+  const { isThemeDark } = useContext(PreferencesContext);
+  let loginTextColor = isThemeDark ? "#cfab58" : null
+  let signUpButtonColor = isThemeDark ? "#cfab58" : null
+  let signUpTextColor = isThemeDark ? lightColor.lapizLazuli[300] : null
   
   return (
     <View style={{ ...styles.container, inset }}>
@@ -22,12 +28,15 @@ export default function StartScreen({ navigation }) {
         mode="contained"
         style={{ paddingHorizontal: 8 }}
         onPress={() => navigation.navigate('LoginScreen')}
+        textColor={loginTextColor}
       >
        LOGIN
       </Button>
       <Button
-        mode="outlined"
+        mode="elevated"
         onPress={() => navigation.navigate('RegisterScreen')}
+        buttonColor = {signUpButtonColor}
+        textColor = {signUpTextColor}
       >
         SIGN UP
       </Button>
