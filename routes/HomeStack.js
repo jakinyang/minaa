@@ -1,5 +1,5 @@
 //Imports
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -15,10 +15,11 @@ import { lightColor, darkColor } from '../assets/ColorPalette';
 const Tab = createMaterialBottomTabNavigator();
 
 export default function HomeStack() {
+  
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      barStyle={{backgroundColor: lightColor.lapizLazuli[400]}}
+      barStyle={{ backgroundColor: lightColor.lapizLazuli[400] }}
       backBehavior="initialRoute"
       labeled={false}
       activeColor={lightColor.otherGold[400]}
