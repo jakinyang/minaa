@@ -81,6 +81,10 @@ export default function NewReportScreen({ navigation, route }) {
   const imageRef = useRef();
 
   const pickImageAsync = async () => {
+    if (status === null) {
+      requestPermission();
+
+    }
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       quality: 1,
@@ -134,15 +138,14 @@ export default function NewReportScreen({ navigation, route }) {
     }
 
   };
+  const goBack = () => {
+    navigation.goBack();
+    setTempCoords({ latitude: 0, longitude: 0 });
+  }
 
-  if (status === null) {
-    requestPermission();
-    const goBack = () => {
-      navigation.goBack();
-      setTempCoords({ latitude: 0, longitude: 0 });
-    }
-    return (
-      <View style={{ ...styles.container, paddingTop: insets.top }}>
+  return (
+    <View style={{ ...styles.container, paddingTop: insets.top }}>
+      <ScrollView>
         <BackButton
           goBack={goBack}
         />
@@ -283,11 +286,10 @@ export default function NewReportScreen({ navigation, route }) {
                 merge: true
               })
             }} >Submit Report</Button>
-
         </View>
-      </View>
-    )
-  }
+      </ScrollView>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
