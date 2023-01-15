@@ -204,14 +204,8 @@ export default function NewReportScreen({ navigation, route }) {
             style={styles.textInput}
             returnKeyType='next'
           />
+        
         </View>
-        <GestureHandlerRootView style={styles.photoContainer}>
-          <View style={styles.imageContainer}>
-            <View ref={imageRef} collapsable={false}>
-              < ImageViewer placeholderImageSource={PlaceholderImage} selectedImage={selectedImage} />
-            </View>
-          </View>
-        </GestureHandlerRootView>
         <View
           style={styles.buttonContainer}
         >
@@ -222,6 +216,7 @@ export default function NewReportScreen({ navigation, route }) {
             mode="contained">
             Select Photo
           </Button>
+         
           <Button
             mode='outlined'
             style={styles.buttonStyle}
@@ -286,6 +281,13 @@ export default function NewReportScreen({ navigation, route }) {
                 merge: true
               })
             }} >Submit Report</Button>
+             <GestureHandlerRootView style={styles.photoContainer}>
+          <View style={styles.imageContainer}>
+            <View ref={imageRef} collapsable={false}>
+              < ImageViewer placeholderImageSource={PlaceholderImage} selectedImage={selectedImage} />
+            </View>
+          </View>
+        </GestureHandlerRootView>
         </View>
       </ScrollView>
     </View>
@@ -302,7 +304,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     padding: 20,
-    margin: 20
+    marginTop: 20
   },
   buttonContainer: {
     width: "50%",
@@ -326,12 +328,12 @@ const styles = StyleSheet.create({
   },
   photoContainer: {
     flex: 1,
-    backgroundColor: '#25292e',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 1
   },
   imageContainer: {
     flex: 1,
-    paddingTop: 58,
+    paddingTop: 20,
   }
 })
