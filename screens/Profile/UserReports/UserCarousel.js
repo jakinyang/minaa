@@ -1,35 +1,12 @@
-import React, { useState, useRef, useContext } from 'react'
+import React, { useState, useRef } from 'react'
 import { StyleSheet, View } from "react-native"
-import { Text } from 'react-native-paper'
 import Carousel, { Pagination } from 'react-native-snap-carousel'
-import { useQuery } from '@apollo/client'
-import { GET_USER_REPORTS } from '../../../src/Queries/UserReportsQueries'
-import { UserContext } from '../../../shared/userContext'
 import { UserReportCard, SLIDER_WIDTH, ITEM_WIDTH } from './UserReportCard'
-export default function UserCarousel() {
+export default function UserCarousel({data}) {
   const isCarousel = useRef(null)
 
   const [index, setIndex] = useState(0)
 
-  const { user, setUser } = useContext(UserContext);
-
-  const [userData, setUserData] = useState([])
-
-  let queryVar = user ? user : "3";
-
-  console.log('historyScreen userId: ', user);
-  console.log('historyScreen queryVar: ', queryVar);
-
-  const { loading, error, data } = useQuery(GET_USER_REPORTS, {
-    variables: { "userId": queryVar },
-    fetchPolicy: "cache-and-network",
-    onCompleted: (data) => {
-      setUserData(data.user.reports)
-    }
-
-  });
-  if (loading) return <Text style={{flex: 1, alignItems: 'center', justifyContent: 'center', alignSelf:'center', marginTop:400}}>Loading...</Text>;
-  if (error) console.log(`Error! ${error}`);
   return (
     <View style={styles.carouselContainer}>
       <Carousel

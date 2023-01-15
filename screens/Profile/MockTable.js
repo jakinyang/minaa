@@ -1,30 +1,36 @@
-import React, { useState, useEffect } from 'react';
+// Imports
+import React, { useState, useEffect, useContext } from 'react';
 import { DataTable } from 'react-native-paper';
-import { faker } from '@faker-js/faker';
+import { useQuery } from '@apollo/client';
 
-const optionsPerPage = [5, 10, 20, 50, 100];
+// Components and Helpers
+import { GET_USER_REPORTS } from '../../src/Queries/UserReportsQueries';
+import { UserContext } from '../../shared/userContext';
+import { formatDate } from '../../shared/helpers/dateFormatter'
 
-export default function MockTable() {
-  const [page, setPage] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(optionsPerPage[0]);
+export default function MockTable({data}) {
+  const optionsPerPage = [5, 10, 20, 50, 100];
 
   useEffect(() => {
     setPage(0);
   }, [itemsPerPage]);
 
-  const array = new Array(20);
-  const dataRows = array.map((_, i) => {
+  const [page, setPage] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(optionsPerPage[0]);
+  
+  const dataRows = data.user.reports.map((item, i) => {
+    let time = formatDate(item.createdAt)
+    console.log("Item from cell maker loop! ", item)
     return (
       <DataTable.Row key={i}>
-        <DataTable.Cell>{faker.date.recent()}</DataTable.Cell>
-        <DataTable.Cell>{faker.address.longitude()}</DataTable.Cell>
-        <DataTable.Cell>{faker.address.latitude()}</DataTable.Cell>
-        <DataTable.Cell>{faker.lorem.word()}</DataTable.Cell>
-        <DataTable.Cell>{faker.datatype.number()}</DataTable.Cell>
+        <DataTable.Cell>{time}</DataTable.Cell>
+        <DataTable.Cell>{item.longitude}</DataTable.Cell>
+        <DataTable.Cell>{item.latitude}</DataTable.Cell>
+        <DataTable.Cell>{item.statusCategory}</DataTable.Cell>
+        <DataTable.Cell>{item.reportCategory}</DataTable.Cell>
       </DataTable.Row>
     );
   });
-
 
   return (
     <DataTable>
@@ -35,18 +41,7 @@ export default function MockTable() {
         <DataTable.Title >Status</DataTable.Title>
         <DataTable.Title >Response</DataTable.Title>
       </DataTable.Header>
-      {array.map((_, i) => {
-        return (
-          <DataTable.Row key={i}>
-            <DataTable.Cell>{faker.date.recent()}</DataTable.Cell>
-            <DataTable.Cell>{faker.address.longitude()}</DataTable.Cell>
-            <DataTable.Cell>{faker.address.latitude()}</DataTable.Cell>
-            <DataTable.Cell>{faker.lorem.word()}</DataTable.Cell>
-            <DataTable.Cell>{faker.datatype.number()}</DataTable.Cell>
-          </DataTable.Row>
-        );
-      })}
-
+      {dataRows}
       <DataTable.Pagination
         page={page}
         numberOfPages={6}

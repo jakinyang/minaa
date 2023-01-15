@@ -2,7 +2,9 @@ import React, { useState, useCallback, useMemo } from 'react';
 import 'react-native-gesture-handler';
 import { StyleSheet, useColorScheme } from 'react-native';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
-import { Provider as PaperProvider } from 'react-native-paper';
+
+import { Provider as PaperProvider, DefaultTheme as PaperDefaultTheme } from 'react-native-paper';
+
 import HomeStack from './routes/HomeStack';
 import {
   ApolloClient,
@@ -13,7 +15,7 @@ import {
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import UserProvider from './shared/userContext';
 import { PreferencesContext } from './shared/preferencesContext';
-import { lightColor, darkColor } from './assets/ColorPalette';
+import { lightColor, darkColor, PaperThemeColorsLight } from './assets/ColorPalette';
 
 const link = new HttpLink({
   uri: 'http://localhost:4000/',
@@ -25,13 +27,12 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-
 export default function App() {
 
   const DefaultTheme = {
 
     colors: {
-      primary: lightColor.greenAccent[400],
+      primary: lightColor.bluePrimary[400],
       background: "#b8c3bd",
       card: 'rgb(255, 255, 255)',
       text: 'rgb(28, 28, 30)',
@@ -42,7 +43,7 @@ export default function App() {
   const DarkTheme = {
 
     colors: {
-      primary: darkColor.greenAccent[800],
+      primary: darkColor.bluePrimary[800],
       background: "#262616",
       card: 'rgb(18, 18, 18)',
       text: 'rgb(229, 229, 231)',
@@ -51,6 +52,12 @@ export default function App() {
     },
   };
 
+  const TestTheme = {
+    ...PaperDefaultTheme,
+    colors: {
+      ...PaperThemeColorsLight.colors
+    }
+  }
   const [isThemeDark, setIsThemeDark] = useState(false);
   let theme = isThemeDark ? DarkTheme : DefaultTheme;
   const toggleTheme = useCallback(() => {
@@ -66,9 +73,9 @@ export default function App() {
 
   return (
     <PreferencesContext.Provider value={preferences}>
-      <PaperProvider >
+      <PaperProvider theme={TestTheme} >
         <ApolloProvider client={client}>
-          <NavigationContainer theme={theme}>
+          <NavigationContainer>
             <BottomSheetModalProvider>
               <UserProvider>
                 <HomeStack style={styles.container} />
