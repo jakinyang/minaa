@@ -80,9 +80,6 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 8,
   },
-  chip: {
-    margin: 4,
-  },
   card: {
     margin: 4,
   },
