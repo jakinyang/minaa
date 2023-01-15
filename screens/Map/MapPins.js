@@ -35,7 +35,7 @@ export default function MapPins({
         >
           <Card style={styles.card}>
             <Card.Content>
-              <Text style={styles.text} >
+              <Text style={styles.title} >
                 {time}
               </Text>
               <View style={styles.chipContainer}>
@@ -88,5 +88,8 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: 'OpenSans_600SemiBold',
+  },
+  title: {
+    fontFamily: 'Montserrat_400Regular',
   }
 })

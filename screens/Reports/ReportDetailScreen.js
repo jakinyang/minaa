@@ -50,6 +50,7 @@ export default function ReportDetailScreen({ navigation, route }) {
             <Chip
               style={styles.chip} icon="alert-decagram"
               theme={ChipTheme}
+              textStyle={styles.chipText}
             >
               REPORT STATUS: {route.params.statusCategory}
             </Chip>
@@ -57,6 +58,7 @@ export default function ReportDetailScreen({ navigation, route }) {
               icon="map-marker-alert"
               style={styles.chip}
               theme={ChipTheme}
+              textStyle={styles.chipText}
             >
               LATITUDE: {route.params.latitude}
             </Chip>
@@ -64,6 +66,7 @@ export default function ReportDetailScreen({ navigation, route }) {
               icon="map-marker-alert"
               style={styles.chip}
               theme={ChipTheme}
+              textStyle={styles.chipText}
             >
               LONGITUDE: {route.params.longitude}
             </Chip>
@@ -72,6 +75,7 @@ export default function ReportDetailScreen({ navigation, route }) {
                 style={styles.chip}
                 icon="information"
                 theme={ChipTheme}
+                textStyle={styles.chipText}
               >
                 REPORT ID: {route.params.id}
               </Chip>
@@ -79,6 +83,7 @@ export default function ReportDetailScreen({ navigation, route }) {
                 style={styles.chip}
                 icon="radar"
                 theme={ChipTheme}
+                textStyle={styles.chipText}
               >
                 REPORTED AREA: {route.params.radius}m
               </Chip>
@@ -118,6 +123,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   description: {
+    fontFamily: 'Montserrat_400Regular',
     marginTop: 5,
     marginHorizontal: 5,
     marginBottom: 10
@@ -130,8 +136,11 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
   title: {
-    fontFamily: 'Montserrat_600SemiBold',
+    fontFamily: 'OpenSans_600SemiBold',
     fontSize: 20,
     lineHeight: 30
+  },
+  chipText: {
+    fontFamily: 'OpenSans_600SemiBold',
   }
 })
