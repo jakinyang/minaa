@@ -38,24 +38,6 @@ export default function UserInfo() {
                         <Text style={[styles.text, styles.subText]}>saved</Text>
                     </View>
                 </View>
-
-                {/* <View style={{ marginTop: 32 }}>
-                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                        <View style={styles.mediaImageContainer}>
-                            <Image source={require("../../assets/landmine-warning.png")} style={styles.image} resizeMode="cover"></Image>
-                        </View>
-                        <View style={styles.mediaImageContainer}>
-                            <Image source={require("../../assets/landmine-warning.png")} style={styles.image} resizeMode="cover"></Image>
-                        </View>
-                        <View style={styles.mediaImageContainer}>
-                            <Image source={require("../../assets/landmine-warning.png")} style={styles.image} resizeMode="cover"></Image>
-                        </View>
-                    </ScrollView>
-                    <View style={styles.bigNumberCount}>
-                        <Text style={[styles.text, { fontSize: 24, color: "#DFD8C8", fontWeight: "300" }]}>70</Text>
-                        <Text style={[styles.text, { fontSize: 12, color: "#DFD8C8", textTransform: "uppercase" }]}>Media</Text>
-                    </View>
-                </View> */}
                 <Text style={[styles.subText, styles.recent]}>Recent Activity</Text>
                 <View style={{ alignItems: "center" }}>
                     <View style={styles.recentItem}>
@@ -164,22 +146,6 @@ const styles = StyleSheet.create({
         borderRadius: 12,
         overflow: "hidden",
         marginHorizontal: 10
-    },
-    bigNumberCount: {
-        backgroundColor: "#41444B",
-        position: "absolute",
-        top: "50%",
-        marginTop: -50,
-        marginLeft: 30,
-        width: 100,
-        height: 100,
-        alignItems: "center",
-        justifyContent: "center",
-        borderRadius: 12,
-        shadowColor: "rgba(0, 0, 0, 0.38)",
-        shadowOffset: { width: 0, height: 10 },
-        shadowRadius: 20,
-        shadowOpacity: 1
     },
     recent: {
         marginLeft: 78,

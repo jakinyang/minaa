@@ -15,7 +15,7 @@ import {
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import UserProvider from './shared/userContext';
 import { PreferencesContext } from './shared/preferencesContext';
-import { lightColor, darkColor, PaperThemeColorsLight } from './assets/ColorPalette';
+import { lightColor, darkColor, PaperThemeColorsLight, PaperThemeColorsDark } from './assets/ColorPalette';
 
 const link = new HttpLink({
   uri: 'http://localhost:4000/',
@@ -51,15 +51,23 @@ export default function App() {
       notification: 'rgb(255, 69, 58)',
     },
   };
-
+//Theme for paper provider
   const TestTheme = {
     ...PaperDefaultTheme,
     colors: {
       ...PaperThemeColorsLight.colors
     }
   }
+  const TestDarkTheme = {
+    ...PaperDefaultTheme,
+    colors: {
+      ...PaperThemeColorsDark.colors
+    }
+  }
+  
   const [isThemeDark, setIsThemeDark] = useState(false);
-  let theme = isThemeDark ? DarkTheme : DefaultTheme;
+  let testTheme = isThemeDark ? TestDarkTheme : TestTheme
+  // let theme = isThemeDark ? DarkTheme : DefaultTheme;
   const toggleTheme = useCallback(() => {
     return setIsThemeDark(!isThemeDark);
   }, [isThemeDark]);
@@ -73,7 +81,7 @@ export default function App() {
 
   return (
     <PreferencesContext.Provider value={preferences}>
-      <PaperProvider theme={TestTheme} >
+      <PaperProvider theme={testTheme} >
         <ApolloProvider client={client}>
           <NavigationContainer>
             <BottomSheetModalProvider>
