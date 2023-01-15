@@ -6,7 +6,7 @@ import { getTimeElapsed } from '../../shared/helpers/timeCalculator';
 import { formatDate } from '../../shared/helpers/dateFormatter';
 import { DefaultTheme } from 'react-native-paper';
 import { lightColor, PaperThemeColorsLight } from '../../assets/ColorPalette';
-import { OpenSans_400Regular } from '@expo-google-fonts/open-sans';
+import { OpenSans_400Regular, OpenSans_600SemiBold } from '@expo-google-fonts/open-sans';
 export default function MapPins({
   navigation,
   pinData,
@@ -87,6 +87,6 @@ const styles = StyleSheet.create({
     margin: 4,
   },
   text: {
-    fontFamily: 'OpenSans_400Regular'
+    fontFamily: 'OpenSans_600SemiBold',
   }
 })
