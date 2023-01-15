@@ -221,3 +221,47 @@ export const PaperThemeColorsLight = {
     "backdrop": "rgba(55, 46, 52, 0.4)"
   }
 }
+export const PaperThemeColorsDark = {
+  "colors": {
+    "primary": lightColor.lapizLazuli[200], // Color for buttons and main things
+    "onPrimary": lightColor.bluePrimary[200],
+    "primaryContainer": lightColor.bluePrimary[400],
+    "onPrimaryContainer": lightColor.blackOff[800],
+    "secondary": lightColor.darkBlue[600],
+    "onSecondary": lightColor.darkBlue[200],
+    "secondaryContainer": "transparent",
+    "onSecondaryContainer": lightColor.darkBlue[800], // This controls text for the chips
+    "tertiary": lightColor.blackOff[600],
+    "onTertiary": lightColor.blackOff[200],
+    "tertiaryContainer": lightColor.blackOff[400],
+    "onTertiaryContainer": lightColor.blackOff[800],
+    "error": lightColor.redAccent[600],
+    "onError": lightColor.redAccent[200],
+    "errorContainer": lightColor.redAccent[600],
+    "onErrorContainer": lightColor.redAccent[800],
+    "background": lightColor.grayAccent[200],
+    "onBackground": lightColor.grayAccent[400],
+    "surface": lightColor.grayAccent[200],
+    "onSurface": lightColor.grayAccent[800], // Card text and card title
+    "surfaceVariant": lightColor.grayAccent[600],
+    "onSurfaceVariant": lightColor.grayAccent[700], // Bookmark Icon, Text Input, Back button
+    "outline": lightColor.grayAccent[600],
+    "outlineVariant": lightColor.grayAccent[600],
+    "shadow": "rgb(0, 0, 0)",
+    "scrim": "rgb(0, 0, 0)",
+    "inverseSurface": "rgb(52, 47, 50)",
+    "inverseOnSurface": "rgb(248, 238, 242)",
+    "inversePrimary": lightColor.redAccent[600],
+    "elevation": {
+      "level0": "transparent",
+      "level1": "rgb(250, 241, 250)",
+      "level2": "rgb(247, 234, 247)",
+      "level3": "rgb(244, 228, 244)",
+      "level4": "rgb(243, 226, 243)",
+      "level5": "rgb(241, 222, 241)"
+    },
+    "surfaceDisabled": "rgba(30, 26, 29, 0.12)",
+    "onSurfaceDisabled": "rgba(30, 26, 29, 0.38)",
+    "backdrop": "rgba(55, 46, 52, 0.4)"
+  }
+}
