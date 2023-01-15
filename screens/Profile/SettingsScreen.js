@@ -18,7 +18,6 @@ export default function SettingsScreen({ navigation }) {
       <View
         style={styles.container}
       >
-        
         <IconButton
           icon="arrow-left"
           iconColor={MD3Colors.primary0}
@@ -114,9 +113,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   rowText: {
-    marginRight: 100
+    marginRight: 100,
+    fontFamily: 'OpenSans_400Regular',
   },
   rowText2: {
-    marginRight: 60
+    marginRight: 60,
+    fontFamily: 'OpenSans_400Regular',
   },
 });

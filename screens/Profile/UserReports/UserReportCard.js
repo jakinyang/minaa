@@ -22,7 +22,7 @@ export const UserReportCard = ({ item, index }) => {
     ...DefaultTheme,
     colors: {
       ...PaperThemeColorsLight,
-      primary: lightColor.lapizLazuli[300]
+      primary: lightColor.redAccent[500]
     }
   }
 
@@ -42,8 +42,9 @@ export const UserReportCard = ({ item, index }) => {
       <Card.Title
         title={item.reportCategory}
         titleVariant='headlineSmall'
+        titleStyle={styles.title}
         // FIX THIS
-        left={(props) => <Avatar.Icon {...props} icon="mine" 
+        left={(props) => <Avatar.Icon {...props} icon="map-marker-alert-outline" 
         theme={IconTheme}
         />}
       />
@@ -52,18 +53,21 @@ export const UserReportCard = ({ item, index }) => {
         <Chip
           style={styles.chip} icon="alert-decagram"
           theme={ChipTheme}
+          textStyle={styles.chipText}
         >
           STATUS: {item.statusCategory}
         </Chip>
         <Chip
-          icon="map-marker-alert-outline" style={styles.chip}
+          icon="map-marker-alert" style={styles.chip}
           theme={ChipTheme}
+          textStyle={styles.chipText}
         >
           LATITUDE: {item.latitude}
         </Chip>
         <Chip
-          icon="map-marker-alert-outline" style={styles.chip}
+          icon="map-marker-alert" style={styles.chip}
           theme={ChipTheme}
+          textStyle={styles.chipText}
         >
           LONGITUDE: {item.longitude}
         </Chip>
@@ -71,6 +75,7 @@ export const UserReportCard = ({ item, index }) => {
           style={styles.chip}
           icon="information"
           theme={ChipTheme}
+          textStyle={styles.chipText}
         >
           REPORT ID: {item.id}
         </Chip>
@@ -78,6 +83,7 @@ export const UserReportCard = ({ item, index }) => {
           style={styles.chip}
           icon="radar"
           theme={ChipTheme}
+          textStyle={styles.chipText}
         >
           REPORTED AREA: {item.radius}m
         </Chip>
@@ -121,4 +127,13 @@ const styles = StyleSheet.create({
   chip: {
     marginBottom: 10,
   },
+  chipText: {
+    fontFamily: 'OpenSans_600SemiBold',
+  },
+  title: {
+    fontFamily: 'OpenSans_600SemiBold',
+  },
+  description: {
+    fontFamily: 'Montserrat_400Regular',
+  }
 })
