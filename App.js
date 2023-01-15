@@ -12,7 +12,7 @@ import {
 } from '@react-navigation/native';
 import {
   Provider as PaperProvider,
-  DefaultTheme as PaperDefaultTheme
+  DefaultTheme as PaperDefaultTheme,
 } from 'react-native-paper';
 import {
   ApolloClient,
@@ -104,7 +104,7 @@ import HomeStack from './routes/HomeStack';
 import UserProvider from './shared/userContext';
 import FontProvider from './shared/fontContext';
 import { PreferencesContext } from './shared/preferencesContext';
-import { lightColor, darkColor, PaperThemeColorsLight } from './assets/ColorPalette';
+import { lightColor, darkColor, PaperThemeColorsLight, PaperThemeColorsDark } from './assets/ColorPalette';
 
 const link = new HttpLink({
   uri: 'http://localhost:4000/',
@@ -117,26 +117,26 @@ const client = new ApolloClient({
 });
 export default function App() {
 
-  const DefaultTheme = {
-
+  const DefaultNavTheme = {
+    ...DefaultTheme,
     colors: {
-      primary: lightColor.bluePrimary[400],
-      background: "#b8c3bd",
-      card: 'rgb(255, 255, 255)',
-      text: 'rgb(28, 28, 30)',
-      border: 'rgb(199, 199, 204)',
-      notification: 'rgb(255, 69, 58)',
+      // primary: lightColor.lapizLazuli[800],
+      background: darkColor.grayAccent[500],
+      // card: 'rgb(255, 255, 255)',
+      // text: 'rgb(28, 28, 30)',
+      // border: 'rgb(199, 199, 204)',
+      // notification: 'rgb(255, 69, 58)',
     },
   };
-  const DarkTheme = {
-
+  const DarkNavTheme = {
+    ...DefaultTheme,
     colors: {
-      primary: darkColor.bluePrimary[800],
+      // primary: lightColor.lapizLazuli[800],
       background: "#262616",
-      card: 'rgb(18, 18, 18)',
-      text: 'rgb(229, 229, 231)',
-      border: 'rgb(39, 39, 41)',
-      notification: 'rgb(255, 69, 58)',
+      // card: 'rgb(18, 18, 18)',
+      // text: 'rgb(229, 229, 231)',
+      // border: 'rgb(39, 39, 41)',
+      // notification: 'rgb(255, 69, 58)',
     },
   };
 
@@ -146,8 +146,15 @@ export default function App() {
       ...PaperThemeColorsLight.colors
     }
   }
+  const TestThemeDark = {
+    ...PaperDefaultTheme,
+    colors: {
+      ...PaperThemeColorsDark.colors
+    }
+  }
   const [isThemeDark, setIsThemeDark] = useState(false);
-  let theme = isThemeDark ? DarkTheme : DefaultTheme;
+  let themeNav = isThemeDark ? DarkNavTheme : DefaultNavTheme;
+  let theme = isThemeDark? TestThemeDark : TestTheme;
   const toggleTheme = useCallback(() => {
     return setIsThemeDark(!isThemeDark);
   }, [isThemeDark]);
@@ -198,9 +205,9 @@ export default function App() {
   }
   return (
     <PreferencesContext.Provider value={preferences}>
-      <PaperProvider theme={TestTheme} >
+      <PaperProvider theme={theme} >
         <ApolloProvider client={client}>
-          <NavigationContainer>
+          <NavigationContainer theme={themeNav}>
             <BottomSheetModalProvider>
               <UserProvider>
                 <HomeStack style={styles.container} />

@@ -1,9 +1,11 @@
 // RN imports
-import React from 'react'
+import React, {useContext} from 'react'
 import { Image, StyleSheet } from 'react-native'
+import { PreferencesContext } from '../../../shared/preferencesContext'
 
 export default function Logo() {
-  return <Image style={styles.image}source={require('../../../assets/handshake.png')}/>
+  const { isThemeDark } = useContext(PreferencesContext);
+  return <Image style={ isThemeDark ? styles.imageDark : styles.image }source={require('../../../assets/handshake.png')}/>
 }
 
 const styles = StyleSheet.create({
@@ -12,6 +14,15 @@ const styles = StyleSheet.create({
     height: 110,
     marginBottom: 8,
   },
+  imageDark: {
+    tintColor: "#cfab58",
+    width: 110,
+    height: 110,
+    marginBottom: 8,
+  },
 })
 
 // source={require('/assets/landmine1.jpg')}
+
+//login text: yellow
+//sing up button: yellow bg, blue text
