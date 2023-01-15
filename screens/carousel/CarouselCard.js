@@ -1,18 +1,47 @@
+import { Raleway_400Regular, Raleway_600SemiBold, Raleway_700Bold } from '@expo-google-fonts/raleway'
 import React from 'react'
 import { View, Text, StyleSheet, Dimensions, Image } from "react-native"
+import { Card, Chip, DefaultTheme } from 'react-native-paper'
+import { formatDate } from '../../shared/helpers/dateFormatter';
+import { PaperThemeColorsLight, lightColor } from '../../assets/ColorPalette';
 
-export const SLIDER_WIDTH = Dimensions.get('window').width -50
+export const SLIDER_WIDTH = Dimensions.get('window').width - 50
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7)
 
 export const CarouselCardItem = ({ item, index }) => {
+
+  const ChipTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...PaperThemeColorsLight,
+      primary: lightColor.otherGold[400]
+    }
+  }
+  const time = "Reported: " + formatDate(item.createdAt)
   return (
     <View style={styles.container} key={index}>
-      <Image
-        source={{ uri: item.imgUrl }}
-        style={styles.image}
-      />
-      <Text style={styles.header}>{item.title}</Text>
-      <Text style={styles.body}>{item.body}</Text>
+      <Card style={styles.card}>
+        <Card.Content>
+          <Text style={styles.title} >
+            {time}
+          </Text>
+          <Text style={styles.title} >
+            {(item.distance / 1000).toFixed(2)} km away
+          </Text>
+          <View style={styles.chipContainer}>
+            <Chip
+              icon="alert-decagram"
+              theme={ChipTheme}
+              textStyle={styles.text}
+            >{item.statusCategory}</Chip>
+            <Chip
+              icon="smoke-detector-variant-alert"
+              theme={ChipTheme}
+              textStyle={styles.text}
+            >{item.reportCategory}</Chip>
+          </View>
+        </Card.Content>
+      </Card>
     </View>
   )
 }
@@ -22,7 +51,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 15,
     width: ITEM_WIDTH,
-    paddingBottom: 10,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -31,25 +59,19 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.29,
     shadowRadius: 4.65,
     elevation: 7,
+    margin: 5,
   },
-  image: {
-    width: ITEM_WIDTH,
-    height: 100,
-    borderTopEndRadius: 15,
-    borderTopStartRadius: 15,
+  chipContainer: {
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginTop: 10,
   },
-  header: {
-    color: "#222",
-    fontSize: 28,
-    fontWeight: "bold",
-    paddingLeft: 20,
-    paddingTop: 20
+  text: {
+    fontFamily: 'OpenSans_600SemiBold',
   },
-  body: {
-    color: "#222",
-    fontSize: 18,
-    paddingLeft: 20,
-    paddingLeft: 20,
-    paddingRight: 20
+  title: {
+    fontFamily: 'Montserrat_400Regular',
+    marginVertical: 2,
   }
 })

@@ -35,63 +35,61 @@ export const UserReportCard = ({ item, index }) => {
   }
 
   return (
-    <Card
-      style={styles.container}
-      key={index}
-    >
-      <Card.Title
-        title={item.reportCategory}
-        titleVariant='headlineSmall'
-        titleStyle={styles.title}
-        // FIX THIS
-        left={(props) => <Avatar.Icon {...props} icon="map-marker-alert-outline" 
-        theme={IconTheme}
-        />}
-      />
-      {/* MAKE SURE REPORT CATEGORY FONT IS CONSISTENT */}
-      <Card.Content>
-        <Chip
-          style={styles.chip} icon="alert-decagram"
-          theme={ChipTheme}
-          textStyle={styles.chipText}
-        >
-          STATUS: {item.statusCategory}
-        </Chip>
-        <Chip
-          icon="map-marker-alert" style={styles.chip}
-          theme={ChipTheme}
-          textStyle={styles.chipText}
-        >
-          LATITUDE: {item.latitude}
-        </Chip>
-        <Chip
-          icon="map-marker-alert" style={styles.chip}
-          theme={ChipTheme}
-          textStyle={styles.chipText}
-        >
-          LONGITUDE: {item.longitude}
-        </Chip>
-        <Chip
-          style={styles.chip}
-          icon="information"
-          theme={ChipTheme}
-          textStyle={styles.chipText}
-        >
-          REPORT ID: {item.id}
-        </Chip>
-        <Chip
-          style={styles.chip}
-          icon="radar"
-          theme={ChipTheme}
-          textStyle={styles.chipText}
-        >
-          REPORTED AREA: {item.radius}m
-        </Chip>
-        <Text style={styles.description}>
-          Reported: {time} ago
-        </Text>
-      </Card.Content>
-    </Card>
+    <View style={styles.container} key={index}>
+      <Card>
+        <Card.Title
+          title={item.reportCategory}
+          titleVariant='headlineSmall'
+          titleStyle={styles.title}
+          // FIX THIS
+          left={(props) => <Avatar.Icon {...props} icon="map-marker-alert-outline"
+            theme={IconTheme}
+          />}
+        />
+        <Card.Content>
+          <Chip
+            style={styles.chip} icon="alert-decagram"
+            theme={ChipTheme}
+            textStyle={styles.chipText}
+          >
+            STATUS: {item.statusCategory}
+          </Chip>
+          <Chip
+            icon="map-marker-alert" style={styles.chip}
+            theme={ChipTheme}
+            textStyle={styles.chipText}
+          >
+            LATITUDE: {item.latitude}
+          </Chip>
+          <Chip
+            icon="map-marker-alert" style={styles.chip}
+            theme={ChipTheme}
+            textStyle={styles.chipText}
+          >
+            LONGITUDE: {item.longitude}
+          </Chip>
+          <Chip
+            style={styles.chip}
+            icon="information"
+            theme={ChipTheme}
+            textStyle={styles.chipText}
+          >
+            REPORT ID: {item.id}
+          </Chip>
+          <Chip
+            style={styles.chip}
+            icon="radar"
+            theme={ChipTheme}
+            textStyle={styles.chipText}
+          >
+            REPORTED AREA: {item.radius}m
+          </Chip>
+          <Text style={styles.description}>
+            Reported: {time} ago
+          </Text>
+        </Card.Content>
+      </Card>
+    </View>
   )
 }
 
@@ -109,20 +107,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.29,
     shadowRadius: 4.65,
     elevation: 9,
-  },
-  image: {
-    width: ITEM_WIDTH,
-    height: 100,
-    borderTopEndRadius: 15,
-    borderTopStartRadius: 15,
-  },
-  body: {
-    color: "#222",
-    fontSize: 18,
-    height: 150,
-    paddingLeft: 20,
-    paddingLeft: 20,
-    paddingRight: 20
   },
   chip: {
     marginBottom: 10,

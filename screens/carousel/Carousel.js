@@ -1,10 +1,17 @@
-import React, { useState, useRef} from 'react'
-import { StyleSheet, View } from "react-native"
-import Carousel, { Pagination } from 'react-native-snap-carousel'
-import { CarouselCardItem, SLIDER_WIDTH, ITEM_WIDTH } from './CarouselCard.js'
-import { mockCardData } from '../mock_data/MockCardData.js'
+import React, { useState, useRef} from 'react';
+import { StyleSheet, View } from "react-native";
+import Carousel, { Pagination } from 'react-native-snap-carousel';
+import { CarouselCardItem, SLIDER_WIDTH, ITEM_WIDTH } from './CarouselCard.js';
+import { mockCardData } from '../mock_data/MockCardData.js';
 
-export default function CarouselCards() {
+import proximityCalculator from '../../shared/helpers/proximityCalculator.js';
+
+export default function CarouselCards({ data, location, currentRadius }) {
+
+  const currentCoords = {latitude: location.latitude, longitude: location.longitude}
+
+  const dataArray = proximityCalculator(data, currentCoords, currentRadius);
+
   const isCarousel = useRef(null)
   const [index, setIndex] = useState(0)
   return (
@@ -13,7 +20,7 @@ export default function CarouselCards() {
         layout="default"
         layoutCardOffset={9}
         ref={isCarousel}
-        data={mockCardData}
+        data={dataArray}
         renderItem={CarouselCardItem}
         sliderWidth={SLIDER_WIDTH}
         itemWidth={ITEM_WIDTH}
@@ -22,7 +29,7 @@ export default function CarouselCards() {
         onSnapToItem={(index) => setIndex(index)}
       />
       <Pagination
-        dotsLength={mockCardData.length}
+        dotsLength={dataArray.length}
         activeDotIndex={index}
         carouselRef={isCarousel}
         dotStyle={{
