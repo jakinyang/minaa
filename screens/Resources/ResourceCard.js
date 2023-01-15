@@ -47,5 +47,5 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat_500Medium',
     fontSize: 16,
     marginVertical: 10,
-  }
+  },
 })
