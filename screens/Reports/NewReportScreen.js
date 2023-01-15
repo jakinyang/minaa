@@ -37,11 +37,11 @@ export default function NewReportScreen({ navigation, route }) {
   ]);
   const [reportCategory, setReportCategory] = useState("UNCLEAR");
   const [reportTypes, setReportTypes] = useState([
-    { label: "Unclear", value: "UNCLEAR" },
-    { label: "Obscured", value: "OBSCURED" },
-    { label: "Multiple", value: "MULTIPLE" },
-    { label: "Large", value: "LARGE" },
-    { label: "Small", value: "SMALL" },
+    { label: "I'm not sure", value: "UNCLEAR" },
+    { label: "The incident is obscured", value: "OBSCURED" },
+    { label: "It's a small object", value: "SMALL" },
+    { label: "It's a large object", value: "LARGE" },
+    { label: "There are many objects", value: "MULTIPLE" },
   ]);
   const [reportStatus, setStatusStatus] = useState("REPORTED")
   const [reportStatusTypes, setStatusTypes] = useState([
@@ -83,7 +83,7 @@ export default function NewReportScreen({ navigation, route }) {
       <View style={styles.inputContainer}>
         <Text
           style={styles.labels}
-        > Report type </Text>
+        > What do you see? </Text>
         <DropDownPicker
           open={reportDropDown}
           value={reportCategory}
@@ -95,7 +95,7 @@ export default function NewReportScreen({ navigation, route }) {
           zIndexInverse={1000}
 
         />
-        <Text style={styles.labels} > Area of concern in meters </Text>
+        <Text style={styles.labels} > How far are you from the incident? </Text>
         <DropDownPicker
           open={radiusDropDown}
           value={radius}
@@ -107,14 +107,14 @@ export default function NewReportScreen({ navigation, route }) {
           zIndexInverse={3000}
           style={styles.picker}
         />
+        <Text style={styles.labels} > Tell us what you can observe. </Text>
         <TextInput
-          label="Descriptoion"
+          label="Description"
           placeholder='what do you see?'
           defaultValue=' '
           onChangeText={(text) => setDescription({ value: text })}
           multiline={true}
           returnKeyType='next'
-          style={styles.textInput}
         />
       </View>
       <View
@@ -223,9 +223,6 @@ const styles = StyleSheet.create({
   },
   labels: {
     marginVertical: 10,
-  },
-  textInput: {
-    marginTop: 10,
   },
   picker: {
     marginVertical: 10
