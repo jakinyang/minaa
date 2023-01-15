@@ -1,3 +1,4 @@
+import { Raleway_600SemiBold } from "@expo-google-fonts/raleway";
 import React, { useEffect } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
 import { Button, Portal, Dialog, MD2Colors } from 'react-native-paper';
@@ -99,8 +100,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#2196F3",
   },
   textStyle: {
-    color: "white",
-    fontWeight: "bold",
+    fontFamily: 'Raleway_600SemiBold',
     textAlign: "center"
   },
   modalText: {

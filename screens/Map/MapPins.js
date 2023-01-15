@@ -6,6 +6,7 @@ import { getTimeElapsed } from '../../shared/helpers/timeCalculator';
 import { formatDate } from '../../shared/helpers/dateFormatter';
 import { DefaultTheme } from 'react-native-paper';
 import { lightColor, PaperThemeColorsLight } from '../../assets/ColorPalette';
+import { OpenSans_400Regular } from '@expo-google-fonts/open-sans';
 export default function MapPins({
   navigation,
   pinData,
@@ -34,15 +35,20 @@ export default function MapPins({
         >
           <Card style={styles.card}>
             <Card.Content>
-              <Text variant="labelMedium" >
+              <Text style={styles.text} >
                 {time}
               </Text>
               <View style={styles.chipContainer}>
-              <Chip icon="alert-decagram"
-              theme={ChipTheme}
-              >{item.statusCategory}</Chip>
-              <Chip icon="smoke-detector-variant-alert"
-              theme={ChipTheme}>{item.reportCategory}</Chip>
+                <Chip
+                  icon="alert-decagram"
+                  theme={ChipTheme}
+                  textStyle={styles.text}
+                >{item.statusCategory}</Chip>
+                <Chip
+                  icon="smoke-detector-variant-alert"
+                  theme={ChipTheme}
+                  textStyle={styles.text}
+                >{item.reportCategory}</Chip>
               </View>
             </Card.Content>
           </Card>
@@ -79,5 +85,8 @@ const styles = StyleSheet.create({
   },
   card: {
     margin: 4,
+  },
+  text: {
+    fontFamily: 'OpenSans_400Regular'
   }
 })
