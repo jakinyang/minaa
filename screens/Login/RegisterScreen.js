@@ -16,6 +16,7 @@ import BackButton from './LoginComponents/BackButton.js'
 import { emailValidator } from './LoginHelpers/emailValidator.js'
 import { passwordValidator } from './LoginHelpers/passwordValidator.js'
 import { nameValidator } from './LoginHelpers/nameValidator.js'
+import { OpenSans_400Regular, OpenSans_700Bold } from '@expo-google-fonts/open-sans'
 
 export default function RegisterScreen({ navigation }) {
   const [firstName, setFirstName] = useState({ value: '', error: '' })
@@ -121,7 +122,7 @@ export default function RegisterScreen({ navigation }) {
           Sign Up
         </Button>
         <View style={styles.row}>
-          <Text>Already have an account? </Text>
+          <Text style={styles.text}>Already have an account? </Text>
           <TouchableOpacity onPress={() => navigation.replace('LoginScreen')}>
             <Text style={styles.link}>Login</Text>
           </TouchableOpacity>
@@ -142,7 +143,9 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   link: {
-    fontWeight: 'bold',
-    // color: theme.colors.primary,
+    fontFamily: 'OpenSans_700Bold'
+  },
+  text: {
+    fontFamily: 'OpenSans_400Regular'
   },
 })

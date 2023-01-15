@@ -9,7 +9,6 @@ import Background from './LoginComponents/Background.js';
 import Logo from './LoginComponents/Logo.js';
 import Header from './LoginComponents/Header.js';
 import Button from './LoginComponents/Button.js';
-
 import Paragraph from './LoginComponents/Paragraph.js';
 
 export default function StartScreen({ navigation }) {
@@ -18,7 +17,7 @@ export default function StartScreen({ navigation }) {
   return (
     <View style={{ ...styles.container, inset }}>
       <Logo />
-      <Header>MINNA</Header>
+      <Header>MINAA</Header>
       <Button
         mode="contained"
         style={{ paddingHorizontal: 8 }}
