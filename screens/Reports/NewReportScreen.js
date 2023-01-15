@@ -215,7 +215,7 @@ export default function NewReportScreen({ navigation, route }) {
           <Button
             title="Pick an image from camera roll"
             style={styles.buttonStyle}
-            onPress={pickImage}
+            onPress={pickImageAsync}
             mode="contained">
             Select Photo
           </Button>
