@@ -30,11 +30,9 @@ export default function ReportDetailScreen({ navigation, route }) {
     ...DefaultTheme,
     colors: {
       ...PaperThemeColorsLight,
-      primary: lightColor.lapizLazuli[300]
+      onSurfaceVariant: lightColor.otherGold[400]
     }
   }
-
-
 
   return (
     <View style={{ ...styles.container, paddingTop: insets.top }}>
@@ -42,7 +40,8 @@ export default function ReportDetailScreen({ navigation, route }) {
         <Card.Title
           title={route.params.reportCategory}
           left={(props) => <Avatar.Icon {...props} icon="mine" theme={IconTheme}/>}
-          right={(props) => <IconButton {...props} icon={saved ? "bookmark" : "bookmark-outline"} onPress={() => { setSaved(!saved) }}/>}
+          right={(props) => <IconButton {...props} icon={saved ? "bookmark" : "bookmark-outline"} theme={ContrastTheme}
+          onPress={() => { setSaved(!saved) }}/>}
         />
         <Card.Content>
           <Chip

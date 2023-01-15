@@ -180,34 +180,34 @@ export const darkColor =
 export const PaperThemeColorsLight = {
   "colors": {
     "primary": lightColor.lapizLazuli[200], // Color for buttons and main things
-    "onPrimary": "#dfe8ed",
-    "primaryContainer": "#c0d1dc",
-    "onPrimaryContainer": "#464f54",
-    "secondary": "#162e3f",
-    "onSecondary": "#a4b0b9",
+    "onPrimary": lightColor.bluePrimary[200],
+    "primaryContainer": lightColor.bluePrimary[400],
+    "onPrimaryContainer": lightColor.blackOff[800],
+    "secondary": lightColor.darkBlue[600],
+    "onSecondary": lightColor.darkBlue[200],
     "secondaryContainer": "transparent",
-    "onSecondaryContainer": "#0b1720", // This controls text for the chips
-    "tertiary": "#161a1e",
-    "onTertiary": "#a4a6a8",
-    "tertiaryContainer": "#494d51",
-    "onTertiaryContainer": "#0b0d0f",
-    "error": "#ba4b44",
-    "onError": "#f6bfbb",
-    "errorContainer": "#ed7e77",
-    "onErrorContainer": "#5d2622",
-    "background": "#e3e7e5",
-    "onBackground": "#4a4e4c",
-    "surface": "#e3e7e5",
-    "onSurface": "#4a4e4c", // Card text and card title
-    "surfaceVariant": "#c6cfca",
-    "onSurfaceVariant": lightColor.otherGold[400], // Bookmark Icon
-    "outline": "#c6cfca",
-    "outlineVariant": "#939c97",
+    "onSecondaryContainer": lightColor.darkBlue[800], // This controls text for the chips
+    "tertiary": lightColor.blackOff[600],
+    "onTertiary": lightColor.blackOff[200],
+    "tertiaryContainer": lightColor.blackOff[400],
+    "onTertiaryContainer": lightColor.blackOff[800],
+    "error": lightColor.redAccent[600],
+    "onError": lightColor.redAccent[200],
+    "errorContainer": lightColor.redAccent[600],
+    "onErrorContainer": lightColor.redAccent[800],
+    "background": lightColor.grayAccent[200],
+    "onBackground": lightColor.grayAccent[400],
+    "surface": lightColor.grayAccent[200],
+    "onSurface": lightColor.grayAccent[800], // Card text and card title
+    "surfaceVariant": lightColor.grayAccent[600],
+    "onSurfaceVariant": lightColor.grayAccent[700], // Bookmark Icon, Text Input, Back button
+    "outline": lightColor.grayAccent[600],
+    "outlineVariant": lightColor.grayAccent[600],
     "shadow": "rgb(0, 0, 0)",
     "scrim": "rgb(0, 0, 0)",
     "inverseSurface": "rgb(52, 47, 50)",
     "inverseOnSurface": "rgb(248, 238, 242)",
-    "inversePrimary": "#ed7e77",
+    "inversePrimary": lightColor.redAccent[600],
     "elevation": {
       "level0": "transparent",
       "level1": "rgb(250, 241, 250)",

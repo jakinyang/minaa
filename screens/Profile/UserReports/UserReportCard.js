@@ -1,13 +1,38 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, Dimensions } from "react-native"
-import { Avatar, Card, IconButton, Text, Chip } from 'react-native-paper';
+import { Avatar, Card, IconButton, Text, Chip, DefaultTheme } from 'react-native-paper';
 import { getTimeElapsed } from '../../../shared/helpers/timeCalculator';
+import { lightColor, PaperThemeColorsLight } from '../../../assets/ColorPalette';
 
 export const SLIDER_WIDTH = Dimensions.get('window').width - 50
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7)
 
 export const UserReportCard = ({ item, index }) => {
   let time = getTimeElapsed(item.createdAt)
+
+  const ChipTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...PaperThemeColorsLight,
+      primary: lightColor.otherGold[400]
+    }
+  }
+
+  const IconTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...PaperThemeColorsLight,
+      primary: lightColor.lapizLazuli[300]
+    }
+  }
+
+  const ContrastTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...PaperThemeColorsLight,
+      onSurfaceVariant: lightColor.otherGold[400]
+    }
+  }
 
   return (
     <Card
@@ -16,36 +41,45 @@ export const UserReportCard = ({ item, index }) => {
     >
       <Card.Title
         title={item.reportCategory}
-        left={(props) => <Avatar.Icon {...props} icon="mine" />}
-      // right={(props) => <IconButton {...props} icon={saved ? "bookmark" : "bookmark-outline"} onPress={() => { setSaved(!saved) }} />}
+        titleVariant='headlineSmall'
+        // FIX THIS
+        left={(props) => <Avatar.Icon {...props} icon="mine" 
+        theme={IconTheme}
+        />}
       />
+      {/* MAKE SURE REPORT CATEGORY FONT IS CONSISTENT */}
       <Card.Content>
         <Chip
           style={styles.chip} icon="alert-decagram"
+          theme={ChipTheme}
         >
-          Status: {item.statusCategory}
+          STATUS: {item.statusCategory}
         </Chip>
         <Chip
           icon="map-marker-alert-outline" style={styles.chip}
+          theme={ChipTheme}
         >
-          Latitude: {item.latitude}
+          LATITUDE: {item.latitude}
         </Chip>
         <Chip
           icon="map-marker-alert-outline" style={styles.chip}
+          theme={ChipTheme}
         >
-          Longitude: {item.longitude}
+          LONGITUDE: {item.longitude}
         </Chip>
         <Chip
           style={styles.chip}
           icon="information"
+          theme={ChipTheme}
         >
-          Report ID: {item.id}
+          REPORT ID: {item.id}
         </Chip>
         <Chip
           style={styles.chip}
           icon="radar"
+          theme={ChipTheme}
         >
-          Reported Area: {item.radius}m
+          REPORTED AREA: {item.radius}m
         </Chip>
         <Text style={styles.description}>
           Reported: {time} ago
