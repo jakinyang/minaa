@@ -8,7 +8,7 @@ export default function UserInfo() {
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{ alignSelf: "center" }}>
                     <View style={styles.profileImage}>
-                        <Image source={require("../../assets/RandomUser1.jpg")} style={styles.image} resizeMode="center"></Image>
+                        <Image source={require("../../assets/RandomUser2.png")} style={styles.image} resizeMode="center"></Image>
                     </View>
                     <View style={styles.dm}>
                         <MaterialIcons name="chat" size={18} color="#DFD8C8"></MaterialIcons>
@@ -20,7 +20,7 @@ export default function UserInfo() {
                 </View>
 
                 <View style={styles.infoContainer}>
-                    <Text style={[styles.text, { fontWeight: "200", fontSize: 36 }]}>User Name</Text>
+                    <Text style={[styles.text, { fontWeight: "200", fontSize: 36 }]}>JS</Text>
                     <Text style={[styles.text, { color: "#AEB5BC", fontSize: 14 }]}>Full Stack Web Developer</Text>
                 </View>
 

@@ -62,7 +62,7 @@ export default function SettingsScreen({ navigation }) {
         </Card>
 
         <Card
-          style={styles.card}
+          style={styles.card2}
         >
           <Card.Content>
 
@@ -92,7 +92,13 @@ const styles = StyleSheet.create({
   },
   card: {
     // flex: 1,
-    marginTop: 50,
+    marginTop: 400,
+    marginVertical: 5,
+    marginHorizontal: 10,
+  },
+  card2: {
+    // flex: 1,
+    marginTop: 40,
     marginVertical: 5,
     marginHorizontal: 10,
   },
