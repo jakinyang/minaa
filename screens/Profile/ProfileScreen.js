@@ -11,6 +11,7 @@ import MockTable from './MockTable';
 import { GET_USER_REPORTS } from '../../src/Queries/UserReportsQueries';
 import { UserContext } from '../../shared/userContext';
 import { Raleway_400Regular, Raleway_700Bold } from '@expo-google-fonts/raleway';
+import Loading from '../Loading';
 export default function ProfileScreen({ navigation }) {
   // Bottom Sheet Helpers
   const bottomSheetModalRef = useRef(null);
@@ -36,7 +37,7 @@ export default function ProfileScreen({ navigation }) {
     }
 
   });
-  if (loading) return <Text style={{ flex: 1, alignItems: 'center', justifyContent: 'center', alignSelf: 'center', marginTop: 400 }}>Loading...</Text>;
+  if (loading) return <Loading />;
   if (error) console.log(`Error! ${error}`);
 
   return (
