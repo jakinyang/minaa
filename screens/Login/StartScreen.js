@@ -26,7 +26,7 @@ export default function StartScreen({ navigation }) {
       <Header>MINAA</Header>
       <Button
         mode="contained"
-        style={{ paddingHorizontal: 8 }}
+        style={{ paddingHorizontal: 8, marginTop: 40 }}
         onPress={() => navigation.navigate('LoginScreen')}
         textColor={loginTextColor}
       >

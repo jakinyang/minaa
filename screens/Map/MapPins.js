@@ -20,6 +20,7 @@ export default function MapPins({
       primary: lightColor.otherGold[400]
     }
   }
+  
 
   return (pinData?.map((item, i) => {
     const time = "Reported: " + formatDate(item.createdAt)
@@ -27,7 +28,8 @@ export default function MapPins({
       <Marker
         coordinate={{ latitude: item.latitude, longitude: item.longitude }}
         key={i}
-        pinColor={lightColor.redAccent[400]}
+        pinColor={"red"}
+        image={require('../../assets/pinRed200.png')}
       >
         <Callout
           tooltip

@@ -9,6 +9,7 @@ export default function TempPins({ tempCoords }) {
   return (
     <Marker
       coordinate={{latitude: tempCoords.latitude, longitude: tempCoords.longitude}}
+      image={require("../../assets/pinRed200.png")}
     >
     </Marker>
   )
