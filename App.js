@@ -108,7 +108,7 @@ import { lightColor, darkColor, PaperThemeColorsLight, PaperThemeColorsDark } fr
 import Loading from './screens/Loading';
 
 const link = new HttpLink({
-  uri: "http://192.168.68.51:4000",
+  uri: "http://192.168.1.75:4000",
   credentials: 'omit'
 });
 

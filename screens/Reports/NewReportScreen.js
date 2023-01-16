@@ -182,7 +182,7 @@ export default function NewReportScreen({ navigation, route }) {
             setOpen={setRadiusDropDown}
             setItems={setRadiusValue}
             setValue={setRadius}
-            zIndex={1000}
+            zIndex={800}
             zIndexInverse={3000}
             style={styles.picker}
           />
@@ -194,7 +194,7 @@ export default function NewReportScreen({ navigation, route }) {
             setOpen={setDistanceDropDown}
             setItems={setReportDistanceTypes}
             setValue={setReportDistance}
-            zIndex={1000}
+            zIndex={600}
             zIndexInverse={3000}
             style={styles.picker}
           />
@@ -309,7 +309,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     padding: 20,
-    marginTop: 20
+    marginTop: 20,
   },
   buttonContainer: {
     width: "50%",
