@@ -5,7 +5,7 @@ import { PreferencesContext } from '../../../shared/preferencesContext'
 
 export default function Logo() {
   const { isThemeDark } = useContext(PreferencesContext);
-  return <Image style={ isThemeDark ? styles.imageDark : styles.image }source={require('../../../assets/handshake.png')}/>
+  return <Image style={ isThemeDark ? styles.imageDark : styles.image }source={require('../../../assets/MinaaLogo1.png')}/>
 }
 
 const styles = StyleSheet.create({

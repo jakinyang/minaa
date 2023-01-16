@@ -132,7 +132,7 @@ export default function App() {
     ...DefaultTheme,
     colors: {
       // primary: lightColor.lapizLazuli[800],
-      background: "#262616",
+      background: "#192331",
       // card: 'rgb(18, 18, 18)',
       // text: 'rgb(229, 229, 231)',
       // border: 'rgb(39, 39, 41)',
