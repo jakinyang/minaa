@@ -87,7 +87,7 @@ export default function LoginScreen({ navigation }) {
           <>
             <Header>Welcome.</Header>
             <Button mode="contained" onPress={onLogoutPressed}>
-              Logout
+              LOGOUT
             </Button>
           </>
           :
@@ -122,7 +122,7 @@ export default function LoginScreen({ navigation }) {
               </TouchableOpacity>
             </View>
             <Button mode="contained" onPress={onLoginPressed}>
-              Login
+              LOGIN
             </Button>
             <View style={styles.row}>
               <Text style={styles.text}>Don't have an account? </Text>

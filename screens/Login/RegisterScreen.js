@@ -1,8 +1,8 @@
 // RN imports
 import React, { useState } from 'react'
 import { View, StyleSheet, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native'
-import { Text } from 'react-native-paper'
-
+import { Text, IconButton } from 'react-native-paper'
+import { getStatusBarHeight } from 'react-native-status-bar-height'
 // component imports
 import Background from './LoginComponents/Background.js'
 import Logo from './LoginComponents/Logo.js'
@@ -50,7 +50,12 @@ export default function RegisterScreen({ navigation }) {
     <ScrollView style={{ flex: 1, width: "100%", height: "100%" }}>
       <SafeAreaView />
       <Background>
-        <BackButton goBack={navigation.goBack} />
+      <IconButton
+          icon="arrow-left"
+          size={30}
+          onPress={() => navigation.goBack()}
+          style={styles.backButton}
+        />
         <Logo />
         <Header>Create Account</Header>
         <TextInput
@@ -119,7 +124,7 @@ export default function RegisterScreen({ navigation }) {
           onPress={onSignUpPressed}
           style={{ marginTop: 24 }}
         >
-          Sign Up
+          SIGN UP
         </Button>
         <View style={styles.row}>
           <Text style={styles.text}>Already have an account? </Text>
@@ -147,5 +152,10 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: 'OpenSans_400Regular'
+  },
+  backButton: {
+    position: 'absolute',
+    top: getStatusBarHeight(),
+    left: 4,
   },
 })
