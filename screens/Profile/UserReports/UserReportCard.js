@@ -68,14 +68,14 @@ export const UserReportCard = ({ item, index }) => {
           >
             LONGITUDE: {item.longitude}
           </Chip>
-          <Chip
+          {/* <Chip
             style={styles.chip}
             icon="information"
             theme={ChipTheme}
             textStyle={styles.chipText}
           >
             REPORT ID: {item.id}
-          </Chip>
+          </Chip> */}
           <Chip
             style={styles.chip}
             icon="radar"
