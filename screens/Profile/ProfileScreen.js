@@ -10,6 +10,7 @@ import BottomSheet from '../BottomSheet';
 import MockTable from './MockTable';
 import { GET_USER_REPORTS } from '../../src/Queries/UserReportsQueries';
 import { UserContext } from '../../shared/userContext';
+import { Raleway_400Regular, Raleway_700Bold } from '@expo-google-fonts/raleway';
 export default function ProfileScreen({ navigation }) {
   // Bottom Sheet Helpers
   const bottomSheetModalRef = useRef(null);
@@ -47,6 +48,7 @@ export default function ProfileScreen({ navigation }) {
         size={50}
         label="JS"
       />
+      <Text style={styles.text}>Your Reports</Text>
       <View
         style={styles.buttonContainer}
       >
@@ -86,7 +88,7 @@ const styles = StyleSheet.create({
   },
   avatar: {
     position: 'absolute',
-    top: 20,
+    top: 50,
     right: 20
   },
   buttonContainer: {
@@ -95,5 +97,12 @@ const styles = StyleSheet.create({
   button: {
     margin: 10,
   },
+  text: {
+    position: 'absolute',
+    top: 120,
+    alignSelf: 'center',
+    fontSize: 30,
+    fontFamily: 'Raleway_600SemiBold'
+  }
 
 });

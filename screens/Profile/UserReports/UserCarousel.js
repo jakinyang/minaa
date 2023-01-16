@@ -43,7 +43,7 @@ export default function UserCarousel({data}) {
 const styles = StyleSheet.create({
   carouselContainer: {
     position: 'absolute',
-    top: 100,
+    top: 180,
     alignSelf: 'center',
   },
 });
