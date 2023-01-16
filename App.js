@@ -107,8 +107,10 @@ import { PreferencesContext } from './shared/preferencesContext';
 import { lightColor, darkColor, PaperThemeColorsLight, PaperThemeColorsDark } from './assets/ColorPalette';
 import Loading from './screens/Loading';
 
+const LOCALHOST = env('LOCALHOST' || 'http://localhost:4000/');
+
 const link = new HttpLink({
-  uri: 'http://localhost:4000/',
+  uri: LOCALHOST,
   credentials: 'omit'
 });
 

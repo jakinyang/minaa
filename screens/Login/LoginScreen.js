@@ -44,7 +44,7 @@ export default function LoginScreen({ navigation }) {
         return
       }
 
-      alert("Login successful")
+      // alert("Login successful")
       setUser(data.usersSearch[0].id)
 
       navigation.navigate('Home', {
