@@ -5,7 +5,7 @@ import MapView, {
 } from "react-native-maps";
 import { mapStyleDark, mapStyleLight } from "./mapStyle";
 import { PreferencesContext } from "../../shared/preferencesContext";
-
+import { UserContext } from "../../shared/userContext";
 
 export default function Map({
   children,
@@ -18,7 +18,7 @@ export default function Map({
 }) {
   const { isThemeDark } = useContext(PreferencesContext);
   let mapTheme = isThemeDark ? mapStyleDark : mapStyleLight;
-
+  const { user, setUser } = useContext(UserContext);
   return (
     <MapView
       style={styles.map}
@@ -30,25 +30,29 @@ export default function Map({
       onRegionChangeComplete={(region) => setRegion(region)}
       ref={mapRef}
       onLongPress={(e) => {
-        const longitude = Number((e.nativeEvent.coordinate.longitude).toFixed(6));
-        const latitude = Number((e.nativeEvent.coordinate.latitude).toFixed(6));
-        console.log(`Long Press Event Coordinate Data => latitude: ${latitude}, longitude: ${longitude}`)
-        setTempCoords({
-          latitude,
-          longitude,
-        });
-        const tempReport = {
-          id: null,
-          latitude: latitude,
-          longitude: longitude,
-          description: null,
-          radius: null,
-          statusCategory: null,
-          reportCategory: null,
-          imageUrl: null,
-          userId: userInfo.id
-        };
-        setModalVisible(true);
+        if(user) {
+          const longitude = Number((e.nativeEvent.coordinate.longitude).toFixed(6));
+          const latitude = Number((e.nativeEvent.coordinate.latitude).toFixed(6));
+          console.log(`Long Press Event Coordinate Data => latitude: ${latitude}, longitude: ${longitude}`)
+          setTempCoords({
+            latitude,
+            longitude,
+          });
+          const tempReport = {
+            id: null,
+            latitude: latitude,
+            longitude: longitude,
+            description: null,
+            radius: null,
+            statusCategory: null,
+            reportCategory: null,
+            imageUrl: null,
+            userId: userInfo.id
+          };
+          setModalVisible(true);
+        } else {
+          alert("Please log in to report a new incident");
+        }
       }}
     >
       {children}
