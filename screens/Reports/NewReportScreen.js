@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { useMutation } from '@apollo/client';
 import { useState, useRef } from 'react';
-import { View, StyleSheet, ScrollView, Image, SafeAreaView, Platform } from 'react-native';
-import { Dialog, Portal, Text, Button } from 'react-native-paper';
+import { View, StyleSheet, ScrollView, Platform } from 'react-native';
+import { Text, Button, IconButton } from 'react-native-paper';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { CREATE_A_REPORT } from "../../src/Mutations/CreateAReport"
 import { FETCH_ALL_REPORTS } from "../../src/Queries/FetchAllReports";
@@ -10,6 +10,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import TextInput from '../Login/LoginComponents/TextInput';
 import * as ImagePicker from 'expo-image-picker';
 import * as MediaLibrary from 'expo-media-library';
+import { getStatusBarHeight } from 'react-native-status-bar-height'
 
 import ImageViewer from '../../shared/ImageViewer';
 const PlaceholderImage = require("../../assets/landmine-warning.png");
@@ -147,9 +148,11 @@ export default function NewReportScreen({ navigation, route }) {
   return (
     <View style={{ ...styles.container, paddingTop: insets.top }}>
       <ScrollView>
-        <BackButton
-          goBack={goBack}
-        />
+      <IconButton
+        icon="arrow-left"
+        size={30}
+        onPress={goBack}
+      />
         <Text
           variant='displaySmall'
           style={styles.title}
@@ -336,5 +339,10 @@ const styles = StyleSheet.create({
   imageContainer: {
     flex: 1,
     paddingTop: 20,
+  },
+  backButton: {
+    position: 'absolute',
+    top: getStatusBarHeight(),
+    left: 4,
   }
 })

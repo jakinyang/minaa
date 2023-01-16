@@ -1,16 +1,19 @@
 import React from 'react'
-import { IconButton, Text } from 'react-native-paper'
+import { IconButton, Text, View } from 'react-native-paper'
 import { TouchableOpacity, StyleSheet } from 'react-native'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 
 export default function BackButton({ goBack }) {
   return (
-    <IconButton
-      icon="arrow-left"
-      size={30}
+    <View
       style={styles.container}
-      onPress={goBack}
-    />
+    >
+      <IconButton
+        icon="arrow-left"
+        size={30}
+        onPress={goBack}
+      />
+    </View>
   )
 }
 

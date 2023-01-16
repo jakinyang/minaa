@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { View, StyleSheet, SafeAreaView, Text, FlatList, ScrollView } from 'react-native';
-import { Button, IconButton, MD3Colors, useTheme, Appbar, TouchableRipple, Switch, Card,  } from 'react-native-paper';
+import { IconButton, MD3Colors, useTheme, Switch, Card,  } from 'react-native-paper';
+import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { PreferencesContext } from '../../shared/preferencesContext';
 import UserInfo
   from './UserInfo';
@@ -10,6 +11,9 @@ export default function SettingsScreen({ navigation }) {
   const [emailNotification, setEmailNotification] = useState(false)
   const [defaultLocation, setDefaultLocation] = useState(false)
 
+  const goBack = () => {
+    navigation.goBack();
+  }
   return (
     <>
       <SafeAreaView  />
@@ -19,12 +23,11 @@ export default function SettingsScreen({ navigation }) {
         style={styles.container}
       >
         <IconButton
-          icon="arrow-left"
-          iconColor={MD3Colors.primary0}
-          style={styles.goBack}
-          size={30}
-          onPress={() => navigation.goBack()}
-        />
+        icon="arrow-left"
+        size={30}
+        onPress={goBack}
+        style={styles.backButton}
+      />
         <Card
           style={styles.card}
         >
@@ -120,4 +123,9 @@ const styles = StyleSheet.create({
     marginRight: 60,
     fontFamily: 'OpenSans_400Regular',
   },
+  backButton: {
+    position: 'absolute',
+    top: getStatusBarHeight(),
+    left: 4,
+  }
 });
