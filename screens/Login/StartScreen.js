@@ -12,34 +12,49 @@ import Button from './LoginComponents/Button.js';
 import Paragraph from './LoginComponents/Paragraph.js';
 import { PreferencesContext } from '../../shared/preferencesContext.js';
 import { lightColor } from '../../assets/ColorPalette.js';
+import { UserContext } from '../../shared/userContext.js';
 
 export default function StartScreen({ navigation }) {
   const inset = useSafeAreaInsets();
   const { isThemeDark } = useContext(PreferencesContext);
+  const { user, setUser } = useContext(UserContext);
   let loginTextColor = isThemeDark ? "#cfab58" : null
   let signUpButtonColor = isThemeDark ? "#cfab58" : null
   let signUpTextColor = isThemeDark ? lightColor.lapizLazuli[300] : null
-  
+  const onLogoutPressed = () => {
+    setUser(null)
+  }
   return (
     <View style={{ ...styles.container, inset }}>
       <Logo />
       <Header>MINAA</Header>
-      <Button
-        mode="contained"
-        style={{ paddingHorizontal: 8, marginTop: 40 }}
-        onPress={() => navigation.navigate('LoginScreen')}
-        textColor={loginTextColor}
-      >
-       LOGIN
-      </Button>
-      <Button
-        mode="elevated"
-        onPress={() => navigation.navigate('RegisterScreen')}
-        buttonColor = {signUpButtonColor}
-        textColor = {signUpTextColor}
-      >
-        SIGN UP
-      </Button>
+      {
+        user ?
+          <>
+            <Button mode="contained" onPress={onLogoutPressed}>
+              Logout
+            </Button>
+          </>
+          :
+          <>
+            <Button
+              mode="contained"
+              style={{ paddingHorizontal: 8, marginTop: 40 }}
+              onPress={() => navigation.navigate('LoginScreen')}
+              textColor={loginTextColor}
+            >
+              LOGIN
+            </Button>
+            <Button
+              mode="elevated"
+              onPress={() => navigation.navigate('RegisterScreen')}
+              buttonColor={signUpButtonColor}
+              textColor={signUpTextColor}
+            >
+              SIGN UP
+            </Button>
+          </>
+      }
     </View>
   )
 }
