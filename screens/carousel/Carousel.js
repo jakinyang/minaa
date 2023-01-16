@@ -2,7 +2,6 @@ import React, { useState, useRef} from 'react';
 import { StyleSheet, View } from "react-native";
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { CarouselCardItem, SLIDER_WIDTH, ITEM_WIDTH } from './CarouselCard.js';
-import { mockCardData } from '../mock_data/MockCardData.js';
 
 import proximityCalculator from '../../shared/helpers/proximityCalculator.js';
 

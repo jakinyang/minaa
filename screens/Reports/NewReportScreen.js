@@ -213,16 +213,10 @@ export default function NewReportScreen({ navigation, route }) {
         <View
           style={styles.buttonContainer}
         >
-          <Button
-            title="Pick an image from camera roll"
-            style={styles.buttonStyle}
-            onPress={pickImageAsync}
-            mode="contained">
-            Select Photo
-          </Button>
+          
          
           <Button
-            mode='outlined'
+            mode='contained'
             style={styles.buttonStyle}
             onPress={() => {
               let reportString = `The reporter is ${reportDistance}m from the incident. The reporter says "${reportCategory}" about the incident. The incident may cover an area of ${radius}m. The reporter offered the description of the incident as following: ${description.value}`
@@ -285,10 +279,17 @@ export default function NewReportScreen({ navigation, route }) {
                 merge: true
               })
             }} >Submit Report</Button>
+            <Button
+            title="Pick an image from camera roll"
+            style={styles.buttonStyle}
+            onPress={pickImageAsync}
+            mode="outlined">
+            Select Photo
+          </Button>
              <GestureHandlerRootView style={styles.photoContainer}>
           <View style={styles.imageContainer}>
             <View ref={imageRef} collapsable={false}>
-              < ImageViewer placeholderImageSource={PlaceholderImage} selectedImage={selectedImage} />
+              < ImageViewer selectedImage={selectedImage} />
             </View>
           </View>
         </GestureHandlerRootView>
