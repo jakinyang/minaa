@@ -71,7 +71,7 @@ export default function HomeScreenRemaster({ navigation, route }) {
     }
   );
 
-  if (loading) return <Loading />/*<Text style={{ flex: 1, alignItems: 'center', justifyContent: 'center', alignSelf: 'center', marginTop: 400 }}>Loading...</Text>;*/
+  if (loading) return <Loading />;
   if (error) console.log("fetching error", error.message);
 
   return (

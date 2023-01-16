@@ -105,6 +105,7 @@ import UserProvider from './shared/userContext';
 import FontProvider from './shared/fontContext';
 import { PreferencesContext } from './shared/preferencesContext';
 import { lightColor, darkColor, PaperThemeColorsLight, PaperThemeColorsDark } from './assets/ColorPalette';
+import Loading from './screens/Loading';
 
 const link = new HttpLink({
   uri: 'http://localhost:4000/',
@@ -201,7 +202,7 @@ export default function App() {
   })
   
   if (!fontsLoaded) {
-    return null;
+    return <Loading />
   }
   return (
     <PreferencesContext.Provider value={preferences}>

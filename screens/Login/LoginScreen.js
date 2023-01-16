@@ -1,7 +1,8 @@
 // RN imports
 import React, { useEffect, useState, useContext } from 'react'
 import { TouchableOpacity, StyleSheet, View, SafeAreaView } from 'react-native'
-import { Text } from 'react-native-paper'
+import { Text, IconButton } from 'react-native-paper'
+import { getStatusBarHeight } from 'react-native-status-bar-height'
 
 //backend imports
 import { useLazyQuery } from '@apollo/client';
@@ -20,6 +21,7 @@ import { emailValidator } from './LoginHelpers/emailValidator.js'
 import { passwordValidator } from './LoginHelpers/passwordValidator.js'
 import { UserContext } from '../../shared/userContext.js';
 import { OpenSans_400Regular, OpenSans_700Bold } from '@expo-google-fonts/open-sans';
+import Loading from '../Loading.js';
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
@@ -48,6 +50,7 @@ export default function LoginScreen({ navigation }) {
     }
   })
   if (error) console.log(`Error ${error.message}`);
+  if (loading) return <Loading />;
 
   const onLoginPressed = () => {
     const emailError = emailValidator(email.value)
@@ -65,7 +68,12 @@ export default function LoginScreen({ navigation }) {
     <>
       <SafeAreaView />
       <Background>
-        <BackButton goBack={navigation.goBack} />
+      <IconButton
+        icon="arrow-left"
+        size={30}
+        onPress={() => navigation.goBack()}
+        style={styles.backButton}
+      />
         <Logo />
         <Header>Welcome back.</Header>
         <TextInput
@@ -129,5 +137,11 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: 'OpenSans_400Regular'
-  }
+  },
+  backButton: {
+    position: 'absolute',
+    top: getStatusBarHeight(),
+    left: 4,
+  },
+
 })
