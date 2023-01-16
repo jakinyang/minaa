@@ -15,6 +15,7 @@ import DialoguePopup from './DialoguePopup';
 import CarouselCards from './carousel/Carousel';
 import { FETCH_ALL_REPORTS } from '../src/Queries/FetchAllReports';
 import FabGroup from './FabGroup';
+import Loading from './Loading';
 
 export default function HomeScreenRemaster({ navigation, route }) {
   // Map Helpers
@@ -70,7 +71,7 @@ export default function HomeScreenRemaster({ navigation, route }) {
     }
   );
 
-  if (loading) return <Text style={{ flex: 1, alignItems: 'center', justifyContent: 'center', alignSelf: 'center', marginTop: 400 }}>Loading...</Text>;
+  if (loading) return <Loading />/*<Text style={{ flex: 1, alignItems: 'center', justifyContent: 'center', alignSelf: 'center', marginTop: 400 }}>Loading...</Text>;*/
   if (error) console.log("fetching error", error.message);
 
   return (
