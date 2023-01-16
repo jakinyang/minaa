@@ -26,13 +26,16 @@ import Loading from '../Loading.js';
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
-  const { user, setUser} = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext)
 
-    // "Janessa.Witting@gmail.com" "2bRUK1aPe0vj2wf"
-  const[getCurrentUser, { data, loading, error }] = useLazyQuery(CURRENT_USER, {
-    variables: {"search": {
-      "email": email.value
-    }},
+  //  "Sylvia.Tremblay40@hotmail.com" 
+  //  "CFPvtRPIdwDYKv7"
+  const [getCurrentUser, { data, loading, error }] = useLazyQuery(CURRENT_USER, {
+    variables: {
+      "search": {
+        "email": email.value
+      }
+    },
     fetchPolicy: 'cache-and-network',
     onCompleted: (data) => {
       console.log('oncompleted triggered');
@@ -40,7 +43,7 @@ export default function LoginScreen({ navigation }) {
         alert("Invalid email or password, please try again")
         return
       }
-  
+
       alert("Login successful")
       setUser(data.usersSearch[0].id)
 
@@ -55,7 +58,7 @@ export default function LoginScreen({ navigation }) {
   const onLoginPressed = () => {
     const emailError = emailValidator(email.value)
     const passwordError = passwordValidator(password.value)
-    
+
     if (emailError || passwordError) {
       setEmail({ ...email, error: emailError })
       setPassword({ ...password, error: passwordError })
@@ -63,56 +66,72 @@ export default function LoginScreen({ navigation }) {
     }
     getCurrentUser()
   }
+  const onLogoutPressed = () => {
+    setUser(null)
+  }
 
   return (
     <>
       <SafeAreaView />
       <Background>
-      <IconButton
-        icon="arrow-left"
-        size={30}
-        onPress={() => navigation.goBack()}
-        style={styles.backButton}
-      />
+        <IconButton
+          icon="arrow-left"
+          size={30}
+          onPress={() => navigation.goBack()}
+          style={styles.backButton}
+        />
         <Logo />
-        <Header>Welcome back.</Header>
-        <TextInput
-          label="Email"
-          returnKeyType="next"
-          value={email.value}
-          onChangeText={(text) => setEmail({ value: text, error: '' })}
-          error={!!email.error}
-          errorText={email.error}
-          autoCapitalize="none"
-          autoCompleteType="email"
-          textContentType="emailAddress"
-          keyboardType="email-address"
-        />
-        <TextInput
-          label="Password"
-          returnKeyType="done"
-          value={password.value}
-          onChangeText={(text) => setPassword({ value: text, error: '' })}
-          error={!!password.error}
-          errorText={password.error}
-          secureTextEntry
-        />
-        <View style={styles.forgotPassword}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('ResetPasswordScreen')}
-          >
-            <Text style={styles.forgot}>Forgot your password?</Text>
-          </TouchableOpacity>
-        </View>
-        <Button mode="contained" onPress={onLoginPressed}>
-          Login
-        </Button>
-        <View style={styles.row}>
-          <Text style={styles.text}>Don't have an account? </Text>
-          <TouchableOpacity onPress={() => navigation.replace('RegisterScreen')}>
-            <Text style={styles.link}>Register</Text>
-          </TouchableOpacity>
-        </View>
+
+
+        {user ?
+          <>
+            <Header>Welcome.</Header>
+            <Button mode="contained" onPress={onLogoutPressed}>
+              Logout
+            </Button>
+          </>
+          :
+          <>
+            <Header>Welcome back.</Header>
+            <TextInput
+              label="Email"
+              returnKeyType="next"
+              value={email.value}
+              onChangeText={(text) => setEmail({ value: text, error: '' })}
+              error={!!email.error}
+              errorText={email.error}
+              autoCapitalize="none"
+              autoCompleteType="email"
+              textContentType="emailAddress"
+              keyboardType="email-address"
+            />
+            <TextInput
+              label="Password"
+              returnKeyType="done"
+              value={password.value}
+              onChangeText={(text) => setPassword({ value: text, error: '' })}
+              error={!!password.error}
+              errorText={password.error}
+              secureTextEntry
+            />
+            <View style={styles.forgotPassword}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('ResetPasswordScreen')}
+              >
+                <Text style={styles.forgot}>Forgot your password?</Text>
+              </TouchableOpacity>
+            </View>
+            <Button mode="contained" onPress={onLoginPressed}>
+              Login
+            </Button>
+            <View style={styles.row}>
+              <Text style={styles.text}>Don't have an account? </Text>
+              <TouchableOpacity onPress={() => navigation.replace('RegisterScreen')}>
+                <Text style={styles.link}>Register</Text>
+              </TouchableOpacity>
+            </View>
+          </>
+        }
       </Background>
     </>
   )
