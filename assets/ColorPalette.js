@@ -223,7 +223,7 @@ export const PaperThemeColorsLight = {
 }
 export const PaperThemeColorsDark = {
   "colors": {
-    "primary": lightColor.lapizLazuli[200], // Color for buttons and main things
+    "primary": lightColor.lightseagreen[800], // Color for buttons and main things
     "onPrimary": lightColor.bluePrimary[200],
     "primaryContainer": lightColor.bluePrimary[400],
     "onPrimaryContainer": lightColor.blackOff[800],

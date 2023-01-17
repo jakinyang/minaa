@@ -14,13 +14,14 @@ import { PreferencesContext } from '../../shared/preferencesContext.js';
 import { lightColor } from '../../assets/ColorPalette.js';
 import { UserContext } from '../../shared/userContext.js';
 
+
 export default function StartScreen({ navigation }) {
   const inset = useSafeAreaInsets();
   const { isThemeDark } = useContext(PreferencesContext);
   const { user, setUser } = useContext(UserContext);
   let loginTextColor = isThemeDark ? "#cfab58" : null
   let signUpButtonColor = isThemeDark ? "#cfab58" : null
-  let signUpTextColor = isThemeDark ? lightColor.lapizLazuli[300] : null
+  let signUpTextColor = isThemeDark ? lightColor.lightseagreen[900] : null
   const onLogoutPressed = () => {
     setUser(null)
   }
