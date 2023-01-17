@@ -11,15 +11,20 @@ import ResourceStack from './ResourcesStack';
 import ProfileStack from './ProfileStack';
 
 import { lightColor, darkColor } from '../assets/ColorPalette';
+import { PreferencesContext } from '../shared/preferencesContext';
+// import bottomSheet from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheet';
+
 
 const Tab = createMaterialBottomTabNavigator();
 
 export default function HomeStack() {
+const { isThemeDark } = useContext(PreferencesContext);
+let botNavColor = isThemeDark ? lightColor.lightseagreen[900] : lightColor.lapizLazuli[400]
   
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      barStyle={{ backgroundColor: lightColor.lapizLazuli[400] }}
+      barStyle={{ backgroundColor: botNavColor }}
       backBehavior="initialRoute"
       labeled={false}
       activeColor={lightColor.otherGold[400]}

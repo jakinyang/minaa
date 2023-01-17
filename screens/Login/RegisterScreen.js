@@ -10,6 +10,8 @@ import Header from './LoginComponents/Header.js'
 import Button from './LoginComponents/Button.js'
 import TextInput from './LoginComponents/TextInput.js'
 import BackButton from './LoginComponents/BackButton.js'
+import { lightColor } from '../../assets/ColorPalette.js'
+import { PreferencesContext } from '../../shared/preferencesContext.js'
 // import { theme } from '../core/theme'
 
 // helper function imports
@@ -17,8 +19,11 @@ import { emailValidator } from './LoginHelpers/emailValidator.js'
 import { passwordValidator } from './LoginHelpers/passwordValidator.js'
 import { nameValidator } from './LoginHelpers/nameValidator.js'
 import { OpenSans_400Regular, OpenSans_700Bold } from '@expo-google-fonts/open-sans'
+import { useContext } from 'react'
 
 export default function RegisterScreen({ navigation }) {
+  const { isThemeDark } = useContext(PreferencesContext);
+  let signUpTextColor = isThemeDark ? lightColor.otherGold[400] : null;
   const [firstName, setFirstName] = useState({ value: '', error: '' })
   const [lastName, setLastName] = useState({ value: '', error: '' })
   const [phoneNumber, setPhoneNumber] = useState({ value: '', error: '' })
@@ -123,6 +128,7 @@ export default function RegisterScreen({ navigation }) {
           mode="contained"
           onPress={onSignUpPressed}
           style={{ marginTop: 24 }}
+          textColor={signUpTextColor}
         >
           SIGN UP
         </Button>
