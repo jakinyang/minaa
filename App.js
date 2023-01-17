@@ -1,3 +1,4 @@
+import { LogBox } from 'react-native';
 import React, {
   useState,
   useCallback,
@@ -107,6 +108,8 @@ import { PreferencesContext } from './shared/preferencesContext';
 import { lightColor, darkColor, PaperThemeColorsLight, PaperThemeColorsDark } from './assets/ColorPalette';
 import Loading from './screens/Loading';
 
+LogBox.ignoreAllLogs(); //Ignore all log notifications
+
 const link = new HttpLink({
   uri: "http://192.168.1.75:4000",
   credentials: 'omit'
@@ -117,7 +120,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 export default function App() {
-
   const DefaultNavTheme = {
     ...DefaultTheme,
     colors: {
