@@ -111,7 +111,7 @@ import Loading from './screens/Loading';
 LogBox.ignoreAllLogs(); //Ignore all log notifications
 
 const link = new HttpLink({
-  uri: "http://192.168.1.75:4000",
+  uri: "http://localhost:4000",
   credentials: 'omit'
 });
 
