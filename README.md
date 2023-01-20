@@ -55,4 +55,29 @@ With Minaa, users can view a map with map pins that identify possible landmine l
  - "reanimated-bottom-sheet": "^1.0.0-alpha.22"  
 
 ### Node-modules-fix:
-  go into node_modules/
+  go into node_modules/react-native/index.js
+    Go to line 436, where it should display "// Deprecated Prop Types"
+    and then replace line 437 - 464 with the following code:
+     
+    
+    get ColorPropType(): $FlowFixMe {
+    console.warn('');
+    return require('deprecated-react-native-prop-types').ColorPropType;
+  },
+
+  get EdgeInsetsPropType(): $FlowFixMe {
+    console.warn('');
+    return require('deprecated-react-native-prop-types').EdgeInsetsPropType;
+  },
+
+  get PointPropType(): $FlowFixMe {
+    console.warn('');
+    return require('deprecated-react-native-prop-types').PointPropType;
+  },
+
+  get ViewPropTypes(): $FlowFixMe {
+    console.warn('');
+    return require('deprecated-react-native-prop-types').ViewPropTypes;
+  },
+
+Screenshots and a youtube link including a video of the team of creators presenting the project will be included in this readme soon.
