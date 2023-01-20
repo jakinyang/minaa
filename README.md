@@ -24,7 +24,7 @@ npx expo start
 
 # Media and Screenshots
 
-[Video Presentation](file:///Users/jakinbacon/Downloads/Replay%20-%20January%2019,%202023%20at%2012_03%20PM.webm) from January 19, 2023
+[Video](file:///Users/jakinbacon/Downloads/Replay%20-%20January%2019,%202023%20at%2012_03%20PM.webm) presentation from January 19, 2023
 
 ### Node-modules-fix:
   - go into node_modules/react-native/index.js
